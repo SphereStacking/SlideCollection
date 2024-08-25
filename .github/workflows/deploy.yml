@@ -74,10 +74,15 @@ jobs:
 
       - name: Setup Pages
         uses: actions/configure-pages@v4
-
-      - uses: actions/upload-pages-artifact@v3
+  
+      - name: Find and list dist directories
+        run: |
+          find slides -type d -name dist > dist_dirs.txt
+  
+      - name: Upload Pages Artifact
+        uses: actions/upload-pages-artifact@v3
         with:
-          path: 'slides/**/dist/**'
+          path: $(cat dist_dirs.txt | sed 's/$/\/**/' | tr '\n' '\n')
 
   deploy:
     environment:
