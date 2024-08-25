@@ -302,7 +302,7 @@ level: 2
   :initial="{ x:35, y: 40, opacity: 0}"
   :enter="{ y: 0, opacity: 1, transition: { delay: 0 } }">
   <p>結構かかってる。。</p>
-  <openmoji-smiling-face-with-halo class="size-30"/>
+  <!-- <openmoji-smiling-face-with-halo class="size-30"/> -->
 </div>
 
 
