@@ -41,17 +41,6 @@ jobs:
       - name: Install dependencies
         run: nci
 
-      - name: Find changed slide files
-        id: find-changed-slides
-        run: |
-          if git rev-parse HEAD^ >/dev/null 2>&1; then
-            SLIDE_FILES=$(git diff --name-only HEAD^ HEAD | grep 'slides/.*/slides.md')
-          else
-            SLIDE_FILES=$(find slides -name 'slides.md')
-          fi
-          SLIDE_FILES=$(echo "$SLIDE_FILES" | sed 's|slides/||' | tr '\n' ';')
-          echo "SLIDE_FILES=$SLIDE_FILES" >> $GITHUB_ENV
-
       - name: Cache built files
         id: cache-built-files
         uses: actions/cache@v3
@@ -63,19 +52,9 @@ jobs:
 
       - name: Build
         run: |
-          if [ -n "$SLIDE_FILES" ]; then
-            IFS=';' read -ra FILES <<< "$SLIDE_FILES"
-            for file in "${FILES[@]}"; do
-              # Extract the directory name from the file path
-              DIR_NAME=$(dirname "$file")
-              # Create the output directory if it doesn't exist
-              mkdir -p ./dist/$DIR_NAME
-              # Build the slide and output to the correct directory
-              npx slidev build ./slides/$file --out ./dist/$DIR_NAME
-            done
-          else
-            echo "No slide files to build."
-          fi
+          npx slidev build ./slides/yyyy-mm-dd --out ../../dist/yyyy-mm-dd
+          # npx slidev build ./slides/2024-08-24 --out ../dist/2024-08-24
+
       - name: Copy index.html to dist
         run: cp ./index.html ./dist/index.html
 
