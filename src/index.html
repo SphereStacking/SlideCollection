@@ -1,17 +1,18 @@
-<html>
+<!doctype html>
+<html lang="en">
   <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sphere Stacking</title>
+    <link rel="icon" type="image/x-icon" href="data:image/x-icon;base64," />
     <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="" />
     <link
       rel="stylesheet"
-      as="style"
-      onload="this.rel='stylesheet'"
       href="https://fonts.googleapis.com/css2?display=swap&amp;family=Newsreader%3Awght%40400%3B500%3B700%3B800&amp;family=Noto+Sans%3Awght%40400%3B500%3B700%3B900"
     />
-
-    <title>Sphere Stacking</title>
-    <link rel="icon" type="image/x-icon" href="data:image/x-icon;base64," />
-
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script src="https://code.iconify.design/2/2.0.3/iconify.min.js"></script>
     <style>
       @keyframes fade-in {
         from {
@@ -29,175 +30,130 @@
     </style>
   </head>
   <body>
-    <div
-      class="relative flex size-full min-h-screen flex-col bg-[#001000] dark group/design-root overflow-x-hidden animate-fade-in bg-gradient-to-r from-emerald-800 from-2% via-emerald-100 via-50% to-emerald-200 to-98%"
-      style="font-family: Newsreader, 'Noto Sans', sans-serif"
-    >
-      <div class="layout-container flex h-full grow flex-col">
-        <div class="px-20 flex flex-1 justify-center py-5">
-          <div
-            class="layout-content-container flex flex-col max-w-[960px] flex-1"
-          >
-            <div class="@container">
-              <div class="@[480px]:p-4">
-                <div
-                  class="flex min-h-[480px] flex-col gap-6 bg-cover bg-center bg-no-repeat @[480px]:gap-8 @[480px]:rounded-xl items-center justify-center p-4"
-                  style="
-                    background-image: linear-gradient(
-                        rgba(0, 0, 0, 0.1) 0%,
-                        rgba(0, 0, 0, 0.4) 100%
-                      ),
-                      url('https://github.com/SphereStacking/SphereStacking/raw/main/images/hello-world.png');
-                  "
-                >
-                  <div class="flex flex-col gap-2 text-center">
-                    <h1
-                      class="text-white text-4xl font-black leading-tight tracking-[-0.033em] @[480px]:text-5xl @[480px]:font-black @[480px]:leading-tight @[480px]:tracking-[-0.033em]"
-                    >
-                      Welcome to Sphere's Stack
-                    </h1>
-                    <h2
-                      class="text-white text-sm font-normal leading-normal @[480px]:text-base @[480px]:font-normal @[480px]:leading-normal"
-                    >
-                      A personal development log by @SphereStacking
-                    </h2>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <h2
-              class="text-white text-[22px] font-bold leading-tight tracking-[-0.015em] px-4 pb-3 pt-5"
+    <div id="app"></div>
+    <template id="app-template">
+      <div
+        class="relative flex size-full min-h-screen flex-col bg-[#001000] dark group/design-root overflow-x-hidden animate-fade-in bg-gradient-to-r from-emerald-800 from-2% via-emerald-100 via-50% to-emerald-200 to-98%"
+        style="font-family: Newsreader, 'Noto Sans', sans-serif"
+      >
+        <div class="layout-container flex h-full grow flex-col">
+          <div class="px-20 flex flex-1 justify-center py-5">
+            <div
+              class="layout-content-container flex flex-col max-w-[960px] flex-1"
             >
-              Latest from Slides
-            </h2>
-            <div class="rounded-lg bg-[#1a1a1a]">
-              <div
-                class="flex items-center gap-4 px-4 min-h-[72px] py-2 justify-between"
-              >
-                <div class="flex items-center gap-4">
+              <div class="@container">
+                <div class="@[480px]:p-4">
                   <div
-                    class="text-white flex items-center justify-center rounded-lg bg-[#363636] shrink-0 size-12"
-                    data-icon="File"
-                    data-size="24px"
-                    data-weight="regular"
+                    class="flex min-h-[480px] flex-col gap-6 bg-cover bg-center bg-no-repeat @[480px]:gap-8 @[480px]:rounded-xl items-center justify-center p-4"
+                    style="
+                      background-image: linear-gradient(
+                          rgba(0, 0, 0, 0.1) 0%,
+                          rgba(0, 0, 0, 0.4) 100%
+                        ),
+                        url('https://github.com/SphereStacking/SphereStacking/raw/main/images/hello-world.png');
+                    "
                   >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="24px"
-                      height="24px"
-                      fill="currentColor"
-                      viewBox="0 0 256 256"
-                    >
-                      <path
-                        d="M213.66,82.34l-56-56A8,8,0,0,0,152,24H56A16,16,0,0,0,40,40V216a16,16,0,0,0,16,16H200a16,16,0,0,0,16-16V88A8,8,0,0,0,213.66,82.34ZM160,51.31,188.69,80H160ZM200,216H56V40h88V88a8,8,0,0,0,8,8h48V216Z"
-                      ></path>
-                    </svg>
+                    <div class="flex flex-col gap-2 text-center">
+                      <h1
+                        class="text-white text-4xl font-black leading-tight tracking-[-0.033em] @[480px]:text-5xl @[480px]:font-black @[480px]:leading-tight @[480px]:tracking-[-0.033em]"
+                      >
+                        Welcome to Sphere's Stack
+                      </h1>
+                      <h2
+                        class="text-white text-sm font-normal leading-normal @[480px]:text-base @[480px]:font-normal @[480px]:leading-normal"
+                      >
+                        A personal development log by @SphereStacking
+                      </h2>
+                    </div>
                   </div>
-                  <div class="flex flex-col justify-center">
-                    <p
-                      class="text-white text-base font-medium leading-normal line-clamp-1"
-                    >
-                      Post 1
-                    </p>
-                    <p
-                      class="text-[#adadad] text-sm font-normal leading-normal line-clamp-2"
-                    >
-                      hoge fuga piyo
-                    </p>
-                  </div>
-                </div>
-                <div class="shrink-0">
-                  <p class="text-white text-base font-normal leading-normal">
-                    yyyy-mm-dd
-                  </p>
                 </div>
               </div>
-              <div
-                class="flex items-center gap-4 px-4 min-h-[72px] py-2 justify-between"
+              <h2
+                class="text-white text-[22px] font-bold leading-tight tracking-[-0.015em] px-4 pb-3 pt-5"
               >
-                <div class="flex items-center gap-4">
-                  <div
-                    class="text-white flex items-center justify-center rounded-lg bg-[#363636] shrink-0 size-12"
-                    data-icon="File"
-                    data-size="24px"
-                    data-weight="regular"
-                  >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="24px"
-                      height="24px"
-                      fill="currentColor"
-                      viewBox="0 0 256 256"
+                Latest from Slides
+              </h2>
+              <div class="rounded-lg bg-[#1a1a1a]">
+                <div
+                  v-for="(post, index) in posts"
+                  :key="index"
+                  class="flex items-center gap-4 px-4 min-h-[72px] py-2 justify-between"
+                >
+                  <a class="flex items-center gap-4" :href="post.link">
+                    <div
+                      class="text-white flex items-center justify-center rounded-lg bg-[#363636] shrink-0 size-12"
+                      data-icon="File"
+                      data-size="24px"
+                      data-weight="regular"
                     >
-                      <path
-                        d="M213.66,82.34l-56-56A8,8,0,0,0,152,24H56A16,16,0,0,0,40,40V216a16,16,0,0,0,16,16H200a16,16,0,0,0,16-16V88A8,8,0,0,0,213.66,82.34ZM160,51.31,188.69,80H160ZM200,216H56V40h88V88a8,8,0,0,0,8,8h48V216Z"
-                      ></path>
-                    </svg>
-                  </div>
-                  <div class="flex flex-col justify-center">
-                    <p
-                      class="text-white text-base font-medium leading-normal line-clamp-1"
-                    >
-                      Post 2
-                    </p>
-                    <p
-                      class="text-[#adadad] text-sm font-normal leading-normal line-clamp-2"
-                    >
-                      hoge fuga piyo
-                    </p>
-                  </div>
-                </div>
-                <div class="shrink-0">
-                  <p class="text-white text-base font-normal leading-normal">
-                    yyyy-mm-dd
-                  </p>
-                </div>
-              </div>
-              <div
-                class="flex items-center gap-4 px-4 min-h-[72px] py-2 justify-between"
-              >
-                <div class="flex items-center gap-4">
-                  <div
-                    class="text-white flex items-center justify-center rounded-lg bg-[#363636] shrink-0 size-12"
-                    data-icon="File"
-                    data-size="24px"
-                    data-weight="regular"
-                  >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="24px"
-                      height="24px"
-                      fill="currentColor"
-                      viewBox="0 0 256 256"
-                    >
-                      <path
-                        d="M213.66,82.34l-56-56A8,8,0,0,0,152,24H56A16,16,0,0,0,40,40V216a16,16,0,0,0,16,16H200a16,16,0,0,0,16-16V88A8,8,0,0,0,213.66,82.34ZM160,51.31,188.69,80H160ZM200,216H56V40h88V88a8,8,0,0,0,8,8h48V216Z"
-                      ></path>
-                    </svg>
-                  </div>
-                  <div class="flex flex-col justify-center">
-                    <p
-                      class="text-white text-base font-medium leading-normal line-clamp-1"
-                    >
-                      Post 3
-                    </p>
-                    <p
-                      class="text-[#adadad] text-sm font-normal leading-normal line-clamp-2"
-                    >
-                      hoge fuga piyo
+                      <span
+                        class="iconify"
+                        :data-icon="post.icon"
+                        data-width="24"
+                        data-height="24"
+                      ></span>
+                    </div>
+                    <div class="flex flex-col justify-center">
+                      <p
+                        class="text-white text-base font-medium leading-normal line-clamp-1"
+                      >
+                        {{ post.title }}
+                      </p>
+                      <p
+                        class="text-[#adadad] text-sm font-normal leading-normal line-clamp-2"
+                      >
+                        {{ post.description }}
+                      </p>
+                    </div>
+                  </a>
+                  <div class="shrink-0">
+                    <p class="text-white text-base font-normal leading-normal">
+                      {{ post.date }}
                     </p>
                   </div>
-                </div>
-                <div class="shrink-0">
-                  <p class="text-white text-base font-normal leading-normal">
-                    yyyy-mm-dd
-                  </p>
                 </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
+    </template>
+    <script>
+      const { createApp, ref } = Vue
+
+      const App = {
+        setup() {
+          const posts = ref([
+            {
+              title: 'Post 1',
+              icon: 'wpf:ghost',
+              description: 'hoge fuga piyo',
+              date: 'yyyy-mm-dd',
+              link: 'https://github.com/SphereStacking/SlideCollection/yyyy-mm-dd',
+            },
+            {
+              title: 'Post 2',
+              icon: 'mdi:file-document-outline',
+              description: 'hoge fuga piyo',
+              date: 'yyyy-mm-dd',
+              link: 'https://github.com/SphereStacking/SlideCollection',
+            },
+            {
+              title: 'Post 3',
+              icon: 'mdi:file-document-outline',
+              description: 'hoge fuga piyo',
+              date: 'yyyy-mm-dd',
+              link: 'https://github.com/SphereStacking/SlideCollection',
+            },
+          ])
+
+          return { posts }
+        },
+        template: '#app-template',
+      }
+
+      createApp(App).mount('#app')
+    </script>
   </body>
 </html>
+ｖ
