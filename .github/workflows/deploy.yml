@@ -43,7 +43,7 @@ jobs:
 
       - name: Find slide files
         id: find-slides
-        run: echo "SLIDE_FILES=$(find slides -name 'slides.md')" >> $GITHUB_ENV
+        run: echo "SLIDE_FILES=$(find slides -name 'slides.md' | tr '\n' ' ')" >> $GITHUB_ENV
 
       - name: Cache built files
         id: cache-built-files
@@ -55,10 +55,20 @@ jobs:
             ${{ runner.os }}-build-
 
       - name: Build
-        if: steps.cache-built-files.outputs.cache-hit != 'true'
         run: |
           for file in $SLIDE_FILES; do
-            npx slidev build $file
+            SLIDE_DIR=$(dirname $file)
+            SLIDE_HASH=$(sha256sum $file | awk '{ print $1 }')
+            CACHE_KEY="${{ runner.os }}-slide-${SLIDE_HASH}"
+            echo "Checking cache for $file with key $CACHE_KEY"
+            if [[ $(actions/cache@v3 --key $CACHE_KEY --path $SLIDE_DIR/dist) == "cache-hit" ]]; then
+              echo "Cache hit for $file, skipping build."
+            else
+              echo "Cache miss for $file, building..."
+              npx slidev build $file
+              echo "Caching built files for $file"
+              actions/cache@v3 --key $CACHE_KEY --path $SLIDE_DIR/dist
+            fi
           done
 
       - name: Setup Pages
