@@ -76,14 +76,8 @@ jobs:
           else
             echo "No slide files to build."
           fi
-
-      - name: Display folder structure
-        run: |
-          if find . -type d -name 'dist' | grep -q 'dist'; then
-            find . -type d -name 'dist' -exec tree {} \;
-          else
-            echo "No dist directory found."
-          fi
+      - name: Copy index.html to dist
+        run: cp ./index.html ./dist/index.html
 
       - name: Setup Pages
         uses: actions/configure-pages@v4
