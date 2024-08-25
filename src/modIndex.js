@@ -1,9 +1,10 @@
-const parser = require('node-html-parser')
-const fs = require('fs')
+import { parse } from 'node-html-parser'
+import { readFileSync, writeFileSync } from 'fs'
 
-const HTML_PATH = process.argv[2] || './dist/index.html'
-const root = parser.parse(fs.readFileSync(HTML_PATH))
-const script = parser.parse(`
+const HTML_PATH = process.argv[2]
+
+const root = parse(readFileSync(HTML_PATH, 'utf-8'))
+const script = parse(`
 <script>
     (function () {
     var redirect = sessionStorage.redirect;
@@ -16,4 +17,4 @@ const script = parser.parse(`
 `)
 root.querySelector('head').appendChild(script)
 
-fs.writeFileSync(HTML_PATH, root.toString())
+writeFileSync(HTML_PATH, root.toString())
