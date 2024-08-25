@@ -44,7 +44,11 @@ jobs:
       - name: Find changed slide files
         id: find-changed-slides
         run: |
-          SLIDE_FILES=$(git diff --name-only HEAD^ HEAD | grep 'slides/.*/slides.md')
+          if git rev-parse HEAD^ >/dev/null 2>&1; then
+            SLIDE_FILES=$(git diff --name-only HEAD^ HEAD | grep 'slides/.*/slides.md')
+          else
+            SLIDE_FILES=$(find slides -name 'slides.md')
+          fi
           echo "SLIDE_FILES=$SLIDE_FILES" >> $GITHUB_ENV
 
       - name: Cache built files
