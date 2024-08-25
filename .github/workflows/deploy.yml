@@ -27,21 +27,46 @@ jobs:
         with:
           node-version: 'lts/*'
 
+      - name: Cache node modules
+        uses: actions/cache@v3
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+
       - name: Setup @antfu/ni
         run: npm i -g @antfu/ni
 
       - name: Install dependencies
         run: nci
 
+      - name: Find slide files
+        id: find-slides
+        run: echo "SLIDE_FILES=$(find slides -name 'slides.md')" >> $GITHUB_ENV
+
+      - name: Cache built files
+        id: cache-built-files
+        uses: actions/cache@v3
+        with:
+          path: slides/*/dist
+          key: ${{ runner.os }}-build-${{ hashFiles('**/slides/**/*.md') }}
+          restore-keys: |
+            ${{ runner.os }}-build-
+
       - name: Build
-        run: nr build --base /${{github.event.repository.name}}/
+        if: steps.cache-built-files.outputs.cache-hit != 'true'
+        run: |
+          for file in $SLIDE_FILES; do
+            npx slidev build $file
+          done
 
       - name: Setup Pages
         uses: actions/configure-pages@v4
 
       - uses: actions/upload-pages-artifact@v3
         with:
-          path: dist
+          path: slides/*/dist
 
   deploy:
     environment:

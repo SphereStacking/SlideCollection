@@ -3,7 +3,8 @@
   "type": "module",
   "private": true,
   "scripts": {
-    "build": "slidev build ./slides/*/slides.md",
+    "build": "slidev build",
+    "build all": "slidev build ./slides/*/slides.md",
     "dev": "slidev --open",
     "export": "slidev export",
     "start": "slidev --remote"
