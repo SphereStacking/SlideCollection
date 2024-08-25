@@ -72,6 +72,18 @@ jobs:
             echo "No slide files to build."
           fi
 
+      - name: List directory structure
+        run: |
+          sudo apt-get install tree
+          tree slides
+
+      - name: Check if dist directories exist
+        run: |
+          if [ -z "$(find slides -type d -name 'dist')" ]; then
+            echo "No dist directories found."
+            exit 1
+          fi
+
       - name: Setup Pages
         uses: actions/configure-pages@v4
 
@@ -90,5 +102,3 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
-
-
