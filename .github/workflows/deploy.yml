@@ -52,7 +52,7 @@ jobs:
 
       - name: Build
         run: |
-          npx slidev build ./slides/yyyy-mm-dd/slides.md --base /src/ --out ../../dist/yyyy-mm-dd
+          npx slidev build ./slides/yyyy-mm-dd/slides.md --base /src/ --out ../../dist/yyyy-mm-dd/
       #   npx slidev build ./slides/2024-08-24/slides.md --out ../dist/2024-08-24
       # - name: Copy index.html to dist
       #   run: cp ./index.html ./dist/index.html
