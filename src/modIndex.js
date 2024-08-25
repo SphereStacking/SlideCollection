@@ -8,6 +8,7 @@ const script = parse(`
 <script>
     (function () {
         var redirect = sessionStorage.redirect;
+        console.log('Redirect URL:', redirect); // デバッグ用ログ
         delete sessionStorage.redirect;
         if (redirect && redirect !== location.href) {
             window.location.href = redirect;
