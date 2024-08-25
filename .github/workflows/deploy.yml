@@ -62,12 +62,15 @@ jobs:
             ${{ runner.os }}-build-
 
       - name: Build
-        if: steps.find-changed-slides.outputs.SLIDE_FILES != ''
         run: |
-          IFS=';' read -ra FILES <<< "$SLIDE_FILES"
-          for file in "${FILES[@]}"; do
-            npx slidev build $file
-          done
+          if [ -n "$SLIDE_FILES" ]; then
+            IFS=';' read -ra FILES <<< "$SLIDE_FILES"
+            for file in "${FILES[@]}"; do
+              npx slidev build $file
+            done
+          else
+            echo "No slide files to build."
+          fi
 
       - name: Setup Pages
         uses: actions/configure-pages@v4
@@ -87,3 +90,5 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+
+
