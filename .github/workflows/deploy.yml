@@ -72,11 +72,6 @@ jobs:
             echo "No slide files to build."
           fi
 
-      - name: List directory structure
-        run: |
-          sudo apt-get install tree
-          tree slides
-
       - name: Check if dist directories exist
         run: |
           if [ -z "$(find slides -type d -name 'dist')" ]; then
@@ -84,10 +79,16 @@ jobs:
             exit 1
           fi
 
-      - name: Upload Pages artifacts
-        uses: actions/upload-pages-artifact@v3
+      - name: Setup Pages
+        uses: actions/configure-pages@v4
+
+      - name: Find and upload dist directories
+        run: |
+          mkdir -p artifacts
+          find slides -type d -name dist -exec cp -r {} artifacts/ \;
+      - uses: actions/upload-pages-artifact@v3
         with:
-          path: slides/**/dist
+          path: artifacts
 
   deploy:
     environment:
@@ -100,3 +101,4 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+
