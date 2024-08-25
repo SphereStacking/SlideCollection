@@ -44,7 +44,7 @@
               <div class="@container">
                 <div class="@[480px]:p-4">
                   <div
-                    class="flex min-h-[480px] flex-col gap-6 bg-cover bg-center bg-no-repeat @[480px]:gap-8 @[480px]:rounded-xl items-center justify-center p-4"
+                    class="flex min-h-[480px] flex-col rounded-lg gap-6 bg-cover bg-center bg-no-repeat @[480px]:gap-8 @[480px]:rounded-xl items-center justify-center p-4"
                     style="
                       background-image: linear-gradient(
                           rgba(0, 0, 0, 0.1) 0%,
@@ -73,25 +73,34 @@
               >
                 Latest from Slides
               </h2>
-              <div class="rounded-lg bg-[#1a1a1a]">
+              <div class="">
                 <div
                   v-for="(post, index) in posts"
                   :key="index"
-                  class="flex items-center gap-4 px-4 min-h-[72px] py-2 justify-between"
+                  class="flex items-center gap-2 px-4 py-2 min-h-[72px] justify-between rounded-lg bg-[#1a1a1a] group hover:bg-[#363636] duration-300 shadow-lg"
                 >
                   <a class="flex items-center gap-4" :href="post.link">
                     <div
-                      class="text-white flex items-center justify-center rounded-lg bg-[#363636] shrink-0 size-12"
+                      class="text-white flex items-center justify-center rounded-lg bg-[#363636] shrink-0 size-12 group-hover:bg-[#1a1a1a] duration-300 shadow-lg"
                       data-icon="File"
                       data-size="24px"
                       data-weight="regular"
                     >
-                      <span
-                        class="iconify"
-                        :data-icon="post.icon"
-                        data-width="24"
-                        data-height="24"
-                      ></span>
+                      <div class="relative">
+                        <span
+                          class="absolute iconify opacity-100 group-hover:opacity-0 duration-300 -translate-y-1/2 -translate-x-1/2"
+                          :data-icon="post.icon"
+                          data-width="24"
+                          data-height="24"
+                        ></span>
+                        <span
+                          class="absolute iconify opacity-0 group-hover:opacity-100 duration-200 -translate-y-1/2 -translate-x-1/2"
+                          data-icon="mdi:external-link"
+                          data-width="24"
+                          data-height="24"
+                        >
+                        </span>
+                      </div>
                     </div>
                     <div class="flex flex-col justify-center">
                       <p
@@ -125,26 +134,26 @@
         setup() {
           const posts = ref([
             {
-              title: 'Post 1',
+              title: '個人開発の記録 VRイベント共有サービスについて',
               icon: 'wpf:ghost',
-              description: 'hoge fuga piyo',
-              date: 'yyyy-mm-dd',
-              link: 'https://spherestacking.github.io/SlideCollection/2024-08-24',
+              description: '所属会社 社内LT会スライド',
+              date: '2024-08-23',
+              link: 'https://spherestacking.github.io/SlideCollection/2024-08-23',
             },
-            {
-              title: 'Post 2',
-              icon: 'mdi:file-document-outline',
-              description: 'hoge fuga piyo',
-              date: 'yyyy-mm-dd',
-              link: 'https://spherestacking.github.io/SlideCollection/yyyy-mm-dd',
-            },
-            {
-              title: 'Post 3',
-              icon: 'mdi:file-document-outline',
-              description: 'hoge fuga piyo',
-              date: 'yyyy-mm-dd',
-              link: 'https://spherestacking.github.io/SlideCollection/',
-            },
+            // {
+            //   title: 'Post 2',
+            //   icon: 'mdi:file-document-outline',
+            //   description: 'hoge fuga piyo',
+            //   date: 'yyyy-mm-dd',
+            //   link: 'https://spherestacking.github.io/SlideCollection/yyyy-mm-dd',
+            // },
+            // {
+            //   title: 'Post 3',
+            //   icon: 'mdi:file-document-outline',
+            //   description: 'hoge fuga piyo',
+            //   date: 'yyyy-mm-dd',
+            //   link: 'https://spherestacking.github.io/SlideCollection/',
+            // },
           ])
 
           return { posts }
@@ -156,4 +165,3 @@
     </script>
   </body>
 </html>
-ｖ
