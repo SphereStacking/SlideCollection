@@ -66,11 +66,17 @@ jobs:
           if [ -n "$SLIDE_FILES" ]; then
             IFS=';' read -ra FILES <<< "$SLIDE_FILES"
             for file in "${FILES[@]}"; do
-              npx slidev build ./slides/$file --out ./dist/$file
+              # Extract the directory name from the file path
+              DIR_NAME=$(dirname "$file")
+              # Create the output directory if it doesn't exist
+              mkdir -p ./dist/$DIR_NAME
+              # Build the slide and output to the correct directory
+              npx slidev build ./slides/$file --out ./dist/$DIR_NAME
             done
           else
             echo "No slide files to build."
           fi
+
       - name: Display folder structure
         run: |
           if find . -type d -name 'dist' | grep -q 'dist'; then
