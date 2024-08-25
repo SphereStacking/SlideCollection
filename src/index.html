@@ -12,16 +12,6 @@
     <link rel="icon" type="image/x-icon" href="data:image/x-icon;base64," />
 
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-    <script>
-      // 404ページからリダイレクトされた場合、index.htmlにリダイレクトする
-      ;(function () {
-        var redirect = sessionStorage.redirect
-        delete sessionStorage.redirect
-        if (redirect && redirect != location.href) {
-          history.replaceState(null, null, redirect)
-        }
-      })()
-    </script>
     <style>
       @keyframes fade-in {
         from {
