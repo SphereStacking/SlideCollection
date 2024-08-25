@@ -72,23 +72,12 @@ jobs:
             echo "No slide files to build."
           fi
 
-      - name: Check if dist directories exist
-        run: |
-          if [ -z "$(find slides -type d -name 'dist')" ]; then
-            echo "No dist directories found."
-            exit 1
-          fi
-
       - name: Setup Pages
         uses: actions/configure-pages@v4
 
-      - name: Find and upload dist directories
-        run: |
-          mkdir -p artifacts
-          find slides -type d -name dist -exec cp -r {} artifacts/ \;
       - uses: actions/upload-pages-artifact@v3
         with:
-          path: artifacts
+          path: 'slides/**/dist/**'
 
   deploy:
     environment:
@@ -101,4 +90,3 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
-
