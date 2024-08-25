@@ -1,75 +1,75 @@
 ---
-# You can also start simply with 'default'
+# try also 'default' to start simple
 theme: seriph
 # random image from a curated Unsplash collection by Anthony
 # like them? see https://unsplash.com/collections/94734566/slidev
 background: https://cover.sli.dev
-# some information about your slides (markdown enabled)
-title: Welcome to Slidev
+# apply any unocss classes to the current slide
+class: 'text-center'
+# https://sli.dev/custom/config-highlighter.html
+highlighter: shiki
+# some information about the slides, markdown enabled
 info: |
-  ## Slidev Starter Template
-  Presentation slides for developers.
+  ## Slidev スターターテンプレート
+  開発者向けのプレゼンテーションスライド。
 
-  Learn more at [Sli.dev](https://sli.dev)
-# apply unocss classes to the current slide
-class: text-center
-# https://sli.dev/features/drawing
-drawings:
-  persist: false
-# slide transition: https://sli.dev/guide/animations.html#slide-transitions
-transition: slide-left
-# enable MDC Syntax: https://sli.dev/features/mdc
+  詳細は [Sli.dev](https://sli.dev) をご覧ください
+transition: slide-up
+title: 個人開発の共有
 mdc: true
+fonts:
+  sans: Robot
+  serif: Robot Slab
+  mono: Fira Code
+  font-size: 30px
 ---
 
-# Welcome to Slidev
+# 個人開発の共有
 
-Presentation slides for developers
+2024/08/24 所属会社社内LT会スライド
 
-<div class="pt-12">
-  <span @click="$slidev.nav.next" class="px-2 py-1 rounded cursor-pointer" hover="bg-white bg-opacity-10">
-    Press Space for next page <carbon:arrow-right class="inline"/>
-  </span>
+
+2024/08/20 @SphereStacking
+
+
+
+---
+transition: slide-up
+---
+
+# 自己紹介
+
+<div class="flex flex-row gap-2 h-full  items-center">
+  <div class="w-full">
+```
+{
+"profile" : {
+  "name" : "XX XX",
+  "handlename" : "Sphere",
+  "tolikes" : [
+    "🟢(#bbffcc)","🏍️",
+  ],
+  "dislikes" : [
+    "🦐"
+  ],
+  "career" : [
+      { "job":"Web Engineer", "period":"2023/08 ~ now" },
+      { "job":"🚀🛰📡 Engineer", "period":"2016/04 ~ 2023/07" }
+  ],
+}
+```
+  </div>
+  <div class="w-full">
+  昨年8月に組み込み系からWEB系に転職
+
+  社会人歴9年目、仕事としてのweb系は1年のエンジニア
+
+  プライム企業の下請けで従事していた
+
+  30年来の熟成されて黒魔術と化したシステムを保守/運用/機能追加しており
+  技術スタックが古い企業でエンジニアしていました。
+  </div>
 </div>
-
-<div class="abs-br m-6 flex gap-2">
-  <button @click="$slidev.nav.openInEditor()" title="Open in Editor" class="text-xl slidev-icon-btn opacity-50 !border-none !hover:text-white">
-    <carbon:edit />
-  </button>
-  <a href="https://github.com/slidevjs/slidev" target="_blank" alt="GitHub" title="Open in GitHub"
-    class="text-xl slidev-icon-btn opacity-50 !border-none !hover:text-white">
-    <carbon-logo-github />
-  </a>
-</div>
-
-<!--
-The last comment block of each slide will be treated as slide notes. It will be visible and editable in Presenter Mode along with the slide. [Read more in the docs](https://sli.dev/guide/syntax.html#notes)
--->
-
----
-transition: fade-out
----
-
-# What is Slidev?
-
-Slidev is a slides maker and presenter designed for developers, consist of the following features
-
-- 📝 **Text-based** - focus on the content with Markdown, and then style them later
-- 🎨 **Themable** - themes can be shared and re-used as npm packages
-- 🧑‍💻 **Developer Friendly** - code highlighting, live coding with autocompletion
-- 🤹 **Interactive** - embed Vue components to enhance your expressions
-- 🎥 **Recording** - built-in recording and camera view
-- 📤 **Portable** - export to PDF, PPTX, PNGs, or even a hostable SPA
-- 🛠 **Hackable** - virtually anything that's possible on a webpage is possible in Slidev
-<br>
-<br>
-
-Read more about [Why Slidev?](https://sli.dev/guide/why)
-
-<!--
-You can have `style` tag in markdown to override the style for the current page.
-Learn more: https://sli.dev/features/slide-scope-style
--->
 
 <style>
 h1 {
@@ -83,318 +83,519 @@ h1 {
 }
 </style>
 
-<!--
-Here is another comment.
--->
+---
+layout: default
+transition: slide-up
+---
+
+# 目次
+
+<Toc maxDepth="1"></Toc>
+
+---
+transition: slide-left
+---
+
+# サービスの概要
+ 
+ <div class="flex justify-center flex-col text-center">
+  <p class="text-xl font-bold text-gray-900 p-4 rounded-lg shadow-lg bg-gradient-to-r from-gray-700 to-gray-300">
+    <span class="text-3xl font-black text-red-500">
+    「ポスター」
+    </span>
+    と
+    <span class="text-3xl font-black text-blue-500">
+    「人（主催者、演者）」
+    </span>
+    <br>
+    <p class="text-xl">
+      主軸に置いたVR界隈のイベント共有サービス
+    </p>
+    <div class="aspect-auto h-75">
+      <img src="./image/top.png" alt="サービスの概要" class="h-full mx-auto">
+    </div>
+  </p>
+
+ </div>
+---
+transition: slide-left
+level: 2
+---
+
+# サービスの概要
+なにができるのか
+
+<div class="text-xl font-bold text-gray-900 p-4 rounded-lg shadow-lg bg-gradient-to-r from-gray-500 to-gray-300">
+  <div class="grid grid-cols-3 gap-2">
+    <div>
+      <h3 class="text-4xl">イベント</h3>
+      <ul>
+        <li>掲載 / 編集 / 検索</li>
+        <li>SNSへのシェアテキスト生成</li>
+        <li>外部calendarへの登録</li>
+        <li>タイムライン表示</li>
+        <li>いいね / ブックマーク</li>
+        <li>フォロー</li>
+      </ul>
+    </div>
+    <div class="">
+      <h3 class="text-4xl">ユーザー</h3>
+      <ul> 
+        <li>プロフィール</li>
+        <li>チーム(グループ) 試験運用中</li>
+        <li>フォロー</li>
+      </ul>
+    </div>
+    <div class="">
+      <h3 class="text-4xl">管理側</h3>
+      <ul> 
+        <li>コンテンツ管理</li>
+        <li>ユーザー管理</li>
+        <li>権限とロール管理</li>
+        <li>コンフィグ設定管理</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<p class="text-4xl text-center p-10"  v-click>
+  これだけ。
+</p>
+
+
+---
+transition: slide-up
+---
+
+# 開発の動機
+なにを実現したかったのか
+
+<div class="text-xl font-bold text-gray-900 p-4 rounded-lg shadow-lg bg-gradient-to-r from-gray-500 to-gray-300">
+  <div class="flex justify-center flex-col mx-20">
+    <p class="text-xl">
+      フライヤーやポスターをメインとしたEventの共有サイトがなかった。
+    </p>
+    <p class="text-xl">
+      VR界隈をメインターゲットとした共有サイトはあるが見にくいし探しずらい
+    </p>
+    <p class="text-xl">
+      推しタレントの出演情報をとにかく追いにくい。
+    </p>
+    <p class="text-xl">
+      コミュニティが閉じていて外の情報が集めにくい
+    </p>
+  </div>
+</div>
+<p class="text-4xl text-center pt-8"  v-click>
+  そんなことを解決できる
+  <br>
+  <br>
+  <strong>サービス</strong>があったらいいなと思った。
+</p>
+
 
 ---
 transition: slide-up
 level: 2
 ---
 
-# Navigation
+# 開発の動機
+本当の理由?
 
-Hover on the bottom-left corner to see the navigation's controls panel, [learn more](https://sli.dev/guide/navigation.html)
+<div class="text-xl font-bold text-gray-900 p-4 rounded-lg shadow-lg bg-gradient-to-r from-gray-500 to-gray-300">
+  <div class="flex justify-center  flex-col mx-20">
+    <ol>
+      <li>最新の技術に触れるられる機会が減った<br>
+        <span class="text-lg">所属会社の主要な技術スタックが。。</span><br>
+        <span class="text-lg">勉強する動機を作りたかった。</span>
+      </li>
+      <li>自分主体で開発できなくなった。<br>
+        <span class="text-lg">自分が提案できることが少ない。</span>
+      </li>
+      <li>開発を始めた当時のタスクが作業感の強く面白味が。。
+      </li>
+    </ol>
+  </div>
+</div>
+<div class="text-2xl pt-10 text-center" v-click>
+  自分のサービスを作ろう!
+</div>
 
-## Keyboard Shortcuts
-
-|     |     |
-| --- | --- |
-| <kbd>right</kbd> / <kbd>space</kbd>| next animation or slide |
-| <kbd>left</kbd>  / <kbd>shift</kbd><kbd>space</kbd> | previous animation or slide |
-| <kbd>up</kbd> | previous slide |
-| <kbd>down</kbd> | next slide |
-
-<!-- https://sli.dev/guide/animations.html#click-animation -->
-<img
-  v-click
-  class="absolute -bottom-9 -left-7 w-80 opacity-50"
-  src="https://sli.dev/assets/arrow-bottom-left.svg"
-  alt=""
-/>
-<p v-after class="absolute bottom-23 left-45 opacity-30 transform -rotate-10">Here!</p>
-
----
-layout: two-cols
-layoutClass: gap-16
----
-
-# Table of contents
-
-You can use the `Toc` component to generate a table of contents for your slides:
-
-```html
-<Toc minDepth="1" maxDepth="1"></Toc>
-```
-
-The title will be inferred from your slide content, or you can override it with `title` and `level` in your frontmatter.
-
-::right::
-
-<Toc v-click minDepth="1" maxDepth="2"></Toc>
 
 ---
-layout: image-right
-image: https://cover.sli.dev
----
-
-# Code
-
-Use code snippets and get the highlighting directly, and even types hover![^1]
-
-```ts {all|5|7|7-8|10|all} twoslash
-// TwoSlash enables TypeScript hover information
-// and errors in markdown code blocks
-// More at https://shiki.style/packages/twoslash
-
-import { computed, ref } from 'vue'
-
-const count = ref(0)
-const doubled = computed(() => count.value * 2)
-
-doubled.value = 2
-```
-
-<arrow v-click="[4, 5]" x1="350" y1="310" x2="195" y2="334" color="#953" width="2" arrowSize="1" />
-
-<!-- This allow you to embed external code blocks -->
-<<< @/../../snippets/external.ts#snippet
-
-<!-- Footer -->
-[^1]: [Learn More](https://sli.dev/guide/line-highlighting)
-
-<!-- Inline style -->
-<style>
-.footnotes-sep {
-  @apply mt-5 opacity-10;
-}
-.footnotes {
-  @apply text-sm opacity-75;
-}
-.footnote-backref {
-  display: none;
-}
-</style>
-
-<!--
-Notes can also sync with clicks
-
-[click] This will be highlighted after the first click
-
-[click] Highlighted with `count = ref(0)`
-
-[click:3] Last click (skip two clicks)
--->
-
----
+transition: slide-up
 level: 2
 ---
 
-# Shiki Magic Move
+# 技術スタック
+使用したライブラリ等
 
-Powered by [shiki-magic-move](https://shiki-magic-move.netlify.app/), Slidev supports animations across multiple code snippets.
+<div class="grid grid-cols-4 gap-2 w-full  bg-gradient-to-r from-gray-500 to-gray-300 p-4 rounded-lg shadow-lg text-gray-900 text-xl font-bold">
 
-Add multiple code blocks and wrap them with <code>````md magic-move</code> (four backticks) to enable the magic move. For example:
-
-````md magic-move {lines: true}
-```ts {*|2|*}
-// step 1
-const author = reactive({
-  name: 'John Doe',
-  books: [
-    'Vue 2 - Advanced Guide',
-    'Vue 3 - Basic Guide',
-    'Vue 4 - The Mystery'
-  ]
-})
-```
-
-```ts {*|1-2|3-4|3-4,8}
-// step 2
-export default {
-  data() {
-    return {
-      author: {
-        name: 'John Doe',
-        books: [
-          'Vue 2 - Advanced Guide',
-          'Vue 3 - Basic Guide',
-          'Vue 4 - The Mystery'
-        ]
-      }
-    }
-  }
-}
-```
-
-```ts
-// step 3
-export default {
-  data: () => ({
-    author: {
-      name: 'John Doe',
-      books: [
-        'Vue 2 - Advanced Guide',
-        'Vue 3 - Basic Guide',
-        'Vue 4 - The Mystery'
-      ]
-    }
-  })
-}
-```
-
-Non-code blocks are ignored.
-
-```vue
-<!-- step 4 -->
-<script setup>
-const author = {
-  name: 'John Doe',
-  books: [
-    'Vue 2 - Advanced Guide',
-    'Vue 3 - Basic Guide',
-    'Vue 4 - The Mystery'
-  ]
-}
-</script>
-```
-````
-
----
-
-# Components
-
-<div grid="~ cols-2 gap-4">
-<div>
-
-You can use Vue components directly inside your slides.
-
-We have provided a few built-in components like `<Tweet/>` and `<Youtube/>` that you can use directly. And adding your custom components is also super easy.
-
-```html
-<Counter :count="10" />
-```
-
-<!-- ./components/Counter.vue -->
-<Counter :count="10" m="t-4" />
-
-Check out [the guides](https://sli.dev/builtin/components.html) for more.
-
-</div>
-<div>
-
-```html
-<Tweet id="1390115482657726468" />
-```
-
-<Tweet id="1390115482657726468" scale="0.65" />
-
-</div>
-</div>
-
-<!--
-Presenter note with **bold**, *italic*, and ~~striked~~ text.
-
-Also, HTML elements are valid:
-<div class="flex w-full">
-  <span style="flex-grow: 1;">Left content</span>
-  <span>Right content</span>
-</div>
--->
-
----
-class: px-20
----
-
-# Themes
-
-Slidev comes with powerful theming support. Themes can provide styles, layouts, components, or even configurations for tools. Switching between themes by just **one edit** in your frontmatter:
-
-<div grid="~ cols-2 gap-2" m="t-2">
-
-```yaml
----
-theme: default
----
-```
-
-```yaml
----
-theme: seriph
----
-```
-
-<img border="rounded" src="https://github.com/slidevjs/themes/blob/main/screenshots/theme-default/01.png?raw=true" alt="">
-
-<img border="rounded" src="https://github.com/slidevjs/themes/blob/main/screenshots/theme-seriph/01.png?raw=true" alt="">
-
-</div>
-
-Read more about [How to use a theme](https://sli.dev/themes/use.html) and
-check out the [Awesome Themes Gallery](https://sli.dev/themes/gallery.html).
-
----
-
-# Clicks Animations
-
-You can add `v-click` to elements to add a click animation.
-
-<div v-click>
-
-This shows up when you click the slide:
-
-```html
-<div v-click>This shows up when you click the slide.</div>
-```
-
-</div>
-
-<br>
-
-<v-click>
-
-The <span v-mark.red="3"><code>v-mark</code> directive</span>
-also allows you to add
-<span v-mark.circle.orange="4">inline marks</span>
-, powered by [Rough Notation](https://roughnotation.com/):
-
-```html
-<span v-mark.underline.orange>inline markers</span>
-```
-
-</v-click>
-
-<div mt-20 v-click>
-
-[Learn More](https://sli.dev/guide/animations#click-animation)
-
+  <div>
+    <div class="text-xl">バックエンド</div>
+    <ul>
+      <li>laravel 10.x</li>
+      <li>jetstream</li>
+      <li>scout<br>(meilisearch)</li>
+      <li>socialite</li>
+      <li>filament</li>
+    </ul>
+  </div>
+  <div>
+    <div class="text-xl">フロントエンド</div>
+    <ul>
+      <li>vue 3.x</li>
+      <li>tailwindcss 3.x</li>
+      <li>DaisyUI 4</li>
+      <li>inertiajs</li>
+      <li>tiptap</li>
+      <li>swiper</li>
+    </ul>
+  </div>
+  <div>
+    <div class="text-xl">その他</div>
+    <ul>
+      <li>laravel forge</li>
+      <li>digital ocean</li>
+      <li>Cloudflare R2</li>
+      <li>mailtrap</li>
+      <li>Sentry</li>
+      <li>Google Analytics</li>
+      <li>Google Api <br>(form, calendar)</li>
+      <li>X api</li>
+    </ul>
+  </div>
 </div>
 
 ---
+transition: slide-up
+level: 2
+---
 
-# Motions
+# ランニングコスト
 
-Motion animations are powered by [@vueuse/motion](https://motion.vueuse.org/), triggered by `v-motion` directive.
-
-```html
-<div
+<div class="text-xl font-bold text-gray-900 p-4 rounded-lg shadow-lg bg-gradient-to-r from-gray-500 to-gray-300">
+  <div class="flex justify-start flex-row items-top w-full">
+    <div class="flex flex-col w-1/2 pl-10 justify-left">
+      <div class="mb-4" v-click>
+        <span class="text-2xl font-semibold">laravel forge</span> <span class="text-lg">$15/month</span>
+      </div>
+      <div class="mb-4" v-click>
+        <span class="text-2xl font-semibold">CodeRabbit</span> <span class="text-lg">$15/month</span>
+      </div>
+    </div>
+    <div class=" h-full flex flex-col justify-end items-end">
+      <div class="mb-4" v-click>
+        <span class="text-2xl font-semibold">Digital Ocean</span> <span class="text-lg">$12/month</span>
+        <ul class="list-disc list-inside ml-4">
+          <li>app server</li>
+          <li>db server</li>
+          <li>meilisearch server</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+<div class=" text-center  p-10"  v-click
   v-motion
-  :initial="{ x: -80 }"
-  :enter="{ x: 0 }"
-  :click-3="{ x: 80 }"
-  :leave="{ x: 1000 }"
->
-  Slidev
+  :initial="{ x:35, y: 40, opacity: 0}"
+  :enter="{ y: 0, opacity: 1, transition: { delay: 0 } }">
+  <p>結構かかってる。。</p>
+  <openmoji-smiling-face-with-halo class="size-30"/>
 </div>
-```
 
-<div class="w-60 relative">
+
+
+---
+transition: slide-up
+level: 2
+---
+
+# 開発期間
+ 2023/11 ~ now
+
+![contributions](./image/contributions.png)
+
+<div class="text-center p-10 text-xl grid grid-cols-2 gap2" v-click>
+<div>
+  <table class="text-xs">
+    <tr>
+      <td>平日</td>
+      <td> 4h </td>
+    </tr>
+    <tr>
+      <td>土日</td>
+      <td> 8h </td>
+    </tr>
+  </table>
+</div>
+<div>
+コード書いてる時間以外の<br>過ごし方を忘れました。
+</div>
+</div>
+
+---
+transition: slide-up
+level: 2
+---
+
+# ユーザー数の推移
+
+<div class="flex justify-center">
+  <img src="./image/GoogleAnalytics.png" alt="GoogleAnalytics" class="w-2/3">
+</div>
+<div class="text-xl flex flex-col justify-center items-center">
+  <ul>
+    <li>2024/6/9 サービス公開</li>
+    <li>2024/7/31 登録ユーザー数100人突破</li>
+    <li>2024/8/14 メディア記事に掲載いただいた ( https://metacul-frontier.com/?p=14478 )</li>
+  </ul>
+</div>
+
+---
+transition: slide-up
+level: 2
+---
+
+# リリースしてからやったこと
+
+<ol>
+  <li>ダイレクトマーケティング<br>
+    <span class="text-lg">
+      主催者への声かけ
+    </span>
+  </li>
+  <li>Xへの定期投稿<br>
+    投稿時間 時間の比較
+      <ul>
+        <li>
+          昼 12:00 ~ 13:00 反応多め
+        </li>
+        <li>
+        夜 17:00 ~ 20:00 反応多め
+        </li>
+      </ul>
+      <ul>
+        <li>
+          夜 21:00 ~ 24:00  とても少ない
+        </li>
+      </ul>
+  </li>
+</ol>
+
+
+
+
+
+---
+transition: slide-up
+level: 2
+---
+
+# 工夫 / こだわり
+その1
+<div class="flex justify-center flex-row">
+  <div class="w-1/2">
+  <h3 class="text-2xl">デザイン</h3>
+    <div class="text-lg">
+      <br>
+      メインはポスター<br>
+    </div>
+  </div>
+  <div class="w-90">
+      <figure class="w-full ">
+        <video controls>
+          <source src="./image/こだわり4.mp4" type="video/mp4">
+        </video>
+        <figcaption class="text-center mt-2 text-sm text-gray-600">
+          vue-formを参考
+        </figcaption>
+      </figure>
+  </div>
+</div>
+
+---
+transition: slide-up
+level: 2
+---
+
+# 工夫 / こだわり
+その2
+
+<div class="flex justify-center flex-row">
+  <div class="w-1/2">
+    <h3 class="text-2xl">自由度の高い検索フィルター</h3>
+    <div class="text-lg mt-3">
+      カテゴリ / タグ / 主催者 / 場所 / 主催 / 演者 /  日時 
+      <br>
+      全てを
+      <strong class="text-red-500">AND</strong> x <strong class="text-red-500">OR</strong> x <strong class="text-red-500">NOT</strong>
+      で組み合わせることができる。
+    </div>
+    <h3 class="text-2xl mt-10">検索エンジンの導入</h3>
+    <div class="text-lg mt-3">
+      meilisearchを使用
+      高速な全文検索が可能
+      <br>
+      laravelのscoutがラップしているが
+      リレーションデータの連携や<br>
+      フィルター処理は自前実装。
+    </div>
+  </div>
+  <img src="./image/こだわり1.png" alt="こだわり" class="w-1/2">
+</div>
+
+---
+transition: slide-up
+level: 2
+---
+
+# 工夫 / こだわり
+その3
+
+<div class="flex justify-center flex-row">
+  <div class="w-1/2">
+  <h3 class="text-2xl">UIシステムを使用しない</h3>
+    <div class="text-lg">
+      使用してもHeadlessのようなもの<br>
+      コーディング力を上げること。<br>
+      他のPJにも流用可能なデザインシステムを作ること。
+    </div>
+    <div>
+      <figure class="w-full pt-10">
+        <video controls>
+          <source src="./image/こだわり3.mp4" type="video/mp4">
+        </video>
+        <figcaption class="text-center mt-2 text-sm text-gray-600">
+          ag-gridを参考
+        </figcaption>
+      </figure>
+    </div>
+  </div>
+  <div class="w-1/2">
+      <figure class="w-full pt-10">
+        <video controls>
+          <source src="./image/こだわり2.mp4" type="video/mp4">
+        </video>
+        <figcaption class="text-center mt-2 text-sm text-gray-600">
+          vue-formを参考
+        </figcaption>
+      </figure>
+  </div>
+</div>
+
+---
+transition: slide-up
+level: 2
+---
+
+# 工夫 / こだわり
+その4
+
+<div class="flex justify-center flex-row">
+  <div class="w-1/2">
+    <h3 class="text-2xl">使用用途を限定しない</h3>
+    <div class="text-lg">
+      できるだけ特定の対象だけのサービスにしないようにしました。
+      config系のデータは全てカスタマイズできるようにしており
+      <br>
+      もし、今のターゲットがダメったとしても  
+      他のターゲットでも使えるようにしておき
+      サービスを再利用できるようにしておきました。
+    </div>
+  </div>
+</div>
+
+---
+transition: slide-up
+level: 2
+---
+
+# 今後やりたいこと
+
+- 公募機能(主催者と演者のマッチング)
+- 多言語対応(基盤は導入済み)
+- 決済サービスの導入(課金周り)
+  - お金を稼ぎたいというより、決済機能のキャッチアップ。
+- 直感的なブックマークした階層的なEventの仕分け機能
+- レコメンドエンジンの構築
+  - ユーザーのお気に入りやブックマークをもとにしたレコメンド
+- プラットフォームの公開APIを使用したサービスとの連携
+  - 連携機能はないため工夫が必要
+- Google Analyticsの活用
+
+---
+transition: slide-up
+level: 2
+---
+
+# 苦労したこと
+
+- サービス名の変遷について買ったのに使わないdomain 4つも。。。
+- seoがよくわかってなくて途中でSSRに変更したこと。
+- 419エラーの解消にてこずったこと
+- 全文検索(MeiliSearch)でネストした検索に苦労した話。
+- 全文検索(MeiliSearch)で日本語検索が全くうまくいかなかった。
+- 動的なfilterの生成の話。
+- 記事通りlaravelのtz設定したら+9h 時刻がズレた話
+- vue-formのスタイルが気に入らなかったからformの構築を自作した話
+- tiptapをしようしたwysiwygエディターの構築
+- 特定のページだけ502エラーとなってしまう。
+
+
+---
+transition: slide-up
+level: 2
+---
+
+# 振り替えってみて
+
+<div class="flex justify-center flex-row">
+  <
+- まぁ全然使ってもらえない。
+  - ユーザー投稿型だと過疎ったら終わりなのでハードル高かったかも。。
+  - そもそも知ってもらうのが大変
+
+- 所属会社のサービスの展開方法が賢いなと実感  
+  - 自社の人員を多く割くことなく、サービスを多くの人に展開できている(B to B to C)
+  - リソースに限りのある個人ではリーチに限りがある。
+
+- マーケティングが全くできていなかった。
+  - イベントなどに顔を出して主催者へのアプローチをしておけばよかったと思ってます。
+
+- 総じて、とても勉強になった。
+  - 一番身についたのは課題にぶつかった時の調べ方だ
+  - 公式のドキュメントやGithubのIssueを穴が開くほど眺めたりライブラリの中のソースを読んだりする経験ができました。
+
+</div>
+
+---
+layout: center
+class: text-center
+---
+
+# Thank you
+[]
+
+[👻Shelfie](https://hollowshelfie.com/home) / [GitHub](https://github.com/SphereStacking)
+
+---
+preload: false
+---
+
+# credits
+このスライドはSlidevで作成しています。
+
+<div class="grid grid-cols-2 gap-2">
+<div>
+<div class="w-60 relative mt-6">
   <div class="relative w-40 h-40">
     <img
       v-motion
       :initial="{ x: 800, y: -100, scale: 1.5, rotate: -50 }"
       :enter="final"
-      class="absolute inset-0"
+      class="absolute top-0 left-0 right-0 bottom-0"
       src="https://sli.dev/logo-square.png"
       alt=""
     />
@@ -402,7 +603,7 @@ Motion animations are powered by [@vueuse/motion](https://motion.vueuse.org/), t
       v-motion
       :initial="{ y: 500, x: -100, scale: 2 }"
       :enter="final"
-      class="absolute inset-0"
+      class="absolute top-0 left-0 right-0 bottom-0"
       src="https://sli.dev/logo-circle.png"
       alt=""
     />
@@ -410,7 +611,7 @@ Motion animations are powered by [@vueuse/motion](https://motion.vueuse.org/), t
       v-motion
       :initial="{ x: 600, y: 400, scale: 2, rotate: 100 }"
       :enter="final"
-      class="absolute inset-0"
+      class="absolute top-0 left-0 right-0 bottom-0"
       src="https://sli.dev/logo-triangle.png"
       alt=""
     />
@@ -425,7 +626,7 @@ Motion animations are powered by [@vueuse/motion](https://motion.vueuse.org/), t
   </div>
 </div>
 
-<!-- vue script setup scripts can be directly used in markdown, and will only affects current page -->
+<!-- vue script setup scripts can be directly used in markdown, and will only affect the current page -->
 <script setup lang="ts">
 const final = {
   x: 0,
@@ -440,199 +641,44 @@ const final = {
   }
 }
 </script>
-
 <div
   v-motion
-  :initial="{ x:35, y: 30, opacity: 0}"
-  :enter="{ y: 0, opacity: 1, transition: { delay: 3500 } }">
+  :initial="{ x:35, y: 40, opacity: 0}"
+  :enter="{ y: 0, opacity: 1, transition: { delay: 2500 } }">
+  <Tweet id="1390115482657726468" scale="0.65" />
+</div>
 
-[Learn More](https://sli.dev/guide/animations.html#motion)
+</div>
+<div>
+<div
+  v-motion
+  :initial="{ x:35, y: 40, opacity: 0}"
+  :enter="{ y: 0, opacity: 1, transition: { delay: 2700 } }">
+
+- [slidevjs/slidev](https://github.com/slidevjs/slidev)
+</div>
+<div
+  v-motion
+  :initial="{ x:35, y: 40, opacity: 0}"
+  :enter="{ y: 0, opacity: 1, transition: { delay: 2900 } }">
+
+- [tangramor/slidev_docker](https://github.com/tangramor/slidev_docker)
+
+</div>
+<div
+  v-motion
+  :initial="{ x:35, y: 40, opacity: 0}"
+  :enter="{ y: 0, opacity: 1, transition: { delay: 3100 } }">
+
+markdownでスライドを作成できるツールです。
+
+tailwdincss(cssでも可能)で装飾できて使い勝手良かったです。
+
+下記も使用可能です<br>
+Latex / mermaid diagram / vueコンポーネント
 
 </div>
 
----
-
-# LaTeX
-
-LaTeX is supported out-of-box. Powered by [KaTeX](https://katex.org/).
-
-<div h-3 />
-
-Inline $\sqrt{3x-1}+(1+x)^2$
-
-Block
-$$ {1|3|all}
-\begin{aligned}
-\nabla \cdot \vec{E} &= \frac{\rho}{\varepsilon_0} \\
-\nabla \cdot \vec{B} &= 0 \\
-\nabla \times \vec{E} &= -\frac{\partial\vec{B}}{\partial t} \\
-\nabla \times \vec{B} &= \mu_0\vec{J} + \mu_0\varepsilon_0\frac{\partial\vec{E}}{\partial t}
-\end{aligned}
-$$
-
-[Learn more](https://sli.dev/features/latex)
-
----
-
-# Diagrams
-
-You can create diagrams / graphs from textual descriptions, directly in your Markdown.
-
-<div class="grid grid-cols-4 gap-5 pt-4 -mb-6">
-
-```mermaid {scale: 0.5, alt: 'A simple sequence diagram'}
-sequenceDiagram
-    Alice->John: Hello John, how are you?
-    Note over Alice,John: A typical interaction
-```
-
-```mermaid {theme: 'neutral', scale: 0.8}
-graph TD
-B[Text] --> C{Decision}
-C -->|One| D[Result 1]
-C -->|Two| E[Result 2]
-```
-
-```mermaid
-mindmap
-  root((mindmap))
-    Origins
-      Long history
-      ::icon(fa fa-book)
-      Popularisation
-        British popular psychology author Tony Buzan
-    Research
-      On effectiveness<br/>and features
-      On Automatic creation
-        Uses
-            Creative techniques
-            Strategic planning
-            Argument mapping
-    Tools
-      Pen and paper
-      Mermaid
-```
-
-```plantuml {scale: 0.7}
-@startuml
-
-package "Some Group" {
-  HTTP - [First Component]
-  [Another Component]
-}
-
-node "Other Groups" {
-  FTP - [Second Component]
-  [First Component] --> FTP
-}
-
-cloud {
-  [Example 1]
-}
-
-database "MySql" {
-  folder "This is my folder" {
-    [Folder 3]
-  }
-  frame "Foo" {
-    [Frame 4]
-  }
-}
-
-[Another Component] --> [Example 1]
-[Example 1] --> [Folder 3]
-[Folder 3] --> [Frame 4]
-
-@enduml
-```
-
 </div>
 
-Learn More: [Mermaid Diagrams](https://sli.dev/guide/features/mermaid) and [PlantUML Diagrams](https://sli.dev/guide/features/plantuml)
-
----
-foo: bar
-dragPos:
-  square: 691,32,167,_,-16
----
-
-# Draggable Elements
-
-Double-click on the draggable elements to edit their positions.
-
-<br>
-
-###### Directive Usage
-
-```md
-<img v-drag="'square'" src="https://sli.dev/logo.png">
-```
-
-<br>
-
-###### Component Usage
-
-```md
-<v-drag text-3xl>
-  <carbon:arrow-up />
-  Use the `v-drag` component to have a draggable container!
-</v-drag>
-```
-
-<v-drag pos="663,206,261,_,-15">
-  <div text-center text-3xl border border-main rounded>
-    Double-click me!
-  </div>
-</v-drag>
-
-<img v-drag="'square'" src="https://sli.dev/logo.png">
-
-###### Draggable Arrow
-
-```md
-<v-drag-arrow two-way />
-```
-
-<v-drag-arrow pos="67,452,253,46" two-way op70 />
-
----
-src: ../../pages/imported-slides.md
-hide: false
----
-
----
-
-# Monaco Editor
-
-Slidev provides built-in Monaco Editor support.
-
-Add `{monaco}` to the code block to turn it into an editor:
-
-```ts {monaco}
-import { ref } from 'vue'
-import { emptyArray } from './external'
-
-const arr = ref(emptyArray(10))
-```
-
-Use `{monaco-run}` to create an editor that can execute the code directly in the slide:
-
-```ts {monaco-run}
-import { version } from 'vue'
-import { emptyArray, sayHello } from './external'
-
-sayHello()
-console.log(`vue ${version}`)
-console.log(emptyArray<number>(10).reduce(fib => [...fib, fib.at(-1)! + fib.at(-2)!], [1, 1]))
-```
-
----
-layout: center
-class: text-center
----
-
-# Learn More
-
-[Documentation](https://sli.dev) · [GitHub](https://github.com/slidevjs/slidev) · [Showcases](https://sli.dev/showcases.html)
-
-<PoweredBySlidev mt-10 />
+</div>
