@@ -13,6 +13,7 @@
     "@slidev/cli": "^0.49.28",
     "@slidev/theme-default": "latest",
     "@slidev/theme-seriph": "latest",
+    "node-html-parser": "^6.1.13",
     "vue": "^3.4.38"
   }
 }
