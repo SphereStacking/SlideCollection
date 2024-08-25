@@ -66,20 +66,20 @@ jobs:
           if [ -n "$SLIDE_FILES" ]; then
             IFS=';' read -ra FILES <<< "$SLIDE_FILES"
             for file in "${FILES[@]}"; do
-              npx slidev build $file --out ./dist/$file/
+              npx slidev build $file --out ./dist/$file
             done
           else
             echo "No slide files to build."
           fi
       - name: Display folder structure
-        run: tree ./
+        run: tree ./dist
 
       - name: Setup Pages
         uses: actions/configure-pages@v4
 
       - uses: actions/upload-pages-artifact@v3
         with:
-          path: dist
+          path: ./dist
 
   deploy:
     environment:
