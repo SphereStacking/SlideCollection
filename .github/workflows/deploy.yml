@@ -52,10 +52,13 @@ jobs:
 
       - name: Build
         run: |
-          npx slidev build ./slides/yyyy-mm-dd/slides.md --base /SlideCollection/yyyy-mm-dd/ --out ../../dist/yyyy-mm-dd/
-      #   npx slidev build ./slides/2024-08-24/slides.md --out ../dist/2024-08-24
-      # - name: Copy index.html to dist
-      #   run: cp ./index.html ./dist/index.html
+          for dir in ./slides/*/; do
+            base_name=$(basename "$dir")
+            npx slidev build "$dir/slides.md" --base "/SlideCollection/$base_name/" --out "../../dist/$base_name/"
+          done
+
+      - name: Copy index.html to dist
+        run: cp ./index.html ./dist/index.html
 
       - name: Setup Pages
         uses: actions/configure-pages@v4
