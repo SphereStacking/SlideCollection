@@ -66,13 +66,18 @@ jobs:
           if [ -n "$SLIDE_FILES" ]; then
             IFS=';' read -ra FILES <<< "$SLIDE_FILES"
             for file in "${FILES[@]}"; do
-              npx slidev build $file --out ./dist/$file
+              npx slidev build $file --out ../dist/$file
             done
           else
             echo "No slide files to build."
           fi
       - name: Display folder structure
-        run: tree ./src/dist
+        run: |
+          if find . -type d -name 'dist' | grep -q 'dist'; then
+            find . -type d -name 'dist' -exec tree {} \;
+          else
+            echo "No dist directory found."
+          fi
 
       - name: Setup Pages
         uses: actions/configure-pages@v4
