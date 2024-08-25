@@ -49,6 +49,7 @@ jobs:
           else
             SLIDE_FILES=$(find slides -name 'slides.md')
           fi
+          SLIDE_FILES=$(echo "$SLIDE_FILES" | tr '\n' ';')
           echo "SLIDE_FILES=$SLIDE_FILES" >> $GITHUB_ENV
 
       - name: Cache built files
@@ -63,7 +64,8 @@ jobs:
       - name: Build
         if: steps.find-changed-slides.outputs.SLIDE_FILES != ''
         run: |
-          for file in $SLIDE_FILES; do
+          IFS=';' read -ra FILES <<< "$SLIDE_FILES"
+          for file in "${FILES[@]}"; do
             npx slidev build $file
           done
 
