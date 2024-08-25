@@ -84,12 +84,10 @@ jobs:
             exit 1
           fi
 
-      - name: Setup Pages
-        uses: actions/configure-pages@v4
-
-      - uses: actions/upload-pages-artifact@v3
+      - name: Upload Pages artifacts
+        uses: actions/upload-pages-artifact@v3
         with:
-          path: slides/*/dist
+          path: slides/**/dist
 
   deploy:
     environment:
