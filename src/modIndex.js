@@ -7,12 +7,11 @@ const root = parse(readFileSync(HTML_PATH, 'utf-8'))
 const script = parse(`
 <script>
     (function () {
-        var redirect = sessionStorage.redirect;
-        console.log('Redirect URL:', redirect); // デバッグ用ログ
-        delete sessionStorage.redirect;
-        if (redirect && redirect !== location.href) {
-            window.location.href = redirect;
-        }
+    var redirect = sessionStorage.redirect;
+    delete sessionStorage.redirect;
+    if (redirect && redirect != location.href) {
+        history.replaceState(null, null, redirect);
+    }
     })();
 </script>
 `)
