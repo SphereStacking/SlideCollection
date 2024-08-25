@@ -41,28 +41,26 @@ jobs:
       - name: Install dependencies
         run: nci
 
-      - name: Find slide files
-        id: find-slides
-        run: echo "SLIDE_FILES=$(find slides -name 'slides.md' | tr '\n' ' ')" >> $GITHUB_ENV
+      - name: Find changed slide files
+        id: find-changed-slides
+        run: |
+          SLIDE_FILES=$(git diff --name-only HEAD^ HEAD | grep 'slides/.*/slides.md')
+          echo "SLIDE_FILES=$SLIDE_FILES" >> $GITHUB_ENV
 
-      - name: Build and Cache Slides
+      - name: Cache built files
+        id: cache-built-files
+        uses: actions/cache@v3
+        with:
+          path: slides/*/dist
+          key: ${{ runner.os }}-build-${{ hashFiles('**/slides/**/*.md') }}
+          restore-keys: |
+            ${{ runner.os }}-build-
+
+      - name: Build
+        if: steps.find-changed-slides.outputs.SLIDE_FILES != ''
         run: |
           for file in $SLIDE_FILES; do
-            SLIDE_DIR=$(dirname $file)
-            SLIDE_HASH=$(sha256sum $file | awk '{ print $1 }')
-            CACHE_KEY="${{ runner.os }}-slide-${SLIDE_HASH}"
-            echo "Checking cache for $file with key $CACHE_KEY"
-
-            # Restore cache
-            cache-hit=$(echo "::restore-cache name=slide-cache,path=$SLIDE_DIR/dist,key=$CACHE_KEY::")
-            if [[ $cache-hit == *"Cache hit"* ]]; then
-              echo "Cache hit for $file, skipping build."
-            else
-              echo "Cache miss for $file, building..."
-              npx slidev build $file
-              echo "Caching built files for $file"
-              echo "::save-cache name=slide-cache,path=$SLIDE_DIR/dist,key=$CACHE_KEY::"
-            fi
+            npx slidev build $file
           done
 
       - name: Setup Pages
