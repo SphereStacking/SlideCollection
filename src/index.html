@@ -12,10 +12,25 @@
     <link rel="icon" type="image/x-icon" href="data:image/x-icon;base64," />
 
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <style>
+      @keyframes fade-in {
+        from {
+          opacity: 0.2;
+          background-color: #004d40;
+        }
+        to {
+          opacity: 1;
+          background-color: #001000;
+        }
+      }
+      .animate-fade-in {
+        animation: fade-in 1s ease-in-out;
+      }
+    </style>
   </head>
   <body>
     <div
-      class="relative flex size-full min-h-screen flex-col bg-[#1a1a1a] dark group/design-root overflow-x-hidden"
+      class="relative flex size-full min-h-screen flex-col bg-[#001000] dark group/design-root overflow-x-hidden animate-fade-in bg-gradient-to-r from-[#001000] from-10% via-emerald-500 via-50% to-[#001000] to-90%"
       style="font-family: Newsreader, 'Noto Sans', sans-serif"
     >
       <div class="layout-container flex h-full grow flex-col">
@@ -55,127 +70,129 @@
             >
               Latest from Slides
             </h2>
-            <div
-              class="flex items-center gap-4 bg-[#1a1a1a] px-4 min-h-[72px] py-2 justify-between"
-            >
-              <div class="flex items-center gap-4">
-                <div
-                  class="text-white flex items-center justify-center rounded-lg bg-[#363636] shrink-0 size-12"
-                  data-icon="File"
-                  data-size="24px"
-                  data-weight="regular"
-                >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="24px"
-                    height="24px"
-                    fill="currentColor"
-                    viewBox="0 0 256 256"
+            <div class="rounded-lg bg-[#1a1a1a]">
+              <div
+                class="flex items-center gap-4 px-4 min-h-[72px] py-2 justify-between"
+              >
+                <div class="flex items-center gap-4">
+                  <div
+                    class="text-white flex items-center justify-center rounded-lg bg-[#363636] shrink-0 size-12"
+                    data-icon="File"
+                    data-size="24px"
+                    data-weight="regular"
                   >
-                    <path
-                      d="M213.66,82.34l-56-56A8,8,0,0,0,152,24H56A16,16,0,0,0,40,40V216a16,16,0,0,0,16,16H200a16,16,0,0,0,16-16V88A8,8,0,0,0,213.66,82.34ZM160,51.31,188.69,80H160ZM200,216H56V40h88V88a8,8,0,0,0,8,8h48V216Z"
-                    ></path>
-                  </svg>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="24px"
+                      height="24px"
+                      fill="currentColor"
+                      viewBox="0 0 256 256"
+                    >
+                      <path
+                        d="M213.66,82.34l-56-56A8,8,0,0,0,152,24H56A16,16,0,0,0,40,40V216a16,16,0,0,0,16,16H200a16,16,0,0,0,16-16V88A8,8,0,0,0,213.66,82.34ZM160,51.31,188.69,80H160ZM200,216H56V40h88V88a8,8,0,0,0,8,8h48V216Z"
+                      ></path>
+                    </svg>
+                  </div>
+                  <div class="flex flex-col justify-center">
+                    <p
+                      class="text-white text-base font-medium leading-normal line-clamp-1"
+                    >
+                      Post 1
+                    </p>
+                    <p
+                      class="text-[#adadad] text-sm font-normal leading-normal line-clamp-2"
+                    >
+                      hoge fuga piyo
+                    </p>
+                  </div>
                 </div>
-                <div class="flex flex-col justify-center">
-                  <p
-                    class="text-white text-base font-medium leading-normal line-clamp-1"
-                  >
-                    Post 1
-                  </p>
-                  <p
-                    class="text-[#adadad] text-sm font-normal leading-normal line-clamp-2"
-                  >
-                    hoge fuga piyo
-                  </p>
-                </div>
-              </div>
-              <div class="shrink-0">
-                <p class="text-white text-base font-normal leading-normal">
-                  yyyy-mm-dd
-                </p>
-              </div>
-            </div>
-            <div
-              class="flex items-center gap-4 bg-[#1a1a1a] px-4 min-h-[72px] py-2 justify-between"
-            >
-              <div class="flex items-center gap-4">
-                <div
-                  class="text-white flex items-center justify-center rounded-lg bg-[#363636] shrink-0 size-12"
-                  data-icon="File"
-                  data-size="24px"
-                  data-weight="regular"
-                >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="24px"
-                    height="24px"
-                    fill="currentColor"
-                    viewBox="0 0 256 256"
-                  >
-                    <path
-                      d="M213.66,82.34l-56-56A8,8,0,0,0,152,24H56A16,16,0,0,0,40,40V216a16,16,0,0,0,16,16H200a16,16,0,0,0,16-16V88A8,8,0,0,0,213.66,82.34ZM160,51.31,188.69,80H160ZM200,216H56V40h88V88a8,8,0,0,0,8,8h48V216Z"
-                    ></path>
-                  </svg>
-                </div>
-                <div class="flex flex-col justify-center">
-                  <p
-                    class="text-white text-base font-medium leading-normal line-clamp-1"
-                  >
-                    Post 2
-                  </p>
-                  <p
-                    class="text-[#adadad] text-sm font-normal leading-normal line-clamp-2"
-                  >
-                    hoge fuga piyo
+                <div class="shrink-0">
+                  <p class="text-white text-base font-normal leading-normal">
+                    yyyy-mm-dd
                   </p>
                 </div>
               </div>
-              <div class="shrink-0">
-                <p class="text-white text-base font-normal leading-normal">
-                  yyyy-mm-dd
-                </p>
-              </div>
-            </div>
-            <div
-              class="flex items-center gap-4 bg-[#1a1a1a] px-4 min-h-[72px] py-2 justify-between"
-            >
-              <div class="flex items-center gap-4">
-                <div
-                  class="text-white flex items-center justify-center rounded-lg bg-[#363636] shrink-0 size-12"
-                  data-icon="File"
-                  data-size="24px"
-                  data-weight="regular"
-                >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="24px"
-                    height="24px"
-                    fill="currentColor"
-                    viewBox="0 0 256 256"
+              <div
+                class="flex items-center gap-4 px-4 min-h-[72px] py-2 justify-between"
+              >
+                <div class="flex items-center gap-4">
+                  <div
+                    class="text-white flex items-center justify-center rounded-lg bg-[#363636] shrink-0 size-12"
+                    data-icon="File"
+                    data-size="24px"
+                    data-weight="regular"
                   >
-                    <path
-                      d="M213.66,82.34l-56-56A8,8,0,0,0,152,24H56A16,16,0,0,0,40,40V216a16,16,0,0,0,16,16H200a16,16,0,0,0,16-16V88A8,8,0,0,0,213.66,82.34ZM160,51.31,188.69,80H160ZM200,216H56V40h88V88a8,8,0,0,0,8,8h48V216Z"
-                    ></path>
-                  </svg>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="24px"
+                      height="24px"
+                      fill="currentColor"
+                      viewBox="0 0 256 256"
+                    >
+                      <path
+                        d="M213.66,82.34l-56-56A8,8,0,0,0,152,24H56A16,16,0,0,0,40,40V216a16,16,0,0,0,16,16H200a16,16,0,0,0,16-16V88A8,8,0,0,0,213.66,82.34ZM160,51.31,188.69,80H160ZM200,216H56V40h88V88a8,8,0,0,0,8,8h48V216Z"
+                      ></path>
+                    </svg>
+                  </div>
+                  <div class="flex flex-col justify-center">
+                    <p
+                      class="text-white text-base font-medium leading-normal line-clamp-1"
+                    >
+                      Post 2
+                    </p>
+                    <p
+                      class="text-[#adadad] text-sm font-normal leading-normal line-clamp-2"
+                    >
+                      hoge fuga piyo
+                    </p>
+                  </div>
                 </div>
-                <div class="flex flex-col justify-center">
-                  <p
-                    class="text-white text-base font-medium leading-normal line-clamp-1"
-                  >
-                    Post 3
-                  </p>
-                  <p
-                    class="text-[#adadad] text-sm font-normal leading-normal line-clamp-2"
-                  >
-                    hoge fuga piyo
+                <div class="shrink-0">
+                  <p class="text-white text-base font-normal leading-normal">
+                    yyyy-mm-dd
                   </p>
                 </div>
               </div>
-              <div class="shrink-0">
-                <p class="text-white text-base font-normal leading-normal">
-                  yyyy-mm-dd
-                </p>
+              <div
+                class="flex items-center gap-4 px-4 min-h-[72px] py-2 justify-between"
+              >
+                <div class="flex items-center gap-4">
+                  <div
+                    class="text-white flex items-center justify-center rounded-lg bg-[#363636] shrink-0 size-12"
+                    data-icon="File"
+                    data-size="24px"
+                    data-weight="regular"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="24px"
+                      height="24px"
+                      fill="currentColor"
+                      viewBox="0 0 256 256"
+                    >
+                      <path
+                        d="M213.66,82.34l-56-56A8,8,0,0,0,152,24H56A16,16,0,0,0,40,40V216a16,16,0,0,0,16,16H200a16,16,0,0,0,16-16V88A8,8,0,0,0,213.66,82.34ZM160,51.31,188.69,80H160ZM200,216H56V40h88V88a8,8,0,0,0,8,8h48V216Z"
+                      ></path>
+                    </svg>
+                  </div>
+                  <div class="flex flex-col justify-center">
+                    <p
+                      class="text-white text-base font-medium leading-normal line-clamp-1"
+                    >
+                      Post 3
+                    </p>
+                    <p
+                      class="text-[#adadad] text-sm font-normal leading-normal line-clamp-2"
+                    >
+                      hoge fuga piyo
+                    </p>
+                  </div>
+                </div>
+                <div class="shrink-0">
+                  <p class="text-white text-base font-normal leading-normal">
+                    yyyy-mm-dd
+                  </p>
+                </div>
               </div>
             </div>
           </div>
