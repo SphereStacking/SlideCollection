@@ -1,4 +1,4 @@
-name: Deploy pages
+name: manual deploy
 
 on:
   workflow_dispatch:
