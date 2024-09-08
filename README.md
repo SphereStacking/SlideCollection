@@ -3,6 +3,7 @@
 ## 訪問者向け情報
 
 @SphereStacking が作成したスライドを公開しています。
+
 https://spherestacking.github.io/SlideCollection/
 
 ---
