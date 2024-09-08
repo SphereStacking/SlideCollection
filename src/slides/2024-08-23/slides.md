@@ -34,54 +34,9 @@ fonts:
 
 
 ---
+src: ../../components/slides/profile_2024.md
 transition: slide-up
 ---
-
-# 自己紹介
-
-<div class="flex flex-row gap-2 h-full  items-center">
-  <div class="w-full">
-```
-{
-"profile" : {
-  "name" : "XX XX",
-  "handlename" : "Sphere",
-  "tolikes" : [
-    "🟢(#bbffcc)","🏍️",
-  ],
-  "dislikes" : [
-    "🦐"
-  ],
-  "career" : [
-      { "job":"Web Engineer", "period":"2023/08 ~ now" },
-      { "job":"🚀🛰📡 Engineer", "period":"2016/04 ~ 2023/07" }
-  ],
-}
-```
-  </div>
-  <div class="w-full">
-  昨年8月に組み込み系からWEB系に転職
-
-  社会人歴9年目、仕事としてのweb系は1年のエンジニア
-
-  プライム企業の下請けで従事していました。
-  30年来の熟成されて黒魔術と化したシステムを保守/運用/機能追加しており
-  技術スタックが古い企業でエンジニアしていました。
-  </div>
-</div>
-
-<style>
-h1 {
-  background-color: #2B90B6;
-  background-image: linear-gradient(45deg, #4EC5D4 10%, #146b8c 20%);
-  background-size: 100%;
-  -webkit-background-clip: text;
-  -moz-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  -moz-text-fill-color: transparent;
-}
-</style>
-
 ---
 layout: default
 transition: slide-up

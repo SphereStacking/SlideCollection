@@ -1,27 +1,37 @@
 # My Slides
 
-- スライドの複数起動は不可
+## 訪問者向け情報
 
-## powerd by
+@SphereStacking が作成したスライドを公開しています。
+
+https://spherestacking.github.io/SlideCollection/
+
+---
+
+## 開発者向け情報
+
+### 参考資料
+
+- [公式ガイド](https://sli.dev/guide/)
+
+### 使用技術
 
 - [slidev](https://github.com/slidevjs/slidev)
-- [docker](https://www.docker.com/)
 
-## 参考
+### 環境構築手順
 
-- [公式 guide](https://sli.dev/guide/)
+> [!NOTE]
+> スライドの複数起動は不可
 
-## 環境構築
-
-1. リポジトリの clone
+1. リポジトリのクローン
 
    ```sh
    git clone {リポジトリURL}
    ```
 
-2. Editor に pretter 拡張機能をインストール
+2. エディタに Prettier 拡張機能をインストール
 
-   - [pretter](https://prettier.io/)
+   - [Prettier](https://prettier.io/)
    - [prettier-vscode](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode)
 
 3. コンテナを立ち上げる
@@ -36,7 +46,7 @@
    docker-compose exec slidev bash
    ```
 
-## 新規スライド
+### 新規スライド作成手順
 
 1. コンテナに入る
 
@@ -55,7 +65,7 @@
 
    - 新規作成時は自動でローカルでスライドが起動される。
 
-## ローカルのスライド環境を起動
+### ローカルスライド環境の起動手順
 
 1. コンテナに入る
 
@@ -63,7 +73,7 @@
    docker-compose exec slidev bash
    ```
 
-2. 編集対象の slide に移動
+2. 編集対象のスライドフォルダに移動
 
    ```sh
    cd {slideフォルダ}
@@ -73,13 +83,6 @@
 
    ```sh
    npx slidev --remote
-   ```
-
-4. スライドを開く
-
-   ```sh
-   root@4ea691802e16:~/slidev/test# npx slidev --remote
-
 
    ●■▲
    Slidev  v0.49.28
