@@ -42,7 +42,7 @@
               class="layout-content-container flex flex-col max-w-[960px] flex-1"
             >
               <div class="@container">
-                <div class="@[480px]:p-4">
+                <div class="@[480px]">
                   <div
                     class="flex min-h-[480px] flex-col rounded-lg gap-6 bg-cover bg-center bg-no-repeat @[480px]:gap-8 @[480px]:rounded-xl items-center justify-center p-4"
                     style="
@@ -77,49 +77,54 @@
                 <div
                   v-for="(post, index) in posts"
                   :key="index"
-                  class="flex items-center gap-2 px-4 py-2 min-h-[72px] justify-between rounded-lg bg-[#1a1a1a] group hover:bg-[#363636] duration-300 shadow-lg"
+                  class="flex items-center gap-2 px-4 mb-1 py-2 min-h-[72px] justify-between rounded-lg bg-[#1a1a1a] group hover:bg-[#363636] duration-300 shadow-lg"
                 >
-                  <a class="flex items-center gap-4" :href="post.link">
-                    <div
-                      class="text-white flex items-center justify-center rounded-lg bg-[#363636] shrink-0 size-12 group-hover:bg-[#1a1a1a] duration-300 shadow-lg"
-                      data-icon="File"
-                      data-size="24px"
-                      data-weight="regular"
-                    >
-                      <div class="relative">
-                        <span
-                          class="absolute iconify opacity-100 group-hover:opacity-0 duration-300 -translate-y-1/2 -translate-x-1/2"
-                          :data-icon="post.icon"
-                          data-width="24"
-                          data-height="24"
-                        ></span>
-                        <span
-                          class="absolute iconify opacity-0 group-hover:opacity-100 duration-200 -translate-y-1/2 -translate-x-1/2"
-                          data-icon="mdi:external-link"
-                          data-width="24"
-                          data-height="24"
+                  <a
+                    class="flex items-center justify-between w-full"
+                    :href="post.link"
+                  >
+                    <div class="flex items-center gap-2 w-full">
+                      <div
+                        class="text-white flex items-center justify-center rounded-lg bg-[#363636] shrink-0 size-12 group-hover:bg-[#1a1a1a] duration-300 shadow-lg"
+                        data-icon="File"
+                        data-size="24px"
+                        data-weight="regular"
+                      >
+                        <div class="relative">
+                          <span
+                            class="absolute iconify opacity-100 group-hover:opacity-0 duration-300 -translate-y-1/2 -translate-x-1/2"
+                            :data-icon="post.icon"
+                            data-width="24"
+                            data-height="24"
+                          ></span>
+                          <span
+                            class="absolute iconify opacity-0 group-hover:opacity-100 duration-200 -translate-y-1/2 -translate-x-1/2"
+                            data-icon="mdi:external-link"
+                            data-width="24"
+                            data-height="24"
+                          >
+                          </span>
+                        </div>
+                      </div>
+                      <div class="flex flex-col justify-center">
+                        <p
+                          class="text-white text-base font-medium leading-normal line-clamp-1"
                         >
-                        </span>
+                          {{ post.title }}
+                        </p>
+                        <p
+                          class="text-[#adadad] text-sm font-normal leading-normal line-clamp-2"
+                        >
+                          {{ post.description }}
+                        </p>
                       </div>
                     </div>
-                    <div class="flex flex-col justify-center">
-                      <p
-                        class="text-white text-base font-medium leading-normal line-clamp-1"
-                      >
-                        {{ post.title }}
-                      </p>
-                      <p
-                        class="text-[#adadad] text-sm font-normal leading-normal line-clamp-2"
-                      >
-                        {{ post.description }}
-                      </p>
-                    </div>
-                  </a>
-                  <div class="shrink-0">
-                    <p class="text-white text-base font-normal leading-normal">
+                    <p
+                      class="text-white text-base font-normal leading-normal text-nowrap"
+                    >
                       {{ post.date }}
                     </p>
-                  </div>
+                  </a>
                 </div>
               </div>
             </div>
@@ -140,13 +145,13 @@
               date: '2024-08-23',
               link: 'https://spherestacking.github.io/SlideCollection/2024-08-23',
             },
-            // {
-            //   title: 'Post 2',
-            //   icon: 'mdi:file-document-outline',
-            //   description: 'hoge fuga piyo',
-            //   date: 'yyyy-mm-dd',
-            //   link: 'https://spherestacking.github.io/SlideCollection/yyyy-mm-dd',
-            // },
+            {
+              title: 'Sentryでの非推奨イベント起因のエラーについての調査',
+              icon: 'simple-icons:sentry',
+              description: '所属会社 TechSync用スライド',
+              date: '2024-09-08',
+              link: 'https://spherestacking.github.io/SlideCollection/2024-09-08',
+            },
             // {
             //   title: 'Post 3',
             //   icon: 'mdi:file-document-outline',
