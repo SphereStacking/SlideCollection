@@ -2,7 +2,7 @@
 
 <div class="flex flex-row gap-2 h-full  items-center">
   <div class="w-full">
-  <img src="https://avatars.githubusercontent.com/u/108622390" alt="profile" class="size-24">
+  <img src="https://avatars.githubusercontent.com/u/108622390" alt="profile" class="size-24 rounded-md">
 
 2023/8に組み込み系からWEB系に転職
 
