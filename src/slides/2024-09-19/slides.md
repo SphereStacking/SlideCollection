@@ -13,22 +13,9 @@ mdc: true
 
 所属会社 Tech meet up #1 登壇スライド
 
-<div class="pt-12">
-  <span @click="$slidev.nav.next" class="px-2 py-1 rounded cursor-pointer" hover="bg-white bg-opacity-10">
-    Press Space for next page <carbon:arrow-right class="inline"/>
-  </span>
+<div class="flex justify-center">
+  <img src="https://sli.dev/logo.png" class="size-64">
 </div>
-
-<div class="abs-br m-6 flex gap-2">
-  <button @click="$slidev.nav.openInEditor()" title="Open in Editor" class="text-xl slidev-icon-btn opacity-50 !border-none !hover:text-white">
-    <carbon:edit />
-  </button>
-  <a href="https://github.com/slidevjs/slidev" target="_blank" alt="GitHub" title="Open in GitHub"
-    class="text-xl slidev-icon-btn opacity-50 !border-none !hover:text-white">
-    <carbon-logo-github />
-  </a>
-</div>
-
 
 ---
 src: ../../components/slides/profile_2024.md
@@ -45,16 +32,35 @@ transition: slide-up
 4. 簡単なデモをお見せします
 
 ---
+layout: cover
+---
 
-# **紹介の背景と目的**
 
-## **背景**
+<div class="flex justify-center flex-col text-center">
+  <p v-click="1" class="text-2xl font-bold">エンジニアなら誰しも思うことがある</p>  
+
+  <p v-click="2" class="text-2xl font-bold">コードを書くようにスライドを作りたい。</p>
+
+  <p v-click="3" class="text-2xl font-bold">それでもGoogleスライドやCanvaを使っている。</p>
+
+  <p v-click="4" class="text-2xl font-bold">でもMarkdownでスライドを作りたい。</p>
+
+  <p v-click="5" class="text-2xl font-bold">それならもSlidevを使おうよ。</p>
+
+  <p v-click="6" class="text-2xl font-bold">(個人差はあります。)</p>
+</div>
+
+
+
+---
+
+# **目的**
+
   - プレゼンやLTを行う際、スライド作成に意外と時間がかかることってありませんか？  
   - GoogleスライドやCanvaを使っても、レイアウト調整が思ったより手間に感じませんか？
   - 開発者にとって馴染みのMarkdownを用いてスライドを作成できる。
 
-
-## **目的**
+## そんな時におすすめなのがこのToolです。
 
 <div class="flex justify-center flex-col text-center">
   <div class="text-xl font-bold text-gray-900 p-4 rounded-lg shadow-lg bg-gradient-to-r from-gray-700 to-gray-300">
@@ -95,33 +101,71 @@ transition: slide-up
   </div>
 </div>
 
+
 ---
 
 # **Slidevの基本機能**
 
-- **スライド作成が簡単**:  
-  - **Markdownでスライド作成**するため、コードを書くようにスライドを作成できます。
-  - **CSSでスタイリングが可能**で、何度も位置調整する手間がなく、細かいデザインが可能です。<br>(cssなので人によるかもしれない。。。)
+<ul>
+  <li>
+    <strong>スライド作成が簡単</strong>: 
+    <ul>
+      <li><strong>Markdownでスライド作成</strong>するため、コードを書くようにスライドを作成できます。</li>
+      <li><strong>CSSでスタイリングが可能</strong>で、何度も位置調整する手間がなく、細かいデザインが可能です。<br>(cssなので人によるかもしれない。。。)</li>
+    </ul>
+  </li>
+  <li><strong>プレゼンターモード</strong>:
+    <ul>
+      <li>発表者がスムーズに進行できるように、<strong>プレゼンターモード</strong>を提供しています。</li>
+      <li>よくあるプレゼンターのみが参照するコメントも可能です。</li>
+    </ul>
+  </li>
+  <li><strong>リアルタイムプレビューで作業効率UP</strong>:
+    <ul>
+    <li>リアルタイムプレビュー機能があり、スライドの編集を行いながら、その結果をすぐに確認できます。</li>
+  </ul>
+  </li>
 
-- **リアルタイムプレビューで作業効率UP**:  
-  - リアルタイムプレビュー機能があり、スライドの編集を行いながら、その結果をすぐに確認できます。
+  <li><strong>豊富なテーマとカスタマイズ性</strong>:
+    <ul>
+      <li><strong>公開されたテーマ</strong>を簡単に使用できます。テーマを選ぶだけで、デザイン性の高いスライドを作成できます。</li>
+    </ul>
+</li>
+</ul>
 
-- **プレゼンターモード**:  
-  - 発表者がスムーズに進行できるように、**プレゼンターモード**を提供しています。
-  - よくあるプレゼンターのみが参照するコメントも可能です。
+<!--
+なにしゃべろうかな。
+休日ずっとSlack Appで遊んでたから
+なんもすすんどらん  
 
-- **豊富なテーマとカスタマイズ性**:  
-  - **公開されたテーマ**を簡単に使用できます。テーマを選ぶだけで、デザイン性の高いスライドを作成できます。
+カンニング用
+text-red-500
+bg-teel-500
+hover:bg-teel-800
+transition-all duration-300 
+animate-ping
+
+-->
+
+---
+layout: iframe
+url: https://sli.dev/resources/theme-gallery#official-themes
+---
+
+---
+layout: center
+---
+
+# slidevの基本機能のデモ
+
 
 ---
 layout: two-cols-header
 ---
 
-# **Markdown**でスライドを作成する
+# **基本的な構文** header
 
 ::left::
-
-# h1
 
 # h1
 ## h2
@@ -131,6 +175,7 @@ layout: two-cols-header
 ###### h6
 
 ::right::
+
 
 ```markdown
 # h1
@@ -150,9 +195,30 @@ layout: two-cols-header
 layout: two-cols-header
 ---
 
-# **Markdown**でスライドを作成する
+# **基本的な構文** リストや文字装飾
 
 ::left::
+
+- リスト1
+- リスト2
+- リスト3
+
+1. 番号リスト1
+2. 番号リスト2
+1. 番号リスト3
+
+~~取り消し線~~
+
+**太字**
+
+*イタリック*
+
+> 引用
+
+[リンクテキスト](https://example.com)
+
+::right::
+```markdown
 
 - リスト1
 - リスト2
@@ -164,41 +230,52 @@ layout: two-cols-header
 
 ~~取り消し線~~
 
+**太字**
+
+*イタリック*
 
 > 引用
 
 [リンクテキスト](https://example.com)
 
+```
+
+---
+
+# **基本的な構文** コードブロック
+
+## 通常
 ```ts
 // コードブロック
 console.log('Hello, World!')
 ```
 
-::right::
-```markdown
+## monaco
+```ts {monaco-run}
+import { version } from 'vue'
+import { emptyArray, sayHello } from './external'
 
-- リスト1
-- リスト2
-- リスト3
+sayHello()
+console.log(`vue ${version}`)
+console.log(emptyArray<number>(10).reduce(fib => [...fib, fib.at(-1)! + fib.at(-2)!], [1, 1]))
+```
 
-1. 番号リスト1
-2. 番号リスト2
-3. 番号リスト3
+## コードのハイライト
 
-~~取り消し線~~
-
-> 引用
-
-[リンクテキスト](https://example.com)
-
-
+```ts {2-3|5|all}
+function add(
+  a: Ref<number> | number,
+  b: Ref<number> | number
+) {
+  return computed(() => unref(a) + unref(b))
+}
 ```
 
 ---
 layout: two-cols-header
 ---
 
-# **layout**
+# ページの **layout**
 
 スライドを構成する要素を変更することができます。
 
@@ -491,23 +568,6 @@ layout: two-cols-header
 右側に表示されます
 
 ---
-layout: two-cols
----
-
-# モナコEditorでのコード表示
-
-::right::
-
-```ts {monaco}
-
-import { ref } from 'vue'
-import { useMouse } from '@vueuse/core'
-
-const counter = ref(0)
-
-```
-
----
 
 # 数式の表示
 
@@ -572,7 +632,7 @@ Mermaid.jsやPlantUMLを使ってグラフや図表を描画できます。
 ## Mermaid
 ```mermaid
 sequenceDiagram
-    participant User
+    actor User
     participant Frontend
     participant Backend
     participant Database
@@ -590,7 +650,17 @@ sequenceDiagram
 ## PlantUML
 ```plantuml
 @startuml
-Alice -> Bob : Hello!
+actor User
+participant Frontend
+participant Backend
+participant Database
+
+User -> Frontend : 作成リクエスト
+Frontend -> Backend : POST /todos
+Backend -> Database : 保存
+Database --> Backend : 完了
+Backend --> Frontend : 新しいTodo
+Frontend --> User : 作成完了
 @enduml
 ```
 
@@ -612,17 +682,18 @@ src: ../../components/slides/profile_2024.md
 
 WindiCSS(tailwindCSS互換)を使用して、styleを指定することができます。
 
-<div class="grid grid-cols-2 gap-2">
-  <div class="bg-red-500 text-white p-4 rounded-lg shadow-lg">
-    <h1 class="text-2xl font-bold">Hello, World!</h1>
-    <p class="text-base">This is a custom component.</p>
+<div class="grid grid-cols-2 gap-4">
+
+  <div class="bg-gradient-to-r from-teal-300 via-teal-500 to-yellow-500 text-white p-4 rounded-lg shadow-lg animate-pulse">
+    <h1 class="text-2xl font-bold animate-none">Hello, World!</h1>
+    <p class="text-base animate-none">This is a custom css.</p>
   </div>
 
 ```markdown
-<div class="bg-red-500 text-white p-4 rounded-lg shadow-lg">
-  <h1 class="text-2xl font-bold">Hello, World!</h1>
-  <p class="text-base">This is a custom component.</p>
-</div>
+  <div class="bg-gradient-to-r from-teal-300 via-teal-500 to-yellow-500 text-white p-4 rounded-lg shadow-lg animate-pulse">
+    <h1 class="text-2xl font-bold">Hello, World!</h1>
+    <p class="text-base">This is a custom component.</p>
+  </div>
 ```
 
 </div>
@@ -631,7 +702,7 @@ WindiCSS(tailwindCSS互換)を使用して、styleを指定することができ
 ---
 foo: bar
 dragPos:
-  square: 401,55,426,_,54
+  square: 361,37,162,_,-14
 ---
 
 # Draggable Elements
@@ -657,7 +728,7 @@ dragPos:
 </v-drag>
 ```
 
-<v-drag pos="663,206,261,_,-15"undefinedundefined>
+<v-drag pos="367,163,261,_,-15"undefinedundefinedundefinedundefinedundefinedundefinedundefinedundefinedundefinedundefinedundefinedundefinedundefinedundefinedundefinedundefinedundefinedundefinedundefinedundefinedundefinedundefinedundefinedundefinedundefinedundefinedundefinedundefinedundefinedundefinedundefinedundefinedundefinedundefinedundefinedundefinedundefinedundefinedundefinedundefinedundefinedundefinedundefinedundefinedundefinedundefinedundefinedundefinedundefinedundefinedundefinedundefinedundefinedundefinedundefinedundefinedundefinedundefinedundefinedundefinedundefinedundefinedundefinedundefinedundefinedundefinedundefinedundefinedundefinedundefinedundefinedundefinedundefinedundefinedundefinedundefinedundefinedundefinedundefinedundefinedundefinedundefinedundefinedundefinedundefinedundefinedundefinedundefinedundefinedundefinedundefinedundefinedundefinedundefinedundefinedundefinedundefinedundefinedundefinedundefinedundefinedundefinedundefinedundefinedundefinedundefinedundefinedundefinedundefined>
   <div text-center text-3xl border border-main rounded>
     ダブルクリック!
   </div>
@@ -671,31 +742,253 @@ dragPos:
 <v-drag-arrow two-way />
 ```
 
-<v-drag-arrow pos="67,452,253,46" two-way op70 />
+<v-drag-arrow pos="70,430,253,46" two-way op70 />
 
 ---
 
-# 3. **カスタムフォントとアイコン**
-
-外部フォントやアイコンを簡単に利用することができます。
-
-```markdown
-fonts:
-  sans: 'Roboto'
-# フォント変更
-## アイコンの使用 🚀
-
-```
-
----
-
-### 6. **トランジションやアニメーション**
+# トランジションやアニメーション
 
 トランジションやアニメーションも簡単に追加できます。
 
+|transition|説明|
+|---|---|
+|fade | クロスフェード|
+|fade-out | フェードアウトしてからフェードイン|
+|slide-left | 左にスライド|
+|slide-right | 右にスライド|
+|slide-up | 上にスライド|
+|slide-down | 下にスライド|
+|view-transition | ビュートランジションAPIを使用|
+
+---
+transition: fade
+---
+
+# トランジション fade
 ```markdown
-transition: slide-left
-
-# トランジションの追加
-
+---
+transition: fade
+---
 ```
+---
+transition: fade-out
+---
+
+# トランジション fade-out
+```markdown
+---
+transition: fade-out
+---
+```
+
+---
+transition: slide-left
+---
+
+# トランジション slide-left
+```markdown
+---
+transition: slide-left
+---
+```
+
+---
+transition: slide-right
+---
+
+# トランジション slide-right
+
+```markdown
+---
+transition: slide-right
+---
+```
+
+---
+transition: slide-up
+---
+
+
+# トランジション slide-up
+
+```markdown
+---
+transition: slide-up
+---
+```
+
+---
+transition: slide-down
+---
+
+# トランジション slide-down
+
+```markdown
+---
+transition: slide-down
+---
+```
+
+---
+transition: view-transition
+---
+
+# トランジション view-transition
+
+```markdown
+---
+transition: view-transition
+---
+```
+
+# View Transition {.inline-block.view-transition-title}
+
+---
+
+# View Transition {.inline-block.view-transition-title}
+
+---
+
+# Motions
+
+ **motion** は[@vueuse/motion](https://motion.vueuse.org/)で提供されています。
+
+```html
+<div
+  v-motion
+  :initial="{ x: -80 }"
+  :enter="{ x: 0 }"
+  :click-3="{ x: 80 }"
+  :leave="{ x: 1000 }"
+>
+  Slidev
+</div>
+```
+
+<div class="w-60 relative">
+  <div class="relative w-40 h-40">
+    <img
+      v-motion
+      :initial="{ x: 800, y: -100, scale: 1.5, rotate: -50 }"
+      :enter="final"
+      class="absolute inset-0"
+      src="https://sli.dev/logo-square.png"
+      alt=""
+    />
+    <img
+      v-motion
+      :initial="{ y: 500, x: -100, scale: 2 }"
+      :enter="final"
+      class="absolute inset-0"
+      src="https://sli.dev/logo-circle.png"
+      alt=""
+    />
+    <img
+      v-motion
+      :initial="{ x: 600, y: 400, scale: 2, rotate: 100 }"
+      :enter="final"
+      class="absolute inset-0"
+      src="https://sli.dev/logo-triangle.png"
+      alt=""
+    />
+  </div>
+
+  <div
+    class="text-5xl absolute top-14 left-40 text-[#2B90B6] -z-1"
+    v-motion
+    :initial="{ x: -80, opacity: 0}"
+    :enter="{ x: 0, opacity: 1, transition: { delay: 2000, duration: 1000 } }">
+    Slidev
+  </div>
+</div>
+
+<!-- vue script setup scripts can be directly used in markdown, and will only affects current page -->
+<script setup lang="ts">
+const final = {
+  x: 0,
+  y: 0,
+  rotate: 0,
+  scale: 1,
+  transition: {
+    type: 'spring',
+    damping: 10,
+    stiffness: 20,
+    mass: 2
+  }
+}
+</script>
+
+<div
+  v-motion
+  :initial="{ x:35, y: 30, opacity: 0}"
+  :enter="{ y: 0, opacity: 1, transition: { delay: 3500 } }">
+
+[Learn More](https://sli.dev/guide/animations.html#motion)
+
+</div>
+
+---
+
+
+# Components
+
+<div grid="~ cols-2 gap-4">
+<div>
+
+Vue componentsをスライド内で直接使用することができます。
+
+いくつかの組み込みコンポーネントを提供しています。
+
+```html
+<Counter :count="10" />
+```
+
+<!-- ./components/Counter.vue -->
+<Counter :count="10" m="t-4" />
+
+
+</div>
+<div>
+
+```html
+<Tweet id="1799731407054610654" />
+```
+
+<Tweet id="1799731407054610654" scale="0.5" />
+
+</div>
+</div>
+
+---
+
+# 最後に
+[]
+
+
+Slidevを使うことで、スライド作成が楽しくなります。<br>
+コードを書くようにスライドを作成できるので、開発者にとって非常に親しみやすいです。<br>
+デザインの自由度も高く、スライド作成がより楽しくなります。<br>
+
+
+
+<div class="grid grid-cols-2 mt-12">
+  <div>
+
+  <p>こちらのリポジトリを参考にして<br>
+  ぜひSlidevを試してみてください。</p>
+
+  <a href="https://github.com/SphereStacking/SlideCollection">SphereStacking/SlideCollection</a>
+
+  </div>
+  <div class="flex justify-center">
+    <img src="https://avatars.githubusercontent.com/u/108622390" alt="SphereStacking" class="size-32 rounded-full">
+  </div>
+</div>
+
+複数のスライドを同じリポジトリで管理し、GitHub ActionsでGitHub Pagesにデプロイするように設定されています。ForkまたはCloneして試してみてください。（良かったらStarもお願いします！）
+
+---
+layout: end
+---
+
+# ご清聴ありがとうございました。
