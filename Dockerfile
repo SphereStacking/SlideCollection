@@ -1,5 +1,19 @@
 FROM node:18
 
-RUN apt-get update && apt-get install -y xdg-utils
+# 必要な依存関係をインストール
+RUN apt-get update && apt-get install -y \
+    xdg-utils \
+    libnss3 \
+    libnspr4 \
+    libatk1.0-0 \
+    libatk-bridge2.0-0 \
+    libcups2 \
+    libxkbcommon0 \
+    libatspi2.0-0 \
+    libxdamage1 \
+    libasound2
+
+# Playwrightの依存関係とブラウザをインストール
+RUN npx playwright install-deps && npx playwright install
 
 WORKDIR /root/slidev

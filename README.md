@@ -98,3 +98,23 @@ https://spherestacking.github.io/SlideCollection/
 
    shortcuts           > restart | open | edit | quit | qrcode
    ```
+
+### スライドのエクスポート
+
+1. コンテナに入る
+
+   ```sh
+   docker-compose exec slidev bash
+   ```
+
+2. 編集対象のスライドフォルダに移動
+
+   ```sh
+   cd {slideフォルダ}
+   ```
+
+3. スライドをエクスポート
+
+```sh
+   npx slidev export
+```
