@@ -36,11 +36,25 @@
         class="relative flex size-full min-h-screen flex-col bg-[#001000] dark group/design-root overflow-x-hidden animate-fade-in bg-gradient-to-r from-emerald-800 from-2% via-emerald-100 via-50% to-emerald-200 to-98%"
         style="font-family: Newsreader, 'Noto Sans', sans-serif"
       >
+        </div>
         <div class="layout-container flex h-full grow flex-col">
           <div class="px-4 md:px-20 flex flex-1 justify-center py-5">
             <div
               class="layout-content-container flex flex-col max-w-[960px] flex-1"
             >
+                    <!-- 右上にボタンを追加 -->
+        <div class=" top-4 right-4">
+          <button
+            class="bg-emerald-500 text-white font-bold py-2 px-4 rounded hover:bg-emerald-700"
+            @click="viewCareerHistory"
+          >
+          <span
+            class="iconify"
+            data-icon="hugeicons:work-history"
+            data-width="24"
+            data-height="24"
+          >
+          </button>
               <div class="@container">
                 <div class="@[480px]">
                   <div
@@ -170,7 +184,11 @@
             // },
           ])
 
-          return { posts }
+          const viewCareerHistory = () => {
+            window.location.href = 'https://spherestacking.github.io/SlideCollection/work-history'
+          }
+
+          return { posts, viewCareerHistory }
         },
         template: '#app-template',
       }
