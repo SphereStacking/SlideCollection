@@ -107,6 +107,12 @@ layout: center
     </template>
     ```
 
+<div v-click>
+
+## Problem
+
+どこが違うでしょうか？
+</div>
 </template>
 <template #right>
 
@@ -125,13 +131,12 @@ layout: center
     </template>
     ```
 
-</template>
+<div class="" v-click>
 
-<template #footer>
+## Answer
 
-<div class="text-center" v-click>
+大雑把にはデータにアクセスする際に `.value` をつけるかどうかの違いです。
 
-  大雑把にはデータにアクセスする際に `.value` をつけるかどうかの違いです。
 
 </div>
 </template>
@@ -401,7 +406,7 @@ layout: center
 <template>
   <div style="display: none;">case 1</div>
   <div style="display: none;">case 2</div>
-  <div style="display: none;">case 3</div>
+  <div style="display: block;">case 3</div>
 </template>
 ```
 
@@ -679,11 +684,306 @@ layout: center
 
 # 算出プロパティ
 
+- computed
+
+参考 : 公式ドキュメント [算出プロパティ](https://ja.vuejs.org/guide/essentials/computed)
+
+
+---
+
+# 算出プロパティってなんぞ
+
+算出プロパティとは、あるデータや別の算出プロパティから算出される新たなデータのことです。
+
+<transform scale="5" v-click>
+🤔
+</transform>
+
+---
+
+# 算出プロパティの例
+
+<Col2>
+<template #header>
+
+このようなデータがあったときに、平均年齢を算出したいとします。
+
+```vue
+const users = ref([
+  { second_name: 'hoge林', first_name: 'hoge郎' ,age: 24},
+  { second_name: 'fuga田', first_name: 'fuga麿' ,age: 37},
+  { second_name: 'piyo山', first_name: 'piyo美' ,age: 27},
+]);
+```
+
+</template>
+<template #left>
+
+### 算出プロパティを使った場合
+
+```vue {2}
+<script setup>
+const averageAge = computed(() => {
+  let totalAge = 0;
+  for (const user of users.value) {
+    totalAge += user.age;
+  }
+  return totalAge / users.value.length;
+});
+</script>
+<template>
+  <p>{{ averageAge }}</p>
+</template>
+```
+
+</template>
+<template #right>
+
+### 算出プロパティを使わない場合
+
+```vue {2}
+<script setup>
+const averageAge = () => {  
+  let totalAge = 0;
+  for (const user of users.value) {
+    totalAge += user.age;
+  }
+  return totalAge / users.value.length;
+}
+</script>
+<template>
+  <p>{{ averageAge }}</p>
+</template>
+```
+
+</template>
+</Col2>
+
+---
+layout: fact
+---
+
+# 一行しか変わらない
+
+
+
+---
+
+# computed(算出プロパティ) vs method(関数)
+
+<div v-click>
+
+- リアクティブな依存関係にもとづきキャッシュされる
+- リアクティブな依存関係が更新されたときにだけ再評価される
+
+</div>
+
+<v-drag text-3xl pos="487,52,49,44">
+  <transform scale="5" v-click>
+    🤔
+  </transform>
+</v-drag>
+
+<v-drag v-click pos="3,212,332,320">
+
+```vue
+<script setup>
+const count = ref(0);
+
+const computedTimestamp = computed(() => {
+  return `Computed: ${Date.now()}`;
+});
+const methodTimestamp = () => {
+  return `Method: ${Date.now()}`;
+};
+
+let timer;
+onMounted(() => {
+  timer = setInterval(() => {
+    count.value++;
+  }, 1000);
+});
+</script>
+```
+
+</v-drag>
+
+
+
+<v-drag v-click pos="338,265,402,280">
+
+```vue
+<template>
+  <div class="card">
+    <div class="counter">カウンター: {{ count }}</div>
+    <div class="timestamp">
+      <h3>算出プロパティ (computed)</h3>
+      <div>{{ computedTimestamp }}</div>
+    </div>
+
+    <div class="timestamp">
+      <h3>メソッド (method)</h3>
+      <div>{{ methodTimestamp() }}</div>
+    </div>
+  </div>
+</template>
+```
+</v-drag>
+
+<v-drag v-click pos="4,178,327,40">
+
+### Problem どうなると思いますか？
+
+</v-drag>
+
+
+<v-drag v-click pos="560,1,402,280">
+
+## Answer
+<ComputedVsMethod />
+</v-drag>
+
+---
+
+# 算出プロテティを使うときの注意点 1
+
+<Col2>
+<template #left>
+
+### 副作用のないようにすることが重要
+ 
+- 算出プロパティの getter の内部で他のステートを変更
+- 非同期リクエストを実行したり
+- DOM を変更したりしないようにしましょう！ 
+
+- 算出プロパティは他の値に基づいて計算する方法を宣言的に記述していると考えてください。
+
+</template>
+<template #right>
+
+### NGコード
+```vue
+<script setup>
+const el = document.getElementById('document-title');
+
+// NG: 算出プロパティの中で副作用を持つ例
+const computedWithSideEffect = computed(() => {
+  // 他のステートを変更する
+  count.value++;
+
+  // 非同期リクエストを実行する
+  fetch('https://api.example.com/data')
+    .then(response => response.json())
+    .then(data => console.log(data));
+
+  // DOM を変更する
+  el.textContent = `Count is ${count.value}`;
+
+  return count.value;
+});
+</script>
+```
+</template>
+</Col2>
+
+---
+
+# 算出プロテティを使うときの注意点 2
+
+<Col2>
+<template #left>
+
+### 算出した値の変更を避ける​
+ 
+- 算出プロパティから返る値は、一時的なスナップショット
+- ソースの状態が変わるたびに、新しいスナップショットが作成される。
+- 計算された結果は読み取り専用として扱い、変更しないようにします。
+
+<div v-click>
+
+### Problem
+
+この場合どこを変更したらいいでしょうか？
+
+</div>
+<div v-click>
+
+### Answer
+
+```js
+function modifyComputedValue(num) {
+  numbers.value.push(num);
+}
+```
+</div>
+
+</template>
+<template #right>
+
+```vue {monaco}
+<script setup>
+import { ref, computed } from 'vue';
+
+const numbers = ref([1, 2, 3, 4, 5]);
+
+// 算出プロパティ
+const evenNumbers = computed(() => {
+  return numbers.value.filter(n => n % 2 === 0);
+});
+
+// NG: 算出プロパティの値を変更しようとする例
+function modifyComputedValue(num) {
+  evenNumbers.value.push(num);
+}
+</script>
+
+<template>
+  <div>
+    <p>偶数 : {{ evenNumbers }}</p>
+    <button @click="modifyComputedValue(6)">push</button>
+  </div>
+</template>
+```
+</template>
+</Col2>
+
+
+
+---
+layout: fact
+---
+
+# まとめ
+
+- 算出プロパティは副作用のないようにすることが重要
+- 算出プロパティから返る値は読み取り専用として扱い、変更しないようにします。
+
+
+## おまけ
+
+computed は getter と setter を持っていて関数のようにも扱えます。
+下記を参考にしてください。
+[書き込み可能な 算出関数](https://ja.vuejs.org/guide/essentials/computed#writable-computed)
+
+---
+layout: fact
+---
+
+## まとめ
+
+- 
+
 ---
 layout: center
 ---
 
 # ウォッチャー
+
+---
+layout: fact
+---
+
+## まとめ
 
 
 ---
@@ -692,6 +992,11 @@ layout: center
 
 # props と v-bind(:) の仕組み
 
+---
+layout: fact
+---
+
+## まとめ
 
 ---
 layout: center
@@ -699,6 +1004,11 @@ layout: center
 
 # event(@) と emit の仕組み
 
+---
+layout: fact
+---
+
+## まとめ
 
 ---
 layout: center
@@ -706,3 +1016,9 @@ layout: center
 
 # v-model の仕組み
 
+
+---
+layout: fact
+---
+
+## まとめ
