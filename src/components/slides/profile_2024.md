@@ -1,3 +1,7 @@
+---
+layout: center
+---
+
 # 自己紹介
 
 <div class="flex flex-row gap-2 h-full  items-center">
