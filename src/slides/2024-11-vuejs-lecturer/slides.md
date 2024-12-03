@@ -17,14 +17,23 @@ themeConfig:
 ---
 
 <div class="mb-4 absolute bottom-4 left-12">
-  <span class="text-6xl text-primary-lighter text-opacity-80" style="font-weight:500;" >
-    Hands-on
+  <span class="text-4xl" style="font-weight:500;" >
+    中級者になるための
   </span>
-  <div class="text-9xl text-primary text-opacity-60" style="font-weight:600;" >
-    Vue.js
+  <div class="text-9xl  text-opacity-60" style="font-weight:600;" >
+    <span class="text-primary">Vue.js</span> <span class="text-5xl">で知るべきこと</span> 
   </div> 
 </div>
 
+<Profile class="absolute bottom-4 right-12" />
+
+<div class="flex justify-center h-full items-center">
+  <logos-vue class="size-50" />
+</div>
+
+---
+src: ../../components/slides/profile_2024.md
+---
 
 ---
 layout: image-left
@@ -41,8 +50,9 @@ layout: center
 
 # このスライドの概要
 
-- vue.jsを使っているけど、なんとなくで特に意識せずに書いている人が対象です。
-- 公式ドキュメントを読んでいても、なんとなくで読み飛ばしてしまったけど著者が重要かなと思ったことをピックアップしています。
+- Vue.jsをもっと詳しく知りたい人。
+- Vue.jsで知っておくとべきな内容をピックアップしています。
+- 問題形式で考え答えてもらいながら進めます。
 
 ---
 
@@ -50,37 +60,42 @@ layout: center
 <Col2>
 <template #left>
 
-- HTML / CSS / JavaScript の知識がある程度あること
+- HTML / JavaScript の知識が最低限あること
 - vue を少しでも触ったことがあること
-- docker を使ったことがあること
 
-- import文は省略しています
+<div class="flex justify-center h-full items-center">
+<logos-vue class="size-50" />
+</div>
 
 </template>
 <template #right>
 
-### やること
+## 話すこと
+
 - script setup での書き方
 - ディレクティブのちょっとしたtips
 
-### やらないこと
+## 話さないこと
 
 - 基本的な vue 構文について
 - options API について
 - css について
-- docker について
 </template>
 </Col2>
 
 
 ---
+
+# ライフサイクルフック
+
+TODO
+
+---
 layout: center
 ---
 
-# リアクティブな変数について
-
-- ref
-- reactive 
+# ref
+# reactive
 
 参考 : 公式ドキュメント [リアクティビティーの基礎](https://ja.vuejs.org/guide/essentials/reactivity-fundamentals.html)
 
@@ -161,15 +176,15 @@ act: click
 
 # Problem
 
-下記のコードを実行した際に、`name` の値はどうなるでしょうか？
+`reactive`を使用した下記コードを実行した際に、`name` の値はどうなるでしょうか？
 
 ```vue {monaco}
 <script setup>
 const person = reactive({ name: 'ジョン', age: 25 });
 const { name } = person;
+
 name = 'ジョージ';
 </script>
-
 <template>
   <p>{{ name }} {{ person.name }}</p>
 </template>
@@ -185,9 +200,9 @@ name = 'ジョージ';
   両方とも`ジョン`
 
   </div>
-  <transform v-click class="" scale="5">
+  <div v-click class="text-center text-[100px]">
   🤔
-  </transform>
+  </div>
   </div>
   <div v-click class="w-4/5 text-sm">
 
@@ -290,11 +305,8 @@ layout: fact
 layout: center
 ---
 
-# 条件分岐による表示制御
-
-- v-if
-- v-show
-
+# v-if
+# v-show
 
 参考 : 公式ドキュメント [条件付きレンダリング](https://ja.vuejs.org/guide/essentials/conditional)
 
@@ -330,9 +342,9 @@ layout: center
 
 
 <div class="flex flex-row justify-center items-center gap-4 h-25">
-<transform scale="4" class="w-1/5 -mt-20" v-click>
+<div v-click class="text-center text-[100px]">
 🤔 
-</transform>
+</div>
 <div v-click class="w-4/5">
   <div >
 
@@ -414,47 +426,91 @@ layout: center
 </template>
 </Col2>
 
----
-layout: fact
----
 
-## `v-if` は DOM を操作する
-
-<br>
-
-## `v-show` は style の display を操作する
 
 ---
 
 # [v-if vs v-show](https://ja.vuejs.org/guide/essentials/conditional#v-if-vs-v-show)
 
-- `v-if`
-  - 初期表示において状態が false の場合、何もしない。  
-  - 条件が最初に true になるまでレンダリングされない。
-  - より高い切り替えコストを持っている
+<VS>
+<template #left-header>
 
-- `v-show`
-  - 要素は初期条件に関わらず常にレンダリングされ、
-    シンプルな CSS ベースの切り替え。
-  - より高い初期レンダリングコストを持っている
+v-if
+
+</template>
+<template #left>
+
+<ul>
+<li>
+  <strong>表示制御</strong>:<br>
+  <span v-click=1> <code>true</code> のときのみ要素が DOM に存在し、<code>false</code> のときは削除される。</span>
+</li>
+<li>
+  <strong>レンダリング</strong>:<br>
+  <span v-click=3> <code>false</code>/<code>true</code> が変更されたときに毎回レンダリングされる。</span>
+</li>
+<li>
+  <strong>ライフサイクルフック</strong>:<br>
+  <span v-click=5>v-if でレンダリングされたコンポーネントは、created や mounted などのライフサイクルフックが呼び出される。</span>
+</li>
+</ul>
+</template>
+<template #right-header>
+
+v-show
+
+</template>
+<template #right>
+<ul>
+<li>
+  <strong>表示制御</strong>:<br>
+  <span v-click=2>要素は常に DOM に存在し、style の <code>display: none</code> で非表示にする。</span>
+</li>
+<li>
+  <strong>レンダリング</strong>:<br>
+  <span v-click=4>初回レンダリング時に要素が必ずレンダリングされます。</span>
+</li>
+<li>
+  <strong>ライフサイクルフック</strong>:<br>
+  <span v-click=6>要素のライフサイクルフックは呼び出されない。</span>
+</li>
+</ul>
+</template>
+</VS>
 
 
 ---
 layout: fact
 ---
 
-## まとめ
+# まとめ
 
-- とても頻繁に何かを切り替える必要があれば `v-show` を選ぶ
-- 条件が実行時に変更することがほとんどない場合は、`v-if` 選ぶ
+<Col2 class="mx-auto w-4/6 text-left mt-10">
+<template #left>
+
+## `v-if` 
+### DOM を操作する
+### 頻繁に切り替える場合
+
+
+</template>
+<template #right>
+
+## `v-show` 
+### style を操作する
+### 変更することが少ない場合
+
+</template>
+</Col2>
+
+
+
 
 ---
 layout: center
 ---
 
-# リストレンダリング
-
-- v-for
+# v-for
 
 参考 : 公式ドキュメント [リストレンダリング](https://ja.vuejs.org/guide/essentials/list)
 
@@ -529,10 +585,6 @@ const todos = ref([
 </script>
 ```
 
-
-</template>
-<template #right>
-
 <div v-click>
 
 ## Answer
@@ -541,18 +593,24 @@ const todos = ref([
 
 </div>
 
+</template>
+<template #right>
+
+<div v-click class="mb-10">
+  <span class="text-8xl">🤔</span> <span class="text-6xl">？？</span>
+</div>
+
 <div v-click>
 
 ## Why
 
-<transform scale="5">
-🤔
-</transform>
+同じノードで処理が開始された場合の優先順位
+1. `v-if` が評価される
+2. `v-for` が評価される
 
-- `v-for` よりも `v-if` のほうが優先順位が高くなります。
 
-つまり同じノードで処理が開始された場合、`v-if` が先に評価され次に `v-for` が評価されるため、`v-if` で使用している `todo.isComplete` が未定義となりエラーとなります。
-
+`v-for` よりも `v-if` のほうが先に評価されるため、  
+`v-if` で使用している `todo.isComplete` が未定義となりエラーとなる
 
 </div>
 </template>
@@ -682,9 +740,8 @@ layout: fact
 layout: center
 ---
 
-# 算出プロパティ
+# computed (算出プロパティ)
 
-- computed
 
 参考 : 公式ドキュメント [算出プロパティ](https://ja.vuejs.org/guide/essentials/computed)
 
@@ -771,34 +828,98 @@ layout: fact
 
 # computed(算出プロパティ) vs method(関数)
 
+<VS>
+<template #left-header>
+computed
+</template>
+<template #left>
+
+- **キャッシュ機能**:<br>
+同じ依存データに対して複数回アクセスしても、<br>
+一度計算された結果がキャッシュされる。
+
+- **リアクティブ**:<br>
+依存しているデータが変更されると、自動的に再計算されます。
+
+- **テンプレート内での使用**:<br>
+データの表示ロジックをテンプレートに直接組み込む際に便利です。
+
+</template>
+<template #right-header>
+method
+</template>
+<template #right>
+
+- **毎回実行**:<br>
+呼び出されるたびに関数が実行されるため、計算結果が常に最新の状態になります。
+
+- **柔軟性**:<br>
+データの操作や複雑なロジックを実装する際に適しています。
+
+- **イベントハンドリング**:<br>
+ボタンのクリックなどのユーザーアクションに応じて処理を行う場合に使用します。
+
+</template>
+</VS>
+
+---
+
+# Problem
+
+<Col2>
+<template #left>
 <div v-click>
 
-- リアクティブな依存関係にもとづきキャッシュされる
-- リアクティブな依存関係が更新されたときにだけ再評価される
-
+1~3は、それぞれどうなるでしょうか？
+```vue
+<template>
+  <div class="card">
+    <div class="counter">
+      count: {{ count }}
+    </div>
+    <div class="timestamp">
+      <!-- 1 -->
+      <h3>1. computed</h3>
+      <div>{{ computedTimestamp }}</div>
+    </div>
+    <div class="timestamp">
+      <!-- 2 -->
+      <h3>2. method</h3>
+      <div>{{ methodTimestamp() }}</div>
+    </div>
+    <div class="timestamp">
+      <!-- 3 -->
+      <h3>3. ref computed</h3>
+      <div>{{ computedRefTimestamp }}</div>
+    </div>
+  </div>
+</template>
+```
 </div>
+</template>
+<template #right>
 
-<v-drag text-3xl pos="487,52,49,44">
-  <transform scale="5" v-click>
-    🤔
-  </transform>
-</v-drag>
-
-<v-drag v-click pos="3,212,332,320">
+<div v-click>
 
 ```vue
 <script setup>
 const count = ref(0);
-
 const computedTimestamp = computed(() => {
+  //1.リアクティブな依存はない
   return `Computed: ${Date.now()}`;
 });
 const methodTimestamp = () => {
+  //2.リアクティブな依存はない
   return `Method: ${Date.now()}`;
 };
+const computedRefTimestamp = computed(() => {
+  //3.リアクティブな依存がある
+  return `Computed (${count.value}): ${Date.now()}`;
+});
 
 let timer;
 onMounted(() => {
+  // 1sごとにcountをインクリメント
   timer = setInterval(() => {
     count.value++;
   }, 1000);
@@ -806,42 +927,54 @@ onMounted(() => {
 </script>
 ```
 
-</v-drag>
-
-
-
-<v-drag v-click pos="338,265,402,280">
-
-```vue
-<template>
-  <div class="card">
-    <div class="counter">カウンター: {{ count }}</div>
-    <div class="timestamp">
-      <h3>算出プロパティ (computed)</h3>
-      <div>{{ computedTimestamp }}</div>
-    </div>
-
-    <div class="timestamp">
-      <h3>メソッド (method)</h3>
-      <div>{{ methodTimestamp() }}</div>
-    </div>
-  </div>
+</div>
 </template>
-```
-</v-drag>
+</Col2>
 
-<v-drag v-click pos="4,178,327,40">
-
-### Problem どうなると思いますか？
-
-</v-drag>
+---
 
 
-<v-drag v-click pos="560,1,402,280">
+<Col2>
+<template #left>
 
 ## Answer
+
+<div v-click>
+
 <ComputedVsMethod />
-</v-drag>
+</div>
+
+  <div v-click class="text-center text-[100px]">
+  🤔
+  </div>
+</template>
+<template #right>
+
+<div v-click>
+
+## Why
+
+1. リアクティブな依存がないため、一度計算された結果がキャッシュされ移行は更新がかからない。
+2. 関数のため、DOM の更新時に毎回再計算される。
+3. リアクティブな依存があるため、DOM の更新時に毎回再計算される。
+
+
+### NGコード
+```vue
+<template>
+  <!-- NG: 関数の戻りをそのまま描画 -->
+  <div>{{ isHoge() }}</div>
+  <!-- NG: 関数の戻りを使用して条件分岐 -->
+  <div v-if="getValue() === 'Hoge'">Hoge</div>
+  <!-- NG: 関数の戻りを使用してクラス指定 -->
+  <div :class="getClass()">Class</div>
+  <!-- NG: 関数の戻りを使用して条件分岐 -->
+  <div :class="isHoge() ? 'red' : 'blue'">Class</div>
+</template>
+```
+</div>
+</template>
+</Col2>
 
 ---
 
@@ -955,35 +1088,458 @@ layout: fact
 
 # まとめ
 
-- 算出プロパティは副作用のないようにすることが重要
-- 算出プロパティから返る値は読み取り専用として扱い、変更しないようにします。
+<div class="flex flex-col justify-center items-center text-2xl">
+
+- 副作用のないようにする
+- 読み取り専用として扱う
+- template 内ではデータを `computed` で使用する
+</div>
 
 
 ## おまけ
 
-computed は getter と setter を持っていて関数のようにも扱えます。
-下記を参考にしてください。
+`getter` と `setter` を持っていて関数のようにも扱えます。<br>
+下記を参考にしてください。<br>
 [書き込み可能な 算出関数](https://ja.vuejs.org/guide/essentials/computed#writable-computed)
-
----
-layout: fact
----
-
-## まとめ
-
-- 
 
 ---
 layout: center
 ---
 
-# ウォッチャー
+# Watch
+
+---
+
+# Watchとは
+
+- リアクティブなデータの変化を監視し、変更があったときに特定の処理を実行します。
+
+- **Watch**は副作用のある処理を実行する際に使います。
+
+---
+
+
+# 基本的な使い方
+
+
+<Col2>
+<template #left>
+
+## 単体のデータを監視する
+
+```vue
+<script setup>
+const count = ref(0);
+
+// 引数を省略しない
+watch(count, (new, old) => { // newだけでも可
+  console.log(`${old}から${new}に変化`);
+});
+
+// 引数を省略
+watch(count, () => {
+  console.log(`${count.value}に変化`);
+});
+
+</script>
+```
+
+- `watch(監視対象, コールバック関数)` の形式で使用
+- コールバック関数は、`新しい値`と`古い値`が引数
+- 監視対象には、リアクティブなデータを指定
+- 引数は省略可能
+
+</template>
+<template #right>
+
+## 複数のデータを監視する
+
+```vue
+<script setup>
+
+const firstName = ref('太郎');
+const lastName = ref('山田');
+
+watch(
+  [firstName, lastName],
+  ([newFirst, newLast], [oldFirst, oldLast]) => {
+    console.log(`${oldFirst}${oldLast}から`);
+    console.log(`${newFirst}${newLast}に変化`);
+  }
+);
+</script>
+```
+
+- 複数のリアクティブなデータを同時に監視できます。
+- 配列で監視対象を渡し、コールバック関数でも配列として新旧の値を受け取ります。
+
+
+<div v-click>
+
+### あんまりやらないかも。
+</div>
+</template>
+</Col2>
+
+---
+
+<Col2>
+<template #left>
+
+# Problem
+
+ログが出力されるタイミングはどうなるでしょうか？
+
+
+```vue
+<script setup>
+const count = ref(0);
+console.log('A');
+
+watch(count, () => {
+  console.log('B');
+});
+
+console.log('C');
+
+onMounted(() => {
+  console.log('D');
+});
+count.value++;
+console.log('E');
+</script>
+```
+
+<div v-click>
+
+## Answer
+
+immediate: false の場合のログの出力順序<br>
+`A` -> `C` -> `E` -> `B` -> `D`
+
+</div>
+</template>
+<template #right>
+
+<div v-click>
+
+## Why
+
+1. `A` - vueがsetupされた時点で最初に実行
+2. `C` - ウォッチャーの登録後、次の行で実行
+3. `E` - `count.value++` の後に実行
+4. `B` - `count.value` が変更されたため、ウォッチャーのコールバックが実行
+5. `D` - `onMounted` フックは、レンダリングが完了した後に実行
+</div>
+</template>
+</Col2>
+
+
+---
+
+# immediate オプション
+
+watch にはオプションがあり、コールバック関数の実行タイミングを制御できます。
+
+<Col2>
+<template #left>
+
+```vue { 6 }
+<script setup>
+const count = ref(0);
+
+watch(count, (newValue, oldValue) => {
+  console.log('初期値:', newValue);
+}, { immediate: true });
+</script>
+```
+
+- ウォッチャーを登録した直後にコールバック関数を即時実行します。
+
+- つまりこのvueのコードが実行された時点で、`console.log('初期値:', newValue);` が実行されます。
+
+
+</template>
+<template #right>
+
+<div v-click>
+
+## Sample
+<WatchImmediate />
+
+</div>
+</template>
+</Col2>
+
+---
+
+<Col2>
+<template #left>
+
+# Problem
+
+immediateがtrueの場合、ログが出力されるタイミングはどうなるでしょうか？
+
+
+```vue
+<script setup>
+const count = ref(0);
+console.log('A');
+
+watch(count, () => {
+  console.log('B');
+}, { immediate: true });
+
+console.log('C');
+onMounted(() => {
+  console.log('D');
+});
+count.value++;
+console.log('E');
+</script>
+```
+
+<div v-click>
+
+## Answer
+
+immediate: true の場合のログの出力順序<br>
+`A` -> `B` -> `C` -> `E` -> `B` -> `D`
+
+</div>
+</template>
+<template #right>
+
+<div v-click>
+
+## Why
+
+1. `A` - vueがsetupされた時点で最初に実行
+2. `B` - immediate: true により、ウォッチャーのコールバックが登録直後に実行
+3. `C` - ウォッチャーの登録後、次の行で実行
+4. `E` - count.value++ の後に実行
+5. `B` - count.value の変更により、ウォッチャーのコールバックが再度実行
+6. `D` - onMounted フックが最後に実行
+</div>
+</template>
+</Col2>
+
+
+
+---
+
+
+# deep オプション
+
+ネストしたプロパティの変更を検知するために使用します。
+
+<Col2>
+<template #left>
+
+
+```vue
+<script setup>
+const user = ref({
+  name: '太郎',
+  address: {
+    city: '東京'
+  }
+});
+
+watch(user, (newVal, oldVal) => {
+  console.log('userオブジェクトが更新されました');
+}, { deep: true });
+
+user.value.address.city = '大阪';
+</script>
+```
+
+- リアクティブなオブジェクトで、`watch()`関数を呼び出すとき、暗黙的に`deep: true`で生成される。
+
+
+</template>
+<template #right>
+
+<Alert type="warning">
+パフォーマンスへの影響に注意<br>
+監視対象のオブジェクトのネストされた全てのプロパティをトラバースするため<br>
+大きなデータ構造で使用するときにはコストが高い
+</Alert>
+
+
+</template>
+</Col2>
+
+---
+layout: center
+---
+
+# WatchEffect
+
+---
+
+# WatchEffectとは
+
+- リアクティブな依存関係を自動的に追跡し、依存関係が変更されるたびにコールバックを再実行する。
+- 依存関係のリストを手動で管理する必要がないため、コードが簡潔になります。
+- ただし、`fetch`の失敗は依存関係の変更ではないため、`watchEffect`の再実行には影響しません。
+
+<div v-click class="text-center text-[100px]">
+🤔
+</div>
+
+---
+
+# Problem
+<Col2>
+<template #left>
+
+発火するのは`id`/`data`/`error`/`fetch`の<br>
+どれが変更されたときに発火するでしょうか？
+
+```vue
+<script setup>
+const item = ref('todos');
+const id = ref(1);
+const data = ref(null);
+const error = ref(null);
+watchEffect(async () => {
+  try {
+    const response = await fetch(
+      `https://hoge.com/${item.value}?q=${id.value}`
+    );
+    if (!response.ok) {
+      throw new Error('Network response was not ok');
+    }
+    data.value = await response.json();
+  } catch (err) {
+    error.value = err.message;
+  }
+});
+</script>
+```
+
+</template>
+<template #right>
+
+<div v-click>
+
+## Answer
+
+1. `item`が変更されたとき
+2. `id`が変更されたとき
+
+</div>
+
+<div v-click>
+
+## Why
+
+- リアクティブな依存関係を自動的に追跡し、依存関係が変更されるたびにコールバックを再実行する。
+- 依存関係のリストを手動で管理する必要がないため、コードが簡潔になる
+
+</div>
+</template>
+</Col2>
+
+
+---
+
+# Watch vs WatchEffect
+
+<VS>
+<template #left-header>
+Watch
+</template>
+<template #left>
+
+- **明示的な依存関係**: <br>明示的に指定されたソースのみを監視
+- **コントロール**: <br>コールバックはソースが実際に変更されたときにのみ実行
+- **分離**: <br>依存関係の追跡と副作用を分離して管理
+
+</template>
+<template #right-header>
+WatchEffect
+</template>
+<template #right>
+
+- **自動追跡**: <br>同期処理中にアクセスしたすべてのリアクティブプロパティを自動的に追跡
+- **簡潔さ**: <br>コードが短くなり、依存関係のリストを手動で管理する必要がない
+- **即時実行**: <br>コールバックは即時実行され、`immediate: true` を指定する必要がない
+
+</template>
+</VS>
 
 ---
 layout: fact
 ---
 
-## まとめ
+
+<div class="flex flex-col justify-center items-center text-2xl">
+
+# まとめ
+
+### リアクティブデータの変化を監視し、副作用のある処理を実行する。
+### `immediate` や `deep` オプションでウォッチャーの挙動を制御。
+
+# 注意点
+
+### 不要なウォッチを避ける
+### パフォーマンスに影響する可能性があります。
+
+### エラーハンドリング
+### コールバック内のエラーはキャッチされないため、適切に処理すること。
+
+</div>
+
+
+---
+
+# 練習問題
+
+## Problem
+
+以下のコードで `fullName` が更新されないのはなぜでしょうか？
+
+```vue
+<script setup>
+import { ref, watch } from 'vue';
+
+const firstName = ref('太郎');
+const lastName = ref('山田');
+const fullName = ref('');
+
+watch(() => [firstName.value, lastName.value], () => {
+  fullName.value = `${firstName.value} ${lastName.value}`;
+});
+</script>
+
+<template>
+  <p>{{ fullName }}</p>
+  <button @click="firstName.value = '次郎'">名前を変更</button>
+</template>
+```
+
+## Answer
+
+- ウォッチャーで配列を監視する場合、デフォルトでは新旧の値の比較が浅い比較になるため、変更を検知できない。
+
+- **解決策**: 配列を監視する場合は、`deep: true` オプションを追加する。
+
+```vue
+watch(() => [firstName.value, lastName.value], () => {
+  fullName.value = `${firstName.value} ${lastName.value}`;
+}, { deep: true });
+```
+
+---
+
+# まとめ
+
+- ウォッチャーはリアクティブデータの変化を監視して副作用のある処理を実行するための機能です。
+- ウォッチャーは強力な機能ですが、使いすぎるとコードが複雑になる可能性があります。
+
+- まずは **算出プロパティ** や **メソッド** で対応できないか検討し、それでも難しい場合にウォッチャーを使用することをおすすめします。
 
 
 ---
@@ -992,11 +1548,6 @@ layout: center
 
 # props と v-bind(:) の仕組み
 
----
-layout: fact
----
-
-## まとめ
 
 ---
 layout: center
@@ -1005,20 +1556,30 @@ layout: center
 # event(@) と emit の仕組み
 
 ---
-layout: fact
----
-
-## まとめ
-
----
 layout: center
 ---
 
 # v-model の仕組み
 
+---
+
+# slot の仕組み
+
+---
+
+# component の仕組み
+
+---
+
+# transition の仕組み
 
 ---
 layout: fact
 ---
+
+---
+
+# nextTick
+
 
 ## まとめ
