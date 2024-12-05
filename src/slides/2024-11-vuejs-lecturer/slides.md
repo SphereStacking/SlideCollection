@@ -1546,6 +1546,243 @@ watch(() => [firstName.value, lastName.value], () => {
 layout: center
 ---
 
+# バインディング
+
+## v-bind (:value)
+
+---
+
+# い
+## v-on (@input,@change)
+
+
+---
+layout: center
+---
+
+# v-model
+
+参考 : 公式ドキュメント [フォーム入力バインディング](https://ja.vuejs.org/guide/essentials/forms.html)
+
+---
+
+# v-model とは
+
+- `v-model` ディレクティブは、双方向バインディングを提供します。
+
+- ユーザーの入力とアプリケーションの状態を同期させるのに便利です。
+
+- さまざまなフォーム要素（`input`、`select`、`textarea` など）で使用できます。
+
+---
+
+# v-model について
+
+<Col2>
+<template #left>
+
+## 基本的な使い方
+
+```vue
+<template>
+  <input v-model="message">
+  <p>入力されたメッセージ: {{ message }}</p>
+</template>
+
+<script setup>
+const message = ref('');
+</script>
+```
+
+- `v-model` を使用すると、入力フィールドとリアクティブな変数を同期できます。
+
+<VModelExample />
+
+</template>
+<template #right>
+
+## 内部的な仕組み
+
+```vue
+<input
+  :value="message"
+  @input="message = $event.target.value"
+/>
+```
+
+- `v-model` は以下のように展開されます。
+- `:value` でプロパティをバインドし、`@input` でイベントをキャッチして値を更新します。
+
+</template>
+</Col2>
+
+
+
+---
+
+# 修飾子
+
+## `.lazy`
+
+- 入力イベントではなく、`change` イベントで値を更新します。
+
+```vue
+<input v-model.lazy="message">
+```
+
+---
+
+## `.number`
+
+- 入力値を自動的に数値に変換します。
+
+```vue
+<input v-model.number="age" type="number">
+```
+
+---
+
+## `.trim`
+
+- 入力値の前後の空白を自動的に削除します。
+
+```vue
+<input v-model.trim="username">
+```
+
+---
+
+# コンポーネントでの v-model
+
+- カスタムコンポーネントでも `v-model` を使用できます。
+
+```vue
+<MyInput v-model="searchText" />
+```
+
+- コンポーネント側で `modelValue` と `update:modelValue` をハンドリングします。
+
+---
+
+# コンポーネントでの実装例
+
+```vue
+<!-- 親コンポーネント -->
+<template>
+  <MyInput v-model="searchText" />
+</template>
+
+<script setup>
+const searchText = ref('');
+</script>
+```
+
+```vue
+<!-- 子コンポーネント (MyInput.vue) -->
+<template>
+  <input :value="modelValue" @input="$emit('update:modelValue', $event.target.value)">
+</template>
+
+<script setup>
+const props = defineProps(['modelValue']);
+</script>
+```
+
+---
+
+# 複数の v-model バインディング
+
+- 複数のプロパティをバインドする場合、`v-model:propName` を使用します。
+
+```vue
+<MyComponent
+  v-model:title="pageTitle"
+  v-model:content="pageContent"
+/>
+```
+
+---
+
+# Problem
+
+次のコードで、チェックボックスの状態が更新されないのはなぜでしょうか？
+
+```vue
+<template>
+  <input type="checkbox" v-model="checked">
+  <p>チェックボックスは {{ checked ? 'オン' : 'オフ' }}</p>
+</template>
+
+<script setup>
+const checked = ref(false);
+</script>
+```
+
+---
+
+# Answer
+
+- `input` 要素の `type` が `checkbox` の場合、`v-model` は `true` または `false` を期待します。
+
+- しかし、`checked` の初期値が文字列や `null` の場合、期待通りに動作しません。
+
+- **解決策**: `checked` の初期値を確実にブール値にします。
+
+---
+
+# 修正後のコード
+
+```vue
+<template>
+  <input type="checkbox" v-model="checked">
+  <p>チェックボックスは {{ checked ? 'オン' : 'オフ' }}</p>
+</template>
+
+<script setup>
+const checked = ref(false);
+</script>
+```
+
+- `checked` を確実に `false` で初期化しました。
+
+---
+
+# v-model のカスタマイズ
+
+- コンポーネント内で `modelValue` 以外のプロパティ名を使いたい場合は、`model` オプションを使用します。
+
+```vue
+<script>
+export default {
+  model: {
+    prop: 'checked',
+    event: 'change'
+  },
+  props: {
+    checked: Boolean
+  }
+}
+</script>
+```
+
+---
+
+# まとめ
+
+- `v-model` は双方向バインディングを簡潔に実現するためのディレクティブです。
+
+- 修飾子を使って入力値を加工できます。
+
+- カスタムコンポーネントでも `v-model` を活用できます。
+
+- データの型に注意して正しくバインディングしましょう。
+
+---
+layout: center
+---
+
+# event(@) と emit の仕組み
+# v-model の仕組み
 # props と v-bind(:) の仕組み
 
 
@@ -1553,13 +1790,12 @@ layout: center
 layout: center
 ---
 
-# event(@) と emit の仕組み
+
 
 ---
 layout: center
 ---
 
-# v-model の仕組み
 
 ---
 
