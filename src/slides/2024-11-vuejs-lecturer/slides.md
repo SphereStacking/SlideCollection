@@ -489,16 +489,16 @@ layout: fact
 <template #left>
 
 ## `v-if` 
-### DOM を操作する
-### 頻繁に切り替える場合
+### `DOM` を操作する
+### 変更することが少ない場合
 
 
 </template>
 <template #right>
 
 ## `v-show` 
-### style を操作する
-### 変更することが少ない場合
+### `style` を操作する
+### 頻繁に切り替える場合
 
 </template>
 </Col2>
@@ -834,15 +834,20 @@ computed
 </template>
 <template #left>
 
-- **キャッシュ機能**:<br>
-同じ依存データに対して複数回アクセスしても、<br>
-一度計算された結果がキャッシュされる。
-
-- **リアクティブ**:<br>
-依存しているデータが変更されると、自動的に再計算されます。
-
-- **テンプレート内での使用**:<br>
-データの表示ロジックをテンプレートに直接組み込む際に便利です。
+<ul>
+<li>
+<strong>キャッシュ機能</strong>:<br>
+<span v-click=1>同じ依存データに対して複数回アクセスしても、一度計算された結果がキャッシュされる。</span>
+</li>
+<li >
+<strong>リアクティブ</strong>:<br>
+<span v-click=3>依存しているデータが変更されると、自動的に再計算されます。</span>
+</li>
+<li>
+<strong>テンプレート内での使用</strong>:<br>
+<span v-click=5>データの表示ロジックをテンプレートに直接組み込む際に便利です。</span>
+</li>
+</ul>
 
 </template>
 <template #right-header>
@@ -850,14 +855,20 @@ method
 </template>
 <template #right>
 
-- **毎回実行**:<br>
-呼び出されるたびに関数が実行されるため、計算結果が常に最新の状態になります。
-
-- **柔軟性**:<br>
-データの操作や複雑なロジックを実装する際に適しています。
-
-- **イベントハンドリング**:<br>
-ボタンのクリックなどのユーザーアクションに応じて処理を行う場合に使用します。
+<ul>
+<li>
+<strong>毎回実行</strong>:<br>
+<span v-click=2>呼び出されるたびに関数が実行されるため、計算結果が常に最新の状態になります。</span>
+</li>
+<li>
+<strong>柔軟性</strong>:<br>
+<span v-click=4>データの操作や複雑なロジックを実装する際に適しています。</span>
+</li>
+<li>
+<strong>イベントハンドリング</strong>:<br>
+<span v-click>ボタンのクリックなどのユーザーアクションに応じて処理を行う場合に使用します。</span>
+</li>
+</ul>
 
 </template>
 </VS>
@@ -1453,9 +1464,20 @@ Watch
 </template>
 <template #left>
 
-- **明示的な依存関係**: <br>明示的に指定されたソースのみを監視
-- **コントロール**: <br>コールバックはソースが実際に変更されたときにのみ実行
-- **分離**: <br>依存関係の追跡と副作用を分離して管理
+<ul>
+<li>
+<strong>依存関係の管理</strong>:<br>
+<span v-click=1>明示的に指定されたソースのみを監視</span>
+</li>
+<li>
+<strong>実行タイミング</strong>:<br>
+<span v-click=3>コールバックはソースが実際に変更されたときにのみ実行</span>
+</li>
+<li>
+<strong>コードの構造</strong>:<br>
+<span v-click=5>依存関係の追跡と副作用を分離して管理</span>
+</li>
+</ul>
 
 </template>
 <template #right-header>
@@ -1463,10 +1485,20 @@ WatchEffect
 </template>
 <template #right>
 
-- **自動追跡**: <br>同期処理中にアクセスしたすべてのリアクティブプロパティを自動的に追跡
-- **簡潔さ**: <br>コードが短くなり、依存関係のリストを手動で管理する必要がない
-- **即時実行**: <br>コールバックは即時実行され、`immediate: true` を指定する必要がない
-
+<ul>
+<li>
+<strong>依存関係の管理</strong>:<br>
+<span v-click=2>method内にあるすべてのリアクティブプロパティを自動的に追跡</span>
+</li>
+<li>
+<strong>実行タイミング</strong>:<br>
+<span v-click=4>コールバックは即時実行され、その後依存関係が変更されるたびに実行</span>
+</li>
+<li>
+<strong>コードの構造</strong>:<br>
+<span v-click=5>依存関係の追跡と副作用が一体化されたシンプルな構造</span>
+</li>
+</ul>
 </template>
 </VS>
 
