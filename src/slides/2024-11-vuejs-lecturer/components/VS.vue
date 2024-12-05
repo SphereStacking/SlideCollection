@@ -4,7 +4,7 @@
       <slot name="header" />
     </div>
     <div class="flex justify-between gap-4">
-      <div class="border border-gray-300 rounded-md px-4 pb-2 shadow-xl shadow-teal-500 mr-5 w-3/5">
+      <div class="border border-gray-300 rounded-md px-4 pb-2 shadow-xl shadow-teal-500 mr-5 w-3/5 hover:shadow-2xl hover:shadow-teal-400 transition-shadow duration-300">
         <p class="text-center text-teal-300 font-bold text-4xl">
           <slot name="left-header" />
         </p>
@@ -25,7 +25,7 @@
           VS
         </div>
       </div>
-      <div class="border border-gray-300 rounded-md px-4 pb-2 shadow-xl shadow-sky-500 ml-5 w-3/5">
+      <div class="border border-gray-300 rounded-md px-4 pb-2 shadow-xl shadow-sky-500 ml-5 w-3/5 hover:shadow-2xl hover:shadow-sky-400 transition-shadow duration-300">
         <p class="text-center text-sky-300 font-bold text-4xl">
           <slot name="right-header" />
         </p>

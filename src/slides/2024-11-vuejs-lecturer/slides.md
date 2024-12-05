@@ -16,19 +16,19 @@ themeConfig:
   primary: 'rgb(187, 255, 204, 1)'
 ---
 
-<div class="mb-4 absolute bottom-4 left-12">
-  <span class="text-4xl" style="font-weight:500;" >
-    中級者になるための
+<MouseGlow />
+<div class="mb-4 absolute bottom-2 left-5 hover:scale-110 transition-all duration-300">
+  <span class="absolute top-0 left-0 text-4xl hover:scale-120 hover:left-7 transition-all duration-300 font-700 z-2" >
+    中級者になるために
   </span>
-  <div class="text-9xl  text-opacity-60" style="font-weight:600;" >
-    <span class="text-primary">Vue.js</span> <span class="text-5xl">で知るべきこと</span> 
-  </div> 
+  <img src="https://github.com/vuejs/art/blob/master/logo-uwu.png?raw=true" class="h-50 hover:scale-120 transition-all duration-300 z-1" />
+  <span class="absolute -bottom-2 right-10 ml-10 text-4xl font-700 hover:scale-120 transition-all duration-300">で知るべきこと</span> 
 </div>
 
 <Profile class="absolute bottom-4 right-12" />
 
-<div class="flex justify-center h-full items-center">
-  <logos-vue class="size-50" />
+<div class="flex justify-center h-full items-center hover:scale-120 transition-all duration-300">
+  <logos-vue class="size-50 hover:size-60 transition-all duration-300" />
 </div>
 
 ---

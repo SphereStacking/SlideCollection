@@ -1,6 +1,6 @@
 <template>
   <div class="">
-    <img src="https://avatars.githubusercontent.com/u/108622390" alt="profile" class="size-30 rounded-md">
+    <img src="https://avatars.githubusercontent.com/u/108622390" alt="profile" class="size-30 rounded-md hover:scale-110 transition-all duration-300 hover:shadow-lg hover:shadow-teal-500/50">
     <span class="text-3xl text-primary-lighter text-opacity-80" style="font-weight:500;" >
       Sphere
     </span>
