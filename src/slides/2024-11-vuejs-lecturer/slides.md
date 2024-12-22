@@ -33,37 +33,25 @@ themeConfig:
 
 ---
 src: ../../components/slides/profile_2024.md
+hideInToc: true
 ---
 
 ---
-layout: image-left
-image: 'https://cover.sli.dev'
----
-
-# 目次
-
-<Toc maxDepth="1"/>
-
----
-layout: center
+hideInToc: true
 ---
 
 # このスライドの概要
-
-- Vue.jsをもっと詳しく知りたい人。
-- Vue.jsで知っておくとべきな内容をピックアップしています。
-- 問題形式で考え答えてもらいながら進めます。
-
----
-
-# 前提
 <Col2>
 <template #left>
 
+## 前提
+
 - HTML / JavaScript の知識が最低限あること
 - vue を少しでも触ったことがあること
+- Vue.jsをもっと詳しく知りたい人。
+- 問題形式で考え答えてもらいながら進めます。
 
-<div class="flex justify-center h-full items-center">
+<div class="flex justify-center h-1/2 items-center translate-y-1/4 ">
 <logos-vue class="size-50" />
 </div>
 
@@ -72,241 +60,791 @@ layout: center
 
 ## 話すこと
 
-- script setup での書き方
-- ディレクティブのちょっとしたtips
+- Vue.js の tips
+- Vue.js で知っておくとハッピーになれる内容。
 
 ## 話さないこと
 
-- 基本的な vue 構文について
 - options API について
 - css について
 </template>
 </Col2>
 
+---
+layout: image-left
+image: 'https://cover.sli.dev'
+hideInToc: true
+---
 
+# 目次
+
+<Toc maxDepth="1"/>
+
+
+---
+layout: section
 ---
 
 # ライフサイクルフック
 
 TODO
 
+
+---
+layout: section
+---
+
+# ディレクティブ
+
+<Col2 class="text-left">
+<template #left>
+
+## ディレクティブとは
+
+- `v-` という接頭辞を持ち、Vue によって提供される特別な属性です。
+- ディレクティブはレンダリングされる DOM に、特別なリアクティブな振る舞いを割り当てます。
+- 自身で[カスタムディレクティブ](https://ja.vuejs.org/guide/reusability/custom-directives.html)を作成することも可能<br>
+  (今回は割愛)
+
+</template>
+<template #right>
+
+## ディレクティブ一覧
+
+<div class="flex flex-wrap gap-2 font-700">
+  <Link to="v-bind" class="bg-teal-400 text-black px-2 py-1 rounded-md">v-bind</Link>
+  <Link to="v-on" class="bg-teal-400 text-black px-2 py-1 rounded-md">v-on</Link>
+  <Link to="v-model" class="bg-teal-400 text-black px-2 py-1 rounded-md">v-model</Link>
+  <Link to="v-if_v-show" class="bg-teal-400 text-black px-2 py-1 rounded-md">v-if</Link>
+  <Link to="v-if_v-show" class="bg-teal-400 text-black px-2 py-1 rounded-md">v-show</Link>
+  <Link to="v-for" class="bg-teal-400 text-black px-2 py-1 rounded-md">v-for</Link>
+  <Link to="v-slot" class="bg-teal-400 text-black px-2 py-1 rounded-md">v-slot</Link>
+  <span class="bg-teal-400 text-black px-2 py-1 rounded-md">v-text<span class=" text-red-500">*</span></span>
+  <span class="bg-teal-400 text-black px-2 py-1 rounded-md">v-html<span class=" text-red-500">*</span></span>
+  <span class="bg-teal-400 text-black px-2 py-1 rounded-md">v-pre<span class=" text-red-500">*</span></span>
+  <span class="bg-teal-400 text-black px-2 py-1 rounded-md">v-cloak<span class=" text-red-500">*</span></span>
+  <span class="bg-teal-400 text-black px-2 py-1 rounded-md">v-memo<span class=" text-red-500">*</span></span>
+  <span class="bg-teal-400 text-black px-2 py-1 rounded-md">v-once<span class=" text-red-500">*</span></span>
+</div>
+
+<span class=" text-red-500">*</span> はこのスライドでは扱いません。
+
+</template>
+</Col2>
+
+
+
+
+
+---
+layout: section
+routeAlias: v-bind
+---
+
+# v-bind
+
 ---
 layout: center
 ---
 
-# ref
-# reactive
+# v-bind の基本
 
-参考 : 公式ドキュメント [リアクティビティーの基礎](https://ja.vuejs.org/guide/essentials/reactivity-fundamentals.html)
+HTML 属性に動的にデータをバインドするために使用<br>
+省略形として `:` を使用する。
+
+```vue
+<template>
+  <img :src="imageSrc" :alt="imageAlt">
+  <img v-bind:src="imageSrc" v-bind:alt="imageAlt">
+</template>
+
+<script setup>
+const imageSrc = ref('https://example.com/image.png');
+const imageAlt = ref('サンプル画像');
+</script>
+```
+
+- **例**
+  - `:src="imageSrc"` は `imageSrc` の値を `src` 属性にバインドします。
+  - `:alt="imageAlt"` は `imageAlt` の値を `alt` 属性にバインドします。
 
 ---
+layout: center
+---
 
-# リアクティブな変数について
-リアクティブな変数には2種類あります
+# v-bind の様々なバインディング方法
 
 <Col2>
 <template #left>
 
-- `ref` の場合
+```vue
+<template>
+  <!-- オブジェクト構文 -->
+  <div :class="{ active: isActive }">コンテンツ</div>
 
-    ```vue
-    <script setup>
-    const person = ref({ name: 'John', age: 25 });
+  <!-- 配列構文 -->
+  <div :class="[baseClass, errorClass]">コンテンツ</div>
 
-    console.log(person.value.name); // 'John'
-    console.log(person.value.age);  // 25
-    </script>
-    <template>
-      <p>{{ person.name }}</p>
-      <p>{{ person.age }}</p>
-    </template>
-    ```
+  <!-- オブジェクト構文と配列構文の組み合わせ -->
+  <div :class="[
+    { active: isActive }, 
+    baseClass, 
+    errorClass
+  ]">コンテンツ</div>
+</template>
 
-<div v-click>
+<script setup>
+const isActive = ref(true);
+const baseClass = 'base';
+const errorClass = ref('error');
+</script>
+```
+
+</template>
+<template #right>
+
+- `v-bind` では下記の様なバインディングが可能
+  - オブジェクト構文 (`true` のときに適用)
+  - 配列構文
+  - オブジェクト構文と配列構文を組み合わせることも可能
+
+</template>
+</Col2>
+---
+layout: center
+---
+
+# Problem
+
+<Col2>
+<template #left>
+baseStyle と dynamicStyle を同じ div に適用すると、<br>
+最終的にどうなるでしょうか？
+
+```vue
+<template>
+  <div :style="[
+    baseStyle, 
+    isActive ? dynamicStyle : {}
+  ]">
+    コンテンツ
+  </div>
+</template>
+
+<script setup>
+import { ref } from 'vue';
+
+const baseStyle = {
+  padding: '10px',
+  backgroundColor: 'lightgray'
+};
+const dynamicStyle = {
+  backgroundColor: 'darkgray',
+  border: '1px solid black'
+};
+const isActive = ref(true);
+</script>
+```
+
+</template>
+<template #right>
+
+## Answer
+
+<v-click>
+
+```css
+padding: 10px;
+background-color: darkgray;
+border: 1px solid black;
+```
+
+</v-click>
+
+## why
+
+<v-click>
+
+- `backgroundColor` は `dynamicStyle` によって上書きされます。
+
+</v-click>
+
+</template>
+</Col2>
+
+---
+layout: center
+---
+
+# v-bind まとめ
+
+<div>
+
+- `v-bind` と `:` を使用してHTML属性をバインドする。
+- オブジェクト構文と配列構文を使用して、複数の属性をバインドする。
+</div> 
+
+
+---
+layout: section
+routeAlias: v-on
+---
+
+# v-on
+
+---
+layout: center
+---
+
+# v-on イベントハンドリングの基本
+
+DOM イベントを購読し、イベント発生時に特定の処理を実行するために使用<br>
+省略形として `@` を使用することができます。
+
+```vue
+<template>
+  <button @click="handleClick">クリック</button>
+  <button v-on:click="handleClick">クリック</button>
+</template>
+
+<script setup>
+const handleClick = () => {
+  alert('クリックされました');
+};
+</script>
+```
+
+- **例**
+  - `@click="handleClick"` は `click` イベントが発生したときに `handleClick` 関数を呼び出します。
+
+---
+
+# v-on の様々なハンドラー
+
+<Col2>
+<template #left>
+
+```vue
+<template>
+  <!-- インラインハンドラー -->
+  <button @click="count++">Add 1</button>
+  <p>Count is: {{ count }}</p>
+
+  <!-- メソッドハンドラー -->
+  <button @click="greet">Greet</button>
+
+  <!-- インラインハンドラー内でのメソッド呼び出し -->
+  <button @click="say('hello')">Say hello</button>
+</template>
+
+<script setup>
+const count = ref(0);
+
+function greet($event) {
+  alert($event.target.tagName);
+}
+
+function say(message) {
+  alert(message);
+}
+</script>
+```
+</template>
+<template #right>
+
+- **インラインハンドラー**
+  - 簡単なロジックや単純な状態変更に適しています。
+    - あまり使わない方が良いと考えています。<br>
+      Templateにロジックを書くのは避けましょう。
+
+- **メソッドハンドラー**
+  - コンポーネント内で定義された関数を呼び出します。
+  - ネイティブの DOM イベントオブジェクトにアクセスできます。
+
+
+- **インラインハンドラー内でのメソッド呼び出し**
+  - 引数を渡すことで、柔軟なイベント処理が可能になります。
+
+</template>
+</Col2>
+
+---
+layout: center
+---
+
+# イベント修飾子
+
+イベントハンドラー内での `event.preventDefault()` や `event.stopPropagation()` の必要性を軽減します。
+
+<Col2>
+<template #left>
+```vue
+<template>
+  <!-- クリック時にイベントの伝搬を停止 -->
+  <a @click.stop="doThis">リンク</a>
+  
+  <!-- フォームの送信時にページリロードを防止 -->
+  <form @submit.prevent="onSubmit"></form>
+  
+  <!-- 複数の修飾子を組み合わせる -->
+  <a @click.stop.prevent="doThat">リンク</a>
+</template>
+```
+
+</template>
+<template #right>
+
+- **主な修飾子**
+  - `.stop`: イベントの伝搬を停止します。
+  - `.prevent`: イベントのデフォルト動作を防ぎます。
+  
+- **ポイント**
+  - 修飾子はドット（.`.`）を用いて指定します。
+  - 修飾子の順序には注意が必要です。
+
+</template>
+</Col2>
+
+---
+layout: center
+---
+
+# キー修飾子
+
+キーボードイベントを特定のキーに限定して処理します。
+
+<Col2>
+<template #left>
+
+```vue
+<template>
+  <!-- Enterキーが押されたときにsubmitメソッドを実行 -->
+  <input @keyup.enter="submit" />
+  
+  <!-- Ctrl+Enterキーが押されたときにsubmitメソッドを実行 -->
+  <input @keyup.ctrl.enter="submit" />
+</template>
+
+<script setup>
+function submit() {
+  alert('Form submitted!');
+}
+</script>
+```
+
+</template>
+<template #right>
+
+- **主なキー修飾子**
+  - `.enter`
+  - `.tab`
+  - `.delete`
+  - `.esc`
+  - `.space`
+  - `.up`
+  - `.down`
+  - `.left`
+  - `.right`
+
+</template>
+</Col2>
+
+---
+layout: center
+---
+
+# システム修飾子
+
+システムキー（Ctrl、Alt、Shift、Meta）と組み合わせてイベントを制御します。
+
+<Col2>
+<template #left>
+
+```vue
+<template>
+  <!-- Ctrl + Click -->
+  <div @click.ctrl="doSomething">Do something</div>
+  
+  <!-- Alt + Enter -->
+  <button @keyup.alt.enter="clear">Clear</button>
+</template>
+
+<script setup>
+function doSomething() {
+  alert('Ctrl + Click detected!');
+}
+
+function clear() {
+  alert('Alt + Enter detected!');
+}
+</script>
+```
+
+</template>
+<template #right>
+
+- **主なシステム修飾子**
+  - `.ctrl`
+  - `.alt`
+  - `.shift`
+  - `.meta`
+
+- **ポイント**
+  - MacとWindowsでのメタキーの違いに注意が必要です。
+
+</template>
+</Col2>
+
+---
+layout: center
+---
+
+# マウスボタン修飾子
+
+<Col2>
+<template #left>
+
+特定のマウスボタンに限定してイベントを処理します。
+
+```vue
+<template>
+  <!-- 左clickのみを処理 -->
+  <button @click.left="leftClick">左click</button>
+  
+  <!-- 右clickのみを処理 -->
+  <button @click.right="rightClick">右click</button>
+</template>
+
+<script setup>
+function leftClick() {
+  alert('左clickされました');
+}
+
+function rightClick() {
+  alert('右clickされました');
+}
+</script>
+```
+
+</template>
+<template #right>
+
+- **主なマウスボタン修飾子**
+  - `.left`
+  - `.right`
+  - `.middle`
+
+- **ポイント**
+  - 修飾子は主に左利き用マウスに依存せず、「メイン」、「セカンダリ」、「補助」のボタンを示します。
+
+</template>
+</Col2>
+
+---
+layout: center
+---
+# イベントハンドリングのまとめ
+
+- `v-on` と `@` を使用してDOMイベントを購読・処理する。
+- インラインハンドラーはシンプルな操作に適し、メソッドハンドラーは複雑なロジックに適しています。
+- イベント修飾子を活用することで、イベントのデフォルト動作や伝搬を簡単に制御できます。
+- キー修飾子やシステム修飾子を使用して、特定のキーやシステムキーとの組み合わせでイベントを処理できます。
+- マウスボタン修飾子を使用して、特定のマウスボタンに対するイベントを処理できます。
+
+---
+
+# 実践問題
+
+<Col2>
+<template #left>
 
 ## Problem
 
-どこが違うでしょうか？
-</div>
+リンクを右クリックしたときにアラートが表示されるようにしてください。
+その際に、デフォルトの右クリックメニューが表示されないようにしてください。
+
+```vue
+<template>
+  <a 
+    href="https://example.com" 
+    @click="handleClick">
+    Example Link
+  </a>
+</template>
+
+<script setup>
+const handleClick = () => {
+  alert('リンクがクリックされました');
+};
+</script>
+```
+
 </template>
 <template #right>
 
-- `reactive` の場合
-
-    ```vue
-    <script setup>
-    const person = reactive({ name: 'John', age: 25 });
-
-    console.log(person.name); // 'John'
-    console.log(person.age);  // 25
-    </script>
-    <template>
-      <p>{{ person.name }}</p>
-      <p>{{ person.age }}</p>
-    </template>
-    ```
-
-<div class="" v-click>
-
 ## Answer
 
-大雑把にはデータにアクセスする際に `.value` をつけるかどうかの違いです。
+<v-click>
+
+```vue
+<template>
+  <a 
+    href="https://example.com" 
+    @click.right.prevent="handleClick">
+    Example Link
+  </a>
+</template>
+
+<script setup>
+const handleClick = () => {
+  alert('リンクが右clickされました');
+};
+</script>
+```
+
+- `.right`: 右クリックのみを検出。
+- `.prevent`: デフォルトの右クリックメニューを防止。
+
+</v-click>
 
 
-</div>
 </template>
 </Col2>
 
-<!--
+---
+layout: section
+---
 
-echo :
-二種類のリアクティブな変数の宣言方法がありますが意識して使ったことはありますか？
-うまく使い分けていますか？
-値が連動せずあれ？と思ったことはありませんか？
+# v-model
 
-それぞれの違いを見ていくと
+---
+layout: center
+---
 
-act: 誰かにあてる
+# v-model とは
 
-act: click
 
--->
+- `v-model` ディレクティブは、双方向バインディングを提供します。
+
+- ユーザーの入力とアプリケーションの状態を同期させるのに便利です。
+
+- さまざまなフォーム要素（`input`、`select`、`textarea` など）で使用できます。
 
 ---
 
-# Problem
-
-`reactive`を使用した下記コードを実行した際に、`name` の値はどうなるでしょうか？
-
-```vue {monaco}
-<script setup>
-const person = reactive({ name: 'ジョン', age: 25 });
-const { name } = person;
-
-name = 'ジョージ';
-</script>
-<template>
-  <p>{{ name }} {{ person.name }}</p>
-</template>
-```
-
-<div class="flex flex-row gap-4">
-  <div class="w-1/5">
-
-  <div v-click>
-
-  ## Answer
-
-  両方とも`ジョン`
-
-  </div>
-  <div v-click class="text-center text-[100px]">
-  🤔
-  </div>
-  </div>
-  <div v-click class="w-4/5 text-sm">
-
-  ## Why
-
-  - `reactive` で作った `person` から `name` を取り出すと、リアクティブではなく普通の文字列になる。
-  - そのため、`name` に `ジョージ` を代入しても、`person` の `name` は変わりません。
-  - 結果として、テンプレートで表示される `name` は `ジョン` のままになるんです。
-
-  </div>
-</div>
-
-
----
-
-# Problem
-
-ではこの時どうやったら`name` の値はリアクティブになるでしょうか？
-
-```vue {monaco}
-<script setup>
-const person = reactive({ name: 'ジョン', age: 25 });
-const { name } = person;
-name = 'ジョージ';
-</script>
-
-<template>
-  <p>{{ name }}</p>
-</template>
-```
+# v-model について
 
 <Col2>
 <template #left>
-  <div v-click>
 
-## Answer
+## 基本的な使い方
+
 ```vue
-<script setup>
-const person = reactive({ name: 'ジョン', age: 25 });
-const { name } = toRefs(person);
-name.value = 'ジョージ';
-</script>
-
 <template>
-  <p>{{ name }}</p>
+  <input v-model="message">
+  <p>入力されたメッセージ: {{ message }}</p>
 </template>
+
+<script setup>
+const message = ref('');
+</script>
 ```
 
-</div>
+- `v-model` を使用すると、入力フィールドとリアクティブな変数を同期できます。
+
 
 </template>
 <template #right>
-<div v-click class="w-4/5 text-sm">
 
-## Why
+## 内部的な仕組み
 
-- `toRefs` を使って取り出した変数はリアクティブな変数になる。
-- そして `.value` をつけてデータにアクセスすることで書き換えができる。
+```vue
+<input
+  :value="message"
+  @input="message = $event.target.value"
+/>
+```
 
-</div>
+- `v-model` は以下のように展開されます。
+- `:value` でプロパティをバインドし、`@input` でイベントをキャッチして値を更新します。
+
 </template>
 </Col2>
 
+<div class="flex flex-row justify-center items-center gap-4 mt-10">
 
----
+<VModelExample />
 
-# ref vs reactive
-
-それぞれのメリット・デメリットは下記の記事がとても参考になります。
-
-- [【Vue.js】ref と reactive どっちを使う？](https://zenn.dev/azukiazusa/articles/ref-vs-reactive)
-
-また、作者である Evan You さんは `ref` を推奨しています。(vueFes 2023にて)
-
-## 私自身も下記の理由から `ref` を推奨しています。
-
-- reactive において分割代入をするとリアクティブ性が失われる
-- computed(後述) も同様に `.value` でデータにアクセスする
-- toRefs で reactive を解決するなら最初から ref をつかおうよ
-- script部分にて`.value`をつけることでリアクティブな値を触るのを明示できる(諸説あり。面倒と思う人もいる)
+</div>
 
 
 ---
-layout: fact
+
+# 修飾子
+
+## `.lazy`
+
+- 入力イベントではなく、`change` イベントで値を更新します。
+
+```vue
+<input v-model.lazy="message">
+```
+
+---
+
+## `.number`
+
+- 入力値を自動的に数値に変換します。
+
+```vue
+<input v-model.number="age" type="number">
+```
+
+---
+
+## `.trim`
+
+- 入力値の前後の空白を自動的に削除します。
+
+```vue
+<input v-model.trim="username">
+```
+
+---
+
+# コンポーネントでの v-model
+
+- カスタムコンポーネントでも `v-model` を使用できます。
+
+```vue
+<MyInput v-model="searchText" />
+```
+
+- コンポーネント側で `modelValue` と `update:modelValue` をハンドリングします。
+
+---
+
+# コンポーネントでの実装例
+
+```vue
+<!-- 親コンポーネント -->
+<template>
+  <MyInput v-model="searchText" />
+</template>
+
+<script setup>
+const searchText = ref('');
+</script>
+```
+
+```vue
+<!-- 子コンポーネント (MyInput.vue) -->
+<template>
+  <input :value="modelValue" @input="$emit('update:modelValue', $event.target.value)">
+</template>
+
+<script setup>
+const props = defineProps(['modelValue']);
+</script>
+```
+
+---
+
+# 複数の v-model バインディング
+
+- 複数のプロパティをバインドする場合、`v-model:propName` を使用します。
+
+```vue
+<MyComponent
+  v-model:title="pageTitle"
+  v-model:content="pageContent"
+/>
+```
+
+---
+
+# Problem
+
+次のコードで、チェックボックスの状態が更新されないのはなぜでしょうか？
+
+```vue
+<template>
+  <input type="checkbox" v-model="checked">
+  <p>チェックボックスは {{ checked ? 'オン' : 'オフ' }}</p>
+</template>
+
+<script setup>
+const checked = ref(false);
+</script>
+```
+
+---
+
+# Answer
+
+- `input` 要素の `type` が `checkbox` の場合、`v-model` は `true` または `false` を期待します。
+
+- しかし、`checked` の初期値が文字列や `null` の場合、期待通りに動作しません。
+
+- **解決策**: `checked` の初期値を確実にブール値にします。
+
+---
+
+# 修正後のコード
+
+```vue
+<template>
+  <input type="checkbox" v-model="checked">
+  <p>チェックボックスは {{ checked ? 'オン' : 'オフ' }}</p>
+</template>
+
+<script setup>
+const checked = ref(false);
+</script>
+```
+
+- `checked` を確実に `false` で初期化しました。
+
+---
+
+# v-model のカスタマイズ
+
+- コンポーネント内で `modelValue` 以外のプロパティ名を使いたい場合は、`model` オプションを使用します。
+
+```vue
+<script>
+export default {
+  model: {
+    prop: 'checked',
+    event: 'change'
+  },
+  props: {
+    checked: Boolean
+  }
+}
+</script>
+```
+
+---
+layout: center
 ---
 
 # まとめ
 
-- `reactive` は分割代入をするとリアクティブ性が失われる
-- `computed` も `.value` でデータにアクセスする
-- `toRefs` で `reactive` を解決するなら最初から `ref` を使おう
+- `v-model` は双方向バインディングを簡潔に実現するためのディレクティブです。
 
-## これらを踏まえると
+- 修飾子を使って入力値を加工できます。
 
-- 基本的に `ref` を使うことを推奨する。
+- カスタムコンポーネントでも `v-model` を活用できます。
 
-
+- データの型に注意して正しくバインディングしましょう。
 
 ---
 layout: center
+section: v-if_v-show
 ---
 
-# v-if
-# v-show
+# v-if v-show
 
 参考 : 公式ドキュメント [条件付きレンダリング](https://ja.vuejs.org/guide/essentials/conditional)
 
@@ -480,7 +1018,7 @@ v-show
 
 
 ---
-layout: fact
+layout: center
 ---
 
 # まとめ
@@ -728,13 +1266,255 @@ const evenNumbers = computed(() => {
 </Col2>
 
 ---
-layout: fact
+layout: center
 ---
 
-## まとめ
+# まとめ
 
 - `v-for` と `v-if` は同時に使わない
 - `v-for` では `key` 属性を指定する
+
+
+---
+
+# 組み込み関数
+
+<Col2>
+<template #left>
+
+## 組み込み関数とは
+
+- Vue によって提供される関数です。
+- データを操作するための関数です。
+
+</template>
+<template #right>
+
+## 組み込み関数一覧
+
+- `ref`
+- `reactive`
+- `computed`
+- `watch`
+- `watchEffect`
+- `onMounted`
+- `onUnmounted`
+- `onUpdated`
+- `onBeforeMount`
+- `onBeforeUnmount`
+- `onBeforeUpdate`
+
+</template>
+</Col2>
+
+---
+layout: center
+---
+
+# ref
+# reactive
+
+参考 : 公式ドキュメント [リアクティビティーの基礎](https://ja.vuejs.org/guide/essentials/reactivity-fundamentals.html)
+
+---
+
+# リアクティブな変数について
+リアクティブな変数には2種類あります
+
+<Col2>
+<template #left>
+
+- `ref` の場合
+
+    ```vue
+    <script setup>
+    const person = ref({ name: 'John', age: 25 });
+
+    console.log(person.value.name); // 'John'
+    console.log(person.value.age);  // 25
+    </script>
+    <template>
+      <p>{{ person.name }}</p>
+      <p>{{ person.age }}</p>
+    </template>
+    ```
+
+<div v-click>
+
+## Problem
+
+どこが違うでしょうか？
+</div>
+</template>
+<template #right>
+
+- `reactive` の場合
+
+    ```vue
+    <script setup>
+    const person = reactive({ name: 'John', age: 25 });
+
+    console.log(person.name); // 'John'
+    console.log(person.age);  // 25
+    </script>
+    <template>
+      <p>{{ person.name }}</p>
+      <p>{{ person.age }}</p>
+    </template>
+    ```
+
+<div class="" v-click>
+
+## Answer
+
+大雑把にはデータにアクセスする際に `.value` をつけるかどうかの違いです。
+
+
+</div>
+</template>
+</Col2>
+
+<!--
+
+echo :
+二種類のリアクティブな変数の宣言方法がありますが意識して使ったことはありますか？
+うまく使い分けていますか？
+値が連動せずあれ？と思ったことはありませんか？
+
+それぞれの違いを見ていくと
+
+act: 誰かにあてる
+
+act: click
+
+-->
+
+---
+
+# Problem
+
+`reactive`を使用した下記コードを実行した際に、`name` の値はどうなるでしょうか？
+
+```vue {monaco}
+<script setup>
+const person = reactive({ name: 'ジョン', age: 25 });
+const { name } = person;
+
+name = 'ジョージ';
+</script>
+<template>
+  <p>{{ name }} {{ person.name }}</p>
+</template>
+```
+
+<div class="flex flex-row gap-4">
+  <div class="w-1/5">
+
+  <div v-click>
+
+  ## Answer
+
+  両方とも`ジョン`
+
+  </div>
+  <div v-click class="text-center text-[100px]">
+  🤔
+  </div>
+  </div>
+  <div v-click class="w-4/5 text-sm">
+
+  ## Why
+
+  - `reactive` で作った `person` から `name` を取り出すと、リアクティブではなく普通の文字列になる。
+  - そのため、`name` に `ジョージ` を代入しても、`person` の `name` は変わりません。
+  - 結果として、テンプレートで表示される `name` は `ジョン` のままになるんです。
+
+  </div>
+</div>
+
+
+---
+
+# Problem
+
+ではこの時どうやったら`name` の値はリアクティブになるでしょうか？
+
+```vue {monaco}
+<script setup>
+const person = reactive({ name: 'ジョン', age: 25 });
+const { name } = person;
+name = 'ジョージ';
+</script>
+
+<template>
+  <p>{{ name }}</p>
+</template>
+```
+
+<Col2>
+<template #left>
+  <div v-click>
+
+## Answer
+```vue
+<script setup>
+const person = reactive({ name: 'ジョン', age: 25 });
+const { name } = toRefs(person);
+name.value = 'ジョージ';
+</script>
+
+<template>
+  <p>{{ name }}</p>
+</template>
+```
+
+</div>
+
+</template>
+<template #right>
+<div v-click class="w-4/5 text-sm">
+
+## Why
+
+- `toRefs` を使って取り出した変数はリアクティブな変数になる。
+- そして `.value` をつけてデータにアクセスすることで書き換えができる。
+
+</div>
+</template>
+</Col2>
+
+
+---
+
+# ref vs reactive
+
+それぞれのメリット・デメリットは下記の記事がとても参考になります。
+
+- [【Vue.js】ref と reactive どっちを使う？](https://zenn.dev/azukiazusa/articles/ref-vs-reactive)
+
+また、作者である Evan You さんは `ref` を推奨しています。(vueFes 2023にて)
+
+## 私自身も下記の理由から `ref` を推奨しています。
+
+- reactive において分割代入をするとリアクティブ性が失われる
+- computed(後述) も同様に `.value` でデータにアクセスする
+- toRefs で reactive を解決するなら最初から ref をつかおうよ
+- script部分にて`.value`をつけることでリアクティブな値を触るのを明示できる(諸説あり。面倒と思う人もいる)
+
+
+---
+layout: center
+---
+
+# まとめ
+
+- `reactive` は分割代入をするとリアクティブ性が失われる
+- `computed` も `.value` でデータにアクセスする
+- `toRefs` で `reactive` を解決するなら最初から `ref` を使おう
+
+## これらを踏まえると
+
+- 基本的に `ref` を使うことを推奨する。
 
 ---
 layout: center
@@ -1094,7 +1874,7 @@ function modifyComputedValue(num) {
 
 
 ---
-layout: fact
+layout: center
 ---
 
 # まとめ
@@ -1503,7 +2283,7 @@ WatchEffect
 </VS>
 
 ---
-layout: fact
+layout: center
 ---
 
 
@@ -1565,6 +2345,8 @@ watch(() => [firstName.value, lastName.value], () => {
 ```
 
 ---
+layout: center
+---
 
 # まとめ
 
@@ -1578,276 +2360,40 @@ watch(() => [firstName.value, lastName.value], () => {
 layout: center
 ---
 
-# バインディング
-
-## v-bind (:value)
-
----
-
-# い
-## v-on (@input,@change)
-
-
----
-layout: center
----
-
-# v-model
-
-参考 : 公式ドキュメント [フォーム入力バインディング](https://ja.vuejs.org/guide/essentials/forms.html)
-
----
-
-# v-model とは
-
-- `v-model` ディレクティブは、双方向バインディングを提供します。
-
-- ユーザーの入力とアプリケーションの状態を同期させるのに便利です。
-
-- さまざまなフォーム要素（`input`、`select`、`textarea` など）で使用できます。
-
----
-
-# v-model について
+# 組み込みコンポーネント
 
 <Col2>
 <template #left>
 
-## 基本的な使い方
+## 組み込みコンポーネントとは
 
-```vue
-<template>
-  <input v-model="message">
-  <p>入力されたメッセージ: {{ message }}</p>
-</template>
+- Vue によって提供されるコンポーネントです。
+- データを操作するためのコンポーネントです。
 
-<script setup>
-const message = ref('');
-</script>
-```
 
-- `v-model` を使用すると、入力フィールドとリアクティブな変数を同期できます。
-
-<VModelExample />
 
 </template>
 <template #right>
 
-## 内部的な仕組み
+## 組み込みコンポーネント一覧
 
-```vue
-<input
-  :value="message"
-  @input="message = $event.target.value"
-/>
-```
-
-- `v-model` は以下のように展開されます。
-- `:value` でプロパティをバインドし、`@input` でイベントをキャッチして値を更新します。
+- `Transition`
+- `TransitionGroup`
+- `KeepAlive`
+- `Teleport`
+- `Suspense`
 
 </template>
 </Col2>
 
 
-
----
-
-# 修飾子
-
-## `.lazy`
-
-- 入力イベントではなく、`change` イベントで値を更新します。
-
-```vue
-<input v-model.lazy="message">
-```
-
----
-
-## `.number`
-
-- 入力値を自動的に数値に変換します。
-
-```vue
-<input v-model.number="age" type="number">
-```
-
----
-
-## `.trim`
-
-- 入力値の前後の空白を自動的に削除します。
-
-```vue
-<input v-model.trim="username">
-```
-
----
-
-# コンポーネントでの v-model
-
-- カスタムコンポーネントでも `v-model` を使用できます。
-
-```vue
-<MyInput v-model="searchText" />
-```
-
-- コンポーネント側で `modelValue` と `update:modelValue` をハンドリングします。
-
----
-
-# コンポーネントでの実装例
-
-```vue
-<!-- 親コンポーネント -->
-<template>
-  <MyInput v-model="searchText" />
-</template>
-
-<script setup>
-const searchText = ref('');
-</script>
-```
-
-```vue
-<!-- 子コンポーネント (MyInput.vue) -->
-<template>
-  <input :value="modelValue" @input="$emit('update:modelValue', $event.target.value)">
-</template>
-
-<script setup>
-const props = defineProps(['modelValue']);
-</script>
-```
-
----
-
-# 複数の v-model バインディング
-
-- 複数のプロパティをバインドする場合、`v-model:propName` を使用します。
-
-```vue
-<MyComponent
-  v-model:title="pageTitle"
-  v-model:content="pageContent"
-/>
-```
-
----
-
-# Problem
-
-次のコードで、チェックボックスの状態が更新されないのはなぜでしょうか？
-
-```vue
-<template>
-  <input type="checkbox" v-model="checked">
-  <p>チェックボックスは {{ checked ? 'オン' : 'オフ' }}</p>
-</template>
-
-<script setup>
-const checked = ref(false);
-</script>
-```
-
----
-
-# Answer
-
-- `input` 要素の `type` が `checkbox` の場合、`v-model` は `true` または `false` を期待します。
-
-- しかし、`checked` の初期値が文字列や `null` の場合、期待通りに動作しません。
-
-- **解決策**: `checked` の初期値を確実にブール値にします。
-
----
-
-# 修正後のコード
-
-```vue
-<template>
-  <input type="checkbox" v-model="checked">
-  <p>チェックボックスは {{ checked ? 'オン' : 'オフ' }}</p>
-</template>
-
-<script setup>
-const checked = ref(false);
-</script>
-```
-
-- `checked` を確実に `false` で初期化しました。
-
----
-
-# v-model のカスタマイズ
-
-- コンポーネント内で `modelValue` 以外のプロパティ名を使いたい場合は、`model` オプションを使用します。
-
-```vue
-<script>
-export default {
-  model: {
-    prop: 'checked',
-    event: 'change'
-  },
-  props: {
-    checked: Boolean
-  }
-}
-</script>
-```
-
----
-
-# まとめ
-
-- `v-model` は双方向バインディングを簡潔に実現するためのディレクティブです。
-
-- 修飾子を使って入力値を加工できます。
-
-- カスタムコンポーネントでも `v-model` を活用できます。
-
-- データの型に注意して正しくバインディングしましょう。
-
 ---
 layout: center
 ---
 
-# event(@) と emit の仕組み
-# v-model の仕組み
-# props と v-bind(:) の仕組み
+# other
 
-
----
-layout: center
----
-
-
-
----
-layout: center
----
-
-
----
-
-# slot の仕組み
-
----
-
-# component の仕組み
-
----
-
-# transition の仕組み
-
----
-layout: fact
----
-
----
-
-# nextTick
-
-
-## まとめ
+- `nextTick`
+- `component`
+- [フォールスルー属性](https://ja.vuejs.org/guide/components/attrs.html)
+  カスタムcomponentができたら
