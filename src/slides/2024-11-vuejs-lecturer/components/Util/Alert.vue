@@ -2,9 +2,9 @@
 const props = defineProps({
   type: {
     type: String,
-    default: 'note',
+    default: 'default',
     validator(value) {
-      return ['note', 'tip', 'important', 'warning', 'caution'].includes(value.toLowerCase());
+      return ['note', 'tip', 'important', 'warning', 'caution', 'default'].includes(value.toLowerCase());
     },
   },
 });
@@ -18,10 +18,11 @@ const props = defineProps({
 
 <style scoped>
 .alert {
-  border-left: 4px solid;
-  padding: 8px;
-  border-radius: 4px;
-  font-size: 14px;
+  border-left: 0.25rem solid;
+  padding: 0.5rem;
+  border-radius: 0.25rem;
+  font-size: 0.875rem;
+  line-height: 1.6;
 }
 
 .alert--note {
@@ -48,4 +49,10 @@ const props = defineProps({
   border-color: rgb(210, 34, 55);
   background-color: rgba(210, 34, 55, 0.1);
 }
+
+.alert--default {
+  border-color: rgb(128, 128, 128);
+  background-color: rgba(128, 128, 128, 0.1);
+}
+
 </style>

@@ -23,4 +23,12 @@
         font-weight: 400;
         color: oklch(94.15% 0.0966 211.97); /* #98faff */
     }
+
+    /* 最初の見出し以外にマージンを追加 */
+    h1:not(:first-child),
+    h2:not(:first-child),
+    h3:not(:first-child),
+    h4:not(:first-child) {
+        margin-top: 1rem; /* mt-4 相当 */
+    }
 }

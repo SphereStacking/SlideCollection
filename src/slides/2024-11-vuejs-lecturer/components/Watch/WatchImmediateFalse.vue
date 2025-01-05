@@ -26,11 +26,11 @@ onMounted(() => {
 <template>
   <div>
     <div class="flex gap-2 items-center">
-      <button class="bg-blue-500 text-white px-2 py-1 rounded" @click="increment">countを増やす</button>
-      <button class="bg-red-500 text-white px-2 py-1 rounded" @click="clearLogs">ログをクリア</button>
+      <button class="btn btn-xs btn-primary" @click="increment">countを増やす</button>
+      <button class="btn btn-xs btn-danger" @click="clearLogs">ログをクリア</button>
+      <div>immediate: false</div>
       <div>count: {{ count }}</div>
     </div>
-    <div>immediate: false</div>
     <div>
       <div v-for="log in logs" :key="log">{{ log }}</div>
     </div>
