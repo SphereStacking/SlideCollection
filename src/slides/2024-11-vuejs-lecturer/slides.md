@@ -5,6 +5,7 @@ info: |
 transition: slide-up
 layout: intro
 hideInToc: true
+colorSchema: dark
 fonts:
   # basically the text
   sans: 'Robot'
@@ -616,7 +617,6 @@ layout: center
 ---
 
 # v-model とは
-
 
 - `v-model` ディレクティブは、双方向バインディングを提供します。
 
@@ -1253,12 +1253,11 @@ layout: center
 
 # v-for とは？
 
-- 配列に基づいて項目のリストをレンダリングするためのディレクティブです。
+- 配列の要素やオブジェクトのプロパティを繰り返しレンダリングするためのディレクティブです。
+
 ---
 
 # リストレンダリングの基本
-
-`v-for` ディレクティブを使って、配列に基づいて項目のリストをレンダリングします。
 
 ```vue
 <template>
@@ -1280,8 +1279,6 @@ const items = ref([
 ---
 
 # v-for とオブジェクト
-
-オブジェクトの各プロパティを反復処理することもできます。
 
 ```vue
 <template>
@@ -1314,9 +1311,12 @@ const myObject = reactive({
 
 ```vue
 <template>
-<li v-for="todo in todos" v-if="!todo.isComplete">
-  {{ todo.name }}
-</li>
+  <ul>
+    <!-- 同じ要素に v-if と v-for を付与 -->
+    <li v-for="todo in todos" v-if="!todo.isComplete">
+      {{ todo.name }}
+    </li>
+  </ul>
 </template>
 
 <script setup>
@@ -1331,7 +1331,7 @@ const todos = ref([
 
 ## Answer
 
-エラーが throw されます。
+警告が表示されます。
 
 </div>
 
