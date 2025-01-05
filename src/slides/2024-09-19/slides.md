@@ -37,17 +37,9 @@ layout: cover
 
 
 <div class="flex justify-center flex-col text-center">
-  <p v-click="1" class="text-2xl font-bold">エンジニアなら誰しも思うことがある</p>  
+  <p class="text-2xl font-bold">コードを書くようにスライドを作りたい。</p>
 
-  <p v-click="2" class="text-2xl font-bold">コードを書くようにスライドを作りたい。</p>
-
-  <p v-click="3" class="text-2xl font-bold">それでもGoogleスライドやCanvaを使っている。</p>
-
-  <p v-click="4" class="text-2xl font-bold">でもMarkdownでスライドを作りたい。</p>
-
-  <p v-click="5" class="text-2xl font-bold">それならもSlidevを使おうよ。</p>
-
-  <p v-click="6" class="text-2xl font-bold">(個人差はあります。)</p>
+  <p class="text-2xl font-bold">それならSlidevを使おうよ。</p>
 </div>
 
 
@@ -728,7 +720,7 @@ dragPos:
 </v-drag>
 ```
 
-<v-drag pos="367,163,261,_,-15"undefinedundefinedundefinedundefinedundefinedundefinedundefinedundefinedundefinedundefinedundefinedundefinedundefinedundefinedundefinedundefinedundefinedundefinedundefinedundefinedundefinedundefinedundefinedundefinedundefinedundefinedundefinedundefinedundefinedundefinedundefinedundefinedundefinedundefinedundefinedundefinedundefinedundefinedundefinedundefinedundefinedundefinedundefinedundefinedundefinedundefinedundefinedundefinedundefinedundefinedundefinedundefinedundefinedundefinedundefinedundefinedundefinedundefinedundefinedundefinedundefinedundefinedundefinedundefinedundefinedundefinedundefinedundefinedundefinedundefinedundefinedundefinedundefinedundefinedundefinedundefinedundefinedundefinedundefinedundefinedundefinedundefinedundefinedundefinedundefinedundefinedundefinedundefinedundefinedundefinedundefinedundefinedundefinedundefinedundefinedundefinedundefinedundefinedundefinedundefinedundefinedundefinedundefinedundefinedundefinedundefinedundefinedundefinedundefined>
+<v-drag pos="367,163,261,_,-15">
   <div text-center text-3xl border border-main rounded>
     ダブルクリック!
   </div>
