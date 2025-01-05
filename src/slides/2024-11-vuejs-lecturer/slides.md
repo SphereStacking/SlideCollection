@@ -39,23 +39,36 @@ hideInToc: true
 
 ---
 hideInToc: true
+layout: intro
 ---
 
-# このスライドの概要
-<Col2>
+<logos-vue class="size-20" />
+
+# 初めに 
+
+## ご指摘等あれば **PR** いただけるとうれしいです！
+
+---
+hideInToc: true
+layout: center
+---
+
+# 初めに 
+
+<Col2 leftWidth="" rightWidth="">
 <template #left>
 
 ## 前提
 
 - HTML / JavaScript の知識が最低限あること
 - vue を少しでも触ったことがあること
-- Vue.jsをもっと詳しく知りたい人。
-- 問題形式で考え答えてもらいながら進めます。
-- スライドをすっきり見せるために、省略しているコードがあります。
 
-<div class="flex justify-center h-1/2 items-center translate-y-1/4 ">
-<logos-vue class="size-40" />
-</div>
+
+## 対象
+
+- 初級者～中級者
+- Vue.js をもっと詳しく知りたい人
+- 問題形式で考え答えてもらいながら進めます。
 
 </template>
 <template #right>
@@ -94,7 +107,7 @@ layout: cover
 
 ---
 
-## ディレクティブとは
+# ディレクティブとは
 
 <Col2 class="text-left">
 <template #left>
@@ -4038,3 +4051,24 @@ layout: center
 <Alert type="tip">
 フォールスルー属性を活用することで、コード量を削減しつつ柔軟なコンポーネント設計が可能になります。
 </Alert>
+
+
+---
+layout: center
+---
+
+# お疲れ様でした！
+---
+layout: statement
+---
+
+# 最後に
+
+<div>
+
+
+
+</div>
+
+---
+
