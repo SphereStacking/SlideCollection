@@ -18,19 +18,14 @@ themeConfig:
 ---
 
 <MouseGlow />
-<div class="mb-4 absolute bottom-2 left-5 hover:scale-110 transition-all duration-300">
-  <span class="absolute top-0 left-0 text-4xl hover:scale-120 hover:left-7 transition-all duration-300 font-700 z-2" >
-    中級者になるために
-  </span>
+<div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 scale-200 hover:scale-210 transition-all duration-300">
   <img src="https://github.com/vuejs/art/blob/master/logo-uwu.png?raw=true" class="h-50 hover:scale-120 transition-all duration-300 z-1" />
-  <span class="absolute -bottom-2 right-10 ml-10 text-4xl font-700 hover:scale-120 transition-all duration-300">で知るべきこと</span> 
+  <span class="absolute -bottom-2 left-1/2 text-nowrap -translate-x-1/2 text-xl font-700 hover:scale-120 transition-all duration-300">
+    公式ドキュメントを読んでまとめてみた
+  </span> 
 </div>
 
-<Profile class="absolute bottom-4 right-12" />
-
-<div class="flex justify-center h-full items-center hover:scale-120 transition-all duration-300">
-  <logos-vue class="size-50 hover:size-60 transition-all duration-300" />
-</div>
+<Profile class="absolute top-4 right-12" />
 
 ---
 src: ../../components/slides/profile_2024.md
@@ -46,6 +41,8 @@ layout: intro
 
 # 初めに 
 
+## 公式ドキュメントを読んで
+## 自分的に抑えておくと良いと思ったものをまとめてみました。
 ## ご指摘等あれば **PR** いただけるとうれしいです！
 
 ---
@@ -53,7 +50,7 @@ hideInToc: true
 layout: center
 ---
 
-# 初めに 
+# このスライドについて
 
 <Col2 leftWidth="" rightWidth="">
 <template #left>
@@ -94,9 +91,6 @@ hideInToc: true
 # 目次
 
 <Toc maxDepth="1"/>
-
-
-
 
 
 ---
@@ -1449,7 +1443,10 @@ echo :
 
 ```vue
 <script setup>
-const items = ref([{ message: 'Foo' }, { message: 'Bar' }]);
+const items = ref([
+  { message: 'Foo' }, 
+  { message: 'Bar' }
+]);
 
 // 配列の変更
 items.value.push({ message: 'Baz' });
@@ -1712,13 +1709,11 @@ name.value = 'ジョージ';
 
 また、作者である Evan You さんは `ref` を推奨しています。(vueFes 2023にて)
 
-## 私自身も下記の理由から `ref` を推奨しています。
+---
+layout: statement
+---
 
-- reactive において分割代入をするとリアクティブ性が失われる
-- computed(後述) も同様に `.value` でデータにアクセスする
-- toRefs で reactive を解決するなら最初から ref をつかおうよ
-- script部分にて`.value`をつけることでリアクティブな値を触るのを明示できる(諸説あり。面倒と思う人もいる)
-
+# 私も `ref` を推奨します。
 
 ---
 layout: center
@@ -4057,18 +4052,14 @@ layout: center
 layout: center
 ---
 
-# お疲れ様でした！
----
-layout: statement
----
-
 # 最後に
 
-<div>
-
-
-
-</div>
+WIP なんか書く
 
 ---
+layout: section
+---
+
+# ご清聴ありがとうございました！
+
 
