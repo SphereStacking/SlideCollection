@@ -1,8 +1,0 @@
-services:
-  slidev:
-    build: .
-    tty: true
-    volumes:
-      - ./src:/root/slidev
-    ports:
-      - 3030:3030
