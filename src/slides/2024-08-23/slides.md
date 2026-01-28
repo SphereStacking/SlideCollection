@@ -1,14 +1,8 @@
 ---
-# try also 'default' to start simple
 theme: seriph
-# random image from a curated Unsplash collection by Anthony
-# like them? see https://unsplash.com/collections/94734566/slidev
 background: https://cover.sli.dev
-# apply any unocss classes to the current slide
 class: 'text-center'
-# https://sli.dev/custom/config-highlighter.html
 highlighter: shiki
-# some information about the slides, markdown enabled
 info: |
   ## Slidev スターターテンプレート
   開発者向けのプレゼンテーションスライド。
@@ -22,6 +16,14 @@ fonts:
   serif: Robot Slab
   mono: Fira Code
   font-size: 30px
+meta:
+  slug: personal-dev
+  date: '2024-08-23'
+  event: 社内LT会
+  description: 個人開発したVRイベント共有サービスについて
+  icon: wpf:ghost
+  published: true
+  legacyPath: 2024-08-23
 ---
 
 # 個人開発したVRイベント共有サービスについて

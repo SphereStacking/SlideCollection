@@ -1,27 +1,31 @@
 {
-  "name": "slidev",
+  "name": "slide-collection",
   "type": "module",
   "private": true,
+  "packageManager": "pnpm@9.15.0",
   "scripts": {
-    "build": "slidev build",
-    "build all": "slidev build ./slides/*/slides.md",
-    "dev": "slidev --open",
-    "export": "slidev export",
-    "start": "slidev --remote"
-  },
-  "dependencies": {
-    "@slidev/cli": "^0.49.29",
-    "@slidev/theme-default": "latest",
-    "@slidev/theme-seriph": "latest",
-    "dotenv": "^16.4.5",
-    "node-html-parser": "^6.1.13",
-    "slidev-theme-light-icons": "^1.0.2",
-    "slidev-theme-penguin": "^2.2.2",
-    "slidev-theme-the-unnamed": "^0.0.20",
-    "vue": "^3.4.38"
+    "dev": "tsx scripts/dev.ts",
+    "dev:latest": "tsx scripts/dev.ts --latest",
+    "build": "tsx scripts/build.ts",
+    "build:index": "tsx scripts/generate-index.ts",
+    "build:redirects": "tsx scripts/generate-redirects.ts",
+    "preview": "pnpm exec serve dist"
   },
   "devDependencies": {
     "@iconify/json": "^2.2.278",
-    "playwright-chromium": "^1.47.2"
+    "@slidev/cli": "^0.49.29",
+    "@slidev/theme-default": "latest",
+    "@slidev/theme-seriph": "latest",
+    "@types/node": "^20.x",
+    "@types/prompts": "^2.x",
+    "fast-glob": "^3.3.2",
+    "gray-matter": "^4.0.3",
+    "playwright-chromium": "^1.47.2",
+    "prompts": "^2.4.2",
+    "slidev-theme-light-icons": "^1.0.2",
+    "slidev-theme-penguin": "^2.2.2",
+    "slidev-theme-the-unnamed": "^0.0.20",
+    "tsx": "^4.19.2",
+    "vue": "^3.4.38"
   }
 }

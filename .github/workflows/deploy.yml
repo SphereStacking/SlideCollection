@@ -1,9 +1,12 @@
-name: Deploy pages
+name: Deploy to GitHub Pages
 
 on:
   workflow_dispatch:
   push:
-    branches: [main]
+    branches: [master]
+    paths:
+      - 'src/**'
+      - '.github/workflows/deploy.yml'
 
 permissions:
   contents: read
@@ -23,43 +26,28 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - uses: pnpm/action-setup@v4
+
       - uses: actions/setup-node@v4
         with:
-          node-version: 'lts/*'
-
-      - name: Cache node modules
-        uses: actions/cache@v3
-        with:
-          path: ~/.npm
-          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-node-
-
-      - name: Setup @antfu/ni
-        run: npm i -g @antfu/ni
+          node-version: '20'
+          cache: 'pnpm'
+          cache-dependency-path: src/pnpm-lock.yaml
 
       - name: Install dependencies
-        run: nci
+        run: pnpm install --frozen-lockfile
 
-      - name: Cache built files
-        id: cache-built-files
-        uses: actions/cache@v3
-        with:
-          path: slides/*/dist
-          key: ${{ runner.os }}-build-${{ hashFiles('**/slides/**/*.md') }}
-          restore-keys: |
-            ${{ runner.os }}-build-
+      - name: Install Playwright
+        run: pnpm exec playwright install chromium
 
-      - name: Build
-        run: |
-          for dir in ./slides/*/; do
-            base_name=$(basename "$dir")
-            npx slidev build "$dir/slides.md" --base "/SlideCollection/$base_name/" --out "../../dist/$base_name/"
-            node ./modIndex.js "./dist/$base_name/index.html"
-          done
+      - name: Generate slides.json
+        run: pnpm exec tsx scripts/generate-index.ts
 
-      - name: Copy index.html to dist
-        run: cp ./index.html ./dist/index.html && cp ./404.html ./dist/404.html
+      - name: Build all slides
+        run: pnpm exec tsx scripts/build.ts
+
+      - name: Generate redirects
+        run: pnpm exec tsx scripts/generate-redirects.ts
 
       - name: Setup Pages
         uses: actions/configure-pages@v4

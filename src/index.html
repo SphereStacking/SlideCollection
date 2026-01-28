@@ -157,55 +157,32 @@
       </div>
     </template>
     <script>
-      const { createApp, ref } = Vue
+      const { createApp, ref, onMounted } = Vue
 
       const App = {
         setup() {
-          const posts = ref([
-            {
-              title: '個人開発の記録 VRイベント共有サービスについて',
-              icon: 'wpf:ghost',
-              description: '所属会社 社内LT会スライド',
-              date: '2024-08-23',
-              link: 'https://spherestacking.github.io/SlideCollection/2024-08-23',
-            },
-            {
-              title:
-                '[没スライド]Sentryへ通知された非推奨イベントのエラー解決に苦労した話',
-              icon: 'simple-icons:sentry',
-              description: '所属会社 Tech Meet Up #X ',
-              date: '2024-09-XX',
-              link: 'https://spherestacking.github.io/SlideCollection/2024-09-XX',
-            },
-            {
-              title:
-                'Slidevの布教',
-              icon: 'logos:slidev',
-              description: '所属会社 Tech Meet Up #1 スライド',
-              date: '2024-09-19',
-              link: 'https://spherestacking.github.io/SlideCollection/2024-09-19',
-            },
-            {
-              title: 'Vue.js レクチャー',
-              icon: 'logos:vue',
-              description: 'vueのドキュメントを読んでまとめてみた',
-              date: '2025-01',
-              link: 'https://spherestacking.github.io/SlideCollection/2025-01-vuejs-lecturer',
-            },
-            // {
-            //   title: 'Post 3',
-            //   icon: 'mdi:file-document-outline',
-            //   description: 'hoge fuga piyo',
-            //   date: 'yyyy-mm-dd',
-            //   link: 'https://spherestacking.github.io/SlideCollection/',
-            // },
-          ])
+          const posts = ref([])
+          const loading = ref(true)
+
+          onMounted(async () => {
+            try {
+              const response = await fetch('./slides.json')
+              if (response.ok) {
+                const data = await response.json()
+                posts.value = data.filter(post => post.slug !== 'work-history')
+              }
+            } catch (error) {
+              console.error('Failed to load slides.json:', error)
+            } finally {
+              loading.value = false
+            }
+          })
 
           const viewCareerHistory = () => {
-            window.location.href = 'https://spherestacking.github.io/SlideCollection/work-history'
+            window.location.href = 'https://spherestacking.github.io/SlideCollection/work-history/'
           }
 
-          return { posts, viewCareerHistory }
+          return { posts, loading, viewCareerHistory }
         },
         template: '#app-template',
       }
