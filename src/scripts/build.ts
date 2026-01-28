@@ -1,11 +1,57 @@
-import { execSync } from 'child_process'
-import { mkdirSync, existsSync, cpSync, copyFileSync } from 'fs'
+import { exec } from 'child_process'
+import { mkdirSync, existsSync, copyFileSync } from 'fs'
 import { join } from 'path'
-import { getPublishedSlides, DIST_DIR, ROOT_DIR, BASE_URL, log } from './utils.js'
+import { getPublishedSlides, DIST_DIR, ROOT_DIR, BASE_URL, log, type SlideInfo } from './utils.js'
+
+const DEFAULT_CONCURRENCY = 2
+
+function execAsync(command: string, options: { cwd: string }): Promise<void> {
+  return new Promise((resolve, reject) => {
+    const child = exec(command, { ...options, maxBuffer: 1024 * 1024 * 10 }, (error) => {
+      if (error) reject(error)
+      else resolve()
+    })
+    child.stdout?.pipe(process.stdout)
+    child.stderr?.pipe(process.stderr)
+  })
+}
+
+async function runConcurrent<T>(
+  items: T[],
+  concurrency: number,
+  fn: (item: T) => Promise<void>,
+): Promise<void> {
+  const queue = [...items]
+  const workers = Array.from({ length: Math.min(concurrency, queue.length) }, async () => {
+    while (queue.length > 0) {
+      const item = queue.shift()!
+      await fn(item)
+    }
+  })
+  await Promise.all(workers)
+}
+
+async function buildSlide(slide: SlideInfo): Promise<void> {
+  log(`Building: ${slide.title} -> ${slide.outputPath}`)
+  const outputDir = join(DIST_DIR, slide.outputPath)
+
+  try {
+    await execAsync(
+      `npx slidev build "${slide.slidesPath}" --base "${BASE_URL}/${slide.outputPath}/" --out "${outputDir}"`,
+      { cwd: ROOT_DIR }
+    )
+    log(`Built: ${slide.outputPath}`, 'success')
+  } catch (error) {
+    log(`Failed to build: ${slide.outputPath}`, 'error')
+    throw error
+  }
+}
 
 async function build() {
   const args = process.argv.slice(2)
   const onlySlug = args.find((arg) => arg.startsWith('--only='))?.split('=')[1]
+  const concurrencyArg = args.find((arg) => arg.startsWith('--concurrency='))?.split('=')[1]
+  const concurrency = concurrencyArg ? parseInt(concurrencyArg, 10) : DEFAULT_CONCURRENCY
 
   log('Starting build process...')
 
@@ -23,27 +69,9 @@ async function build() {
     mkdirSync(DIST_DIR, { recursive: true })
   }
 
-  log(`Found ${slides.length} slide(s) to build`)
+  log(`Found ${slides.length} slide(s) to build (concurrency: ${concurrency})`)
 
-  for (const slide of slides) {
-    log(`Building: ${slide.title} -> ${slide.outputPath}`)
-
-    const outputDir = join(DIST_DIR, slide.outputPath)
-
-    try {
-      execSync(
-        `npx slidev build "${slide.slidesPath}" --base "${BASE_URL}/${slide.outputPath}/" --out "${outputDir}"`,
-        {
-          cwd: ROOT_DIR,
-          stdio: 'inherit',
-        }
-      )
-      log(`Built: ${slide.outputPath}`, 'success')
-    } catch (error) {
-      log(`Failed to build: ${slide.outputPath}`, 'error')
-      throw error
-    }
-  }
+  await runConcurrent(slides, concurrency, buildSlide)
 
   const indexPath = join(ROOT_DIR, 'index.html')
   if (existsSync(indexPath)) {
