@@ -1,0 +1,34 @@
+.slidev-layout {
+
+    h1 {
+        font-weight: 900;
+        color: oklch(94.15% 0.0966 151.97); /* #bbffcc */
+        margin-bottom: 0.5rem;
+    }
+
+    h2 {
+        margin-bottom: 0.2rem;
+        font-weight: 700;
+        color: oklch(94.15% 0.0966 171.97); /* #99ffe0 */
+    }
+
+    h3 {
+        margin-bottom: 0.2rem;
+        font-weight: 500;
+        color: oklch(94.15% 0.0966 191.97); /* #8bfffa */
+    }
+
+    h4 {
+        margin-bottom: 0.2rem;
+        font-weight: 400;
+        color: oklch(94.15% 0.0966 211.97); /* #98faff */
+    }
+
+    /* 最初の見出し以外にマージンを追加 */
+    h1:not(:first-child),
+    h2:not(:first-child),
+    h3:not(:first-child),
+    h4:not(:first-child) {
+        margin-top: 1rem; /* mt-4 相当 */
+    }
+}
