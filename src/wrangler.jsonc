@@ -1,6 +1,7 @@
 {
   "name": "slide-collection",
   "compatibility_date": "2026-01-28",
+  "main": "./worker.ts",
   "assets": {
     "directory": "./dist"
   }
