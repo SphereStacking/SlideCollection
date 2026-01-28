@@ -8,12 +8,6 @@ async function generateRedirects() {
   const slides = await getPublishedSlides()
   const redirectRules: string[] = []
 
-  // SPAルーティング用のルールを追加
-  for (const slide of slides) {
-    redirectRules.push(`/${slide.outputPath}/* /${slide.outputPath}/index.html 200`)
-  }
-
-  redirectRules.push('')
   redirectRules.push('# Legacy URL redirects')
 
   // 旧URLから新URLへのリダイレクト
@@ -23,8 +17,8 @@ async function generateRedirects() {
     const newPath = slide.outputPath
 
     if (legacyPath && legacyPath !== newPath) {
-      // Cloudflare Pages用の301リダイレクト
-      redirectRules.push(`/${legacyPath}/* /${newPath}/:splat 301`)
+      const encodedLegacy = encodeURI(legacyPath)
+      redirectRules.push(`/${encodedLegacy}/* /${newPath}/:splat 301`)
       log(`Redirect: /${legacyPath}/ -> /${newPath}/`, 'success')
       count++
     }
