@@ -21,7 +21,7 @@ async function generateIndex() {
     icon: slide.meta.icon || 'mdi:file-presentation-box',
     description: slide.meta.description || slide.meta.event || '',
     date: slide.meta.date || '',
-    link: `https://spherestacking.github.io${slide.url}`,
+    link: slide.url,
     slug: slide.meta.slug,
   }))
 
