@@ -1,12 +1,21 @@
 ---
 theme: seriph
 layout: intro
+title: Slidevの布教
 info: "Slidevの布教"
 class: text-center
 drawings:
   persist: false
 transition: slide-up
 mdc: true
+meta:
+  slug: slidev-intro
+  date: '2024-09-19'
+  event: Tech Meet Up #1
+  description: Slidevの布教
+  icon: logos:slidev
+  published: true
+  legacyPath: 2024-09-19
 ---
 
 # **Slidev**の布教

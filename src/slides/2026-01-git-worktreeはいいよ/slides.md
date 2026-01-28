@@ -13,6 +13,13 @@ fonts:
   mono: 'Fira Code'
 themeConfig:
   primary: 'rgb(187, 255, 204, 1)'
+meta:
+  slug: git-worktree
+  date: '2026-01'
+  description: Git Worktreeの使い方と活用法について
+  icon: logos:git-icon
+  published: true
+  legacyPath: 2026-01-git-worktreeはいいよ
 ---
 
 <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">

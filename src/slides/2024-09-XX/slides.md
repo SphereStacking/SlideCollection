@@ -9,6 +9,14 @@ drawings:
   persist: false
 transition: fade-out
 mdc: true
+meta:
+  slug: sentry-deprecation
+  date: '2024-09'
+  event: TechSync
+  description: Sentryへ通知された非推奨イベントのエラー解決に苦労した話
+  icon: simple-icons:sentry
+  published: false
+  legacyPath: 2024-09-XX
 ---
 
 # Sentryへ通知された非推奨イベントのエラー解決に苦労した話

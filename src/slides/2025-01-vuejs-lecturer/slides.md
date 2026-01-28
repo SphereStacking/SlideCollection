@@ -2,19 +2,25 @@
 theme: seriph
 title: Vue.js hands-on
 info: |
+  Vueのドキュメントを読んでまとめてみた
 transition: slide-up
 layout: intro
 hideInToc: true
 colorSchema: dark
 fonts:
-  # basically the text
   sans: 'Robot'
-  # use with `font-serif` css class from windicss
   serif: 'Robot Slab'
-  # for code blocks, inline code, etc.
   mono: 'Fira Code'
 themeConfig:
   primary: 'rgb(187, 255, 204, 1)'
+meta:
+  slug: vuejs-lecture
+  date: '2025-01'
+  event: 社内勉強会
+  description: Vueのドキュメントを読んでまとめてみた
+  icon: logos:vue
+  published: true
+  legacyPath: 2025-01-vuejs-lecturer
 ---
 
 <MouseGlow />

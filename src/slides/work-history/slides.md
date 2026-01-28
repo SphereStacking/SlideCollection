@@ -2,18 +2,22 @@
 theme: seriph
 title: 職務経歴書
 info: |
+  職務経歴書
 transition: slide-up
 layout: intro
 hideInToc: true
 fonts:
-  # basically the text
   sans: 'Robot'
-  # use with `font-serif` css class from windicss
   serif: 'Robot Slab'
-  # for code blocks, inline code, etc.
   mono: 'Fira Code'
 themeConfig:
   primary: 'rgb(187, 255, 204, 1)'
+meta:
+  slug: work-history
+  description: 職務経歴書
+  icon: hugeicons:work-history
+  published: true
+  legacyPath: work-history
 ---
 
 <div class="mb-4 absolute bottom-4 left-12">
