@@ -11,7 +11,11 @@
     "build:redirects": "tsx scripts/generate-redirects.ts",
     "preview": "pnpm exec serve dist"
   },
+  "dependencies": {
+    "hono": "^4.7.4"
+  },
   "devDependencies": {
+    "@cloudflare/workers-types": "^4.20250124.0",
     "@iconify/json": "^2.2.278",
     "@slidev/cli": "^0.49.29",
     "@slidev/theme-default": "latest",

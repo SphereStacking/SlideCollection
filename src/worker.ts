@@ -1,96 +1,75 @@
-const ALLOWED_ORIGINS: (string | RegExp)[] = [
+import { Hono } from 'hono'
+import { cors } from 'hono/cors'
+
+type Bindings = {
+  ASSETS: Fetcher
+}
+
+const ALLOWED_ORIGINS = [
   'https://spherestacking.com',
   'https://www.spherestacking.com',
   /^https:\/\/.*\.spherestacking\.com$/,
   /^http:\/\/localhost(:\d+)?$/,
-];
+]
 
-function isAllowedOrigin(origin: string | null): string | null {
-  if (!origin) return null;
-  for (const allowed of ALLOWED_ORIGINS) {
-    if (typeof allowed === 'string' && allowed === origin) return origin;
-    if (allowed instanceof RegExp && allowed.test(origin)) return origin;
-  }
-  return null;
+function isAllowedOrigin(origin: string): boolean {
+  return ALLOWED_ORIGINS.some((allowed) =>
+    typeof allowed === 'string' ? allowed === origin : allowed.test(origin)
+  )
 }
 
-function createJsonHeaders(request: Request): Record<string, string> {
-  const origin = request.headers.get('Origin');
-  const allowedOrigin = isAllowedOrigin(origin);
+const app = new Hono<{ Bindings: Bindings }>()
 
-  const headers: Record<string, string> = {
-    'Content-Type': 'application/json; charset=utf-8',
+// /slides.json API エンドポイント
+app.use(
+  '/slides.json',
+  cors({
+    origin: (origin) => (isAllowedOrigin(origin) ? origin : ''),
+    maxAge: 86400,
+  })
+)
+
+app.get('/slides.json', async (c) => {
+  const response = await c.env.ASSETS.fetch(new URL('/slides.json', c.req.url))
+
+  if (response.status === 404) {
+    return c.json({ error: 'Not found' }, 404, {
+      'Cache-Control': 'public, max-age=300',
+    })
+  }
+
+  const data = await response.json()
+  return c.json(data, 200, {
     'Cache-Control': 'public, max-age=300',
-  };
+  })
+})
 
-  if (allowedOrigin) {
-    headers['Access-Control-Allow-Origin'] = allowedOrigin;
-    headers['Vary'] = 'Origin';
+// 静的アセット + SPA フォールバック
+app.all('*', async (c) => {
+  const url = new URL(c.req.url)
+
+  // 静的アセットを試す
+  const response = await c.env.ASSETS.fetch(url)
+  if (response.status !== 404) {
+    return response
   }
 
-  return headers;
-}
+  // 404の場合、親ディレクトリのindex.htmlを探す（SPA対応）
+  const pathParts = url.pathname.split('/').filter(Boolean)
 
-export default {
-  async fetch(request: Request, env: { ASSETS: Fetcher }) {
-    const url = new URL(request.url);
-
-    // /slides.json API エンドポイント
-    if (url.pathname === '/slides.json') {
-      // CORS プリフライト
-      if (request.method === 'OPTIONS') {
-        const origin = request.headers.get('Origin');
-        const allowedOrigin = isAllowedOrigin(origin);
-        if (!allowedOrigin) {
-          return new Response(null, { status: 403 });
-        }
-        return new Response(null, {
-          headers: {
-            'Access-Control-Allow-Origin': allowedOrigin,
-            'Access-Control-Allow-Methods': 'GET, OPTIONS',
-            'Access-Control-Max-Age': '86400',
-            'Vary': 'Origin',
-          },
-        });
-      }
-
-      const response = await env.ASSETS.fetch(url);
-      const headers = createJsonHeaders(request);
-
-      if (response.status === 404) {
-        return new Response(JSON.stringify({ error: 'Not found' }), {
-          status: 404,
-          headers,
-        });
-      }
-
-      return new Response(response.body, {
+  while (pathParts.length > 0) {
+    const indexUrl = new URL('/' + pathParts.join('/') + '/index.html', url.origin)
+    const indexResp = await c.env.ASSETS.fetch(indexUrl)
+    if (indexResp.status !== 404) {
+      return new Response(indexResp.body, {
         status: 200,
-        headers,
-      });
+        headers: indexResp.headers,
+      })
     }
+    pathParts.pop()
+  }
 
-    // 静的アセットを試す
-    const response = await env.ASSETS.fetch(url);
-    if (response.status !== 404) {
-      return response;
-    }
+  return response
+})
 
-    // 404の場合、親ディレクトリのindex.htmlを探す（SPA対応）
-    const pathParts = url.pathname.split('/').filter(Boolean);
-
-    while (pathParts.length > 0) {
-      const indexUrl = new URL('/' + pathParts.join('/') + '/index.html', url.origin);
-      const indexResp = await env.ASSETS.fetch(indexUrl);
-      if (indexResp.status !== 404) {
-        return new Response(indexResp.body, {
-          status: 200,
-          headers: indexResp.headers,
-        });
-      }
-      pathParts.pop();
-    }
-
-    return response;
-  },
-};
+export default app
