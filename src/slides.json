@@ -4,7 +4,7 @@
     "icon": "logos:git-icon",
     "description": "Git Worktreeの使い方と活用法について",
     "date": "2026-01",
-    "link": "/2026/git-worktree/",
+    "link": "https://slide-collection.sphere-stacking.workers.dev/2026/git-worktree/",
     "slug": "git-worktree"
   },
   {
@@ -12,7 +12,7 @@
     "icon": "logos:vue",
     "description": "Vueのドキュメントを読んでまとめてみた",
     "date": "2025-01",
-    "link": "/2025/vuejs-lecture/",
+    "link": "https://slide-collection.sphere-stacking.workers.dev/2025/vuejs-lecture/",
     "slug": "vuejs-lecture"
   },
   {
@@ -20,7 +20,7 @@
     "icon": "logos:slidev",
     "description": "Slidevの布教",
     "date": "2024-09-19",
-    "link": "/2024/slidev-intro/",
+    "link": "https://slide-collection.sphere-stacking.workers.dev/2024/slidev-intro/",
     "slug": "slidev-intro"
   },
   {
@@ -28,7 +28,7 @@
     "icon": "wpf:ghost",
     "description": "個人開発したVRイベント共有サービスについて",
     "date": "2024-08-23",
-    "link": "/2024/personal-dev/",
+    "link": "https://slide-collection.sphere-stacking.workers.dev/2024/personal-dev/",
     "slug": "personal-dev"
   },
   {
@@ -36,7 +36,7 @@
     "icon": "hugeicons:work-history",
     "description": "職務経歴書",
     "date": "",
-    "link": "/work-history/",
+    "link": "https://slide-collection.sphere-stacking.workers.dev/work-history/",
     "slug": "work-history"
   }
 ]

@@ -10,7 +10,7 @@ const __dirname = dirname(__filename)
 export const ROOT_DIR = join(__dirname, '..')
 export const SLIDES_DIR = join(ROOT_DIR, 'slides')
 export const DIST_DIR = join(ROOT_DIR, 'dist')
-export const BASE_URL = ''
+export const BASE_URL = 'https://slide-collection.sphere-stacking.workers.dev'
 
 export interface SlideMeta {
   slug: string
