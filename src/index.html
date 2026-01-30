@@ -166,7 +166,7 @@
 
           onMounted(async () => {
             try {
-              const response = await fetch('./slides.json')
+              const response = await fetch('/api/slides')
               if (response.ok) {
                 const data = await response.json()
                 posts.value = data.filter(post => post.slug !== 'work-history')

@@ -20,16 +20,16 @@ function isAllowedOrigin(origin: string): boolean {
 
 const app = new Hono<{ Bindings: Bindings }>()
 
-// /slides.json API エンドポイント
+// /api/slides エンドポイント
 app.use(
-  '/slides.json',
+  '/api/slides',
   cors({
     origin: (origin) => (isAllowedOrigin(origin) ? origin : ''),
     maxAge: 86400,
   })
 )
 
-app.get('/slides.json', async (c) => {
+app.get('/api/slides', async (c) => {
   const response = await c.env.ASSETS.fetch(new URL('/slides.json', c.req.url))
 
   if (response.status === 404) {
