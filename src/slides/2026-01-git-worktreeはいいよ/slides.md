@@ -1,6 +1,6 @@
 ---
 theme: seriph
-title: Git Worktree はいいよ
+title: Git Worktree の使い方と活用法について
 info: |
   Git Worktree の使い方と活用法について
 transition: slide-up
@@ -27,12 +27,12 @@ meta:
     <logos-git-icon class="inline-block mr-2" /> Git Worktree
   </div>
   <div class="text-2xl text-gray-400">
-    複数ブランチを同時に作業する魔法
+    複数ブランチを同時に扱い、DXを向上できる
   </div>
 </div>
 
 ---
-src: ../../components/slides/profile_2024.md
+src: ../../components/slides/profile_2026_q1.md
 hideInToc: true
 ---
 
@@ -41,7 +41,7 @@ layout: center
 hideInToc: true
 ---
 
-# 目次
+# Outline
 
 <Toc maxDepth="1" />
 
@@ -49,76 +49,155 @@ hideInToc: true
 layout: center
 ---
 
-# Git Worktree とは
+# はじめに
 
-<div class="grid grid-cols-2 gap-8 mt-8">
-<div v-click class="p-4 rounded-lg bg-gray-800">
 
-## 通常の Git
+- どういった場面で `Git Worktree` が役に立つのか
+- 詳しいコマンドの使い方やオプションについては話しません
 
-```
-myproject/
-└── .git/
-    └── (1つの作業ディレクトリ)
-```
+詳しい使い方は公式ドキュメントや VSCode 拡張機能にお任せします 🙏
 
-- 1リポジトリ = 1作業ディレクトリ
-- ブランチ切り替え時は **stash** が必要
-
-</div>
-<div v-click class="p-4 rounded-lg bg-green-900">
-
-## Git Worktree
-
-```
-myproject/           # main ブランチ
-myproject-feature/   # feature ブランチ
-myproject-hotfix/    # hotfix ブランチ
-└── 全て同じ .git を共有
-```
-
-- 1リポジトリ = **N個の作業ディレクトリ**
-- 各ディレクトリで異なるブランチを同時展開
-
-</div>
-</div>
 
 ---
 
-# なぜ Worktree が必要なのか
+<h1 class="text-center py-5">
+  開発中に
+</h1>
 
-<div class="grid grid-cols-2 gap-8 mt-8">
-<div>
+<div class="relative h-80">
 
-## stash の問題点
+  <!-- 中心のユーザー -->
+  <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-6xl">
+    <img class="h-50" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgJWP8a9vbGKmeUKbagxvtnL6XsYxKaKeQ01Vm8uiQPdkAdpUQtSGaICZO9MY5P-uzPFhJ_i6txSb8aSjOlxNEgMTJEi8bh0QkHNv8L-96G4uERtiwIEDn7F9dj8Vie7_vCLxqOIH6Qtt0B/s800/job_programmer.png" >
+  </div>
 
-<div v-click class="mt-4 text-red-400">
+  <div
+    v-click
+    v-motion
+    :initial="{ opacity: 0, left:0 }"
+    :enter="{ opacity: 1,left:100, y: 20 }"
+    class="absolute top-0 p-2 rounded-lg bg-blue-500/70 text-white max-w-48 text-center text-sm">
+    レビューお願いします！
+    <div class="absolute top-1/2 -left-2 -translate-y-1/2 w-0 h-0 border-t-8 border-b-8 border-r-8 border-transparent border-r-blue-500/80"></div>
+  </div>
 
-- 作業を中断して stash → 忘れがち
-- stash list が溜まって混乱
-- ビルドキャッシュが無駄になる
-- コンテキストスイッチのコスト
+  <div
+    v-click
+    v-motion
+    :initial="{ opacity: 0, right:0 }"
+    :enter="{ opacity: 1,  right:100, y: 100 }" class="absolute p-2 rounded-lg bg-blue-500/70  text-white text-sm max-w-48 text-center">
+    エラー調査お願いします！
+    <div class="absolute top-1/2 -right-2 -translate-y-1/2 w-0 h-0 border-t-8 border-b-8 border-l-8 border-transparent border-l-blue-500/80"></div>
+  </div>
 
+  <div
+    v-click
+    v-motion
+    :initial="{ opacity: 0, left:0 }"
+    :enter="{ opacity: 1,left:100, y: 200 }"
+    class="absolute p-2 rounded-lg bg-blue-500/80 text-white text-sm max-w-50">
+    先にこの機能実装できる？
+    <div class="absolute top-1/2 -left-2 -translate-y-1/2 w-0 h-0 border-t-8 border-b-8 border-r-8 border-transparent border-r-blue-500/80"></div>
+  </div>
+
+  <div v-click v-motion :initial="{ opacity: 0, bottom: 100 }" :enter="{ opacity: 1, x:300, bottom: 0 }" class="absolute p-2 rounded-lg bg-red-500/80 text-white text-sm text-center">
+    今、いいところなんだけどな...
+    <div class="absolute -top-2 left-1/2 -translate-x-1/2 w-0 h-0 border-l-8 border-r-8 border-b-8 border-transparent border-b-red-500/80"></div>
+  </div>
 </div>
+---
+
+<h1 class="text-center py-5">
+  切り替え中に
+</h1>
+
+<div class="relative h-80">
+
+  <!-- 中心のユーザー -->
+  <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-6xl">
+    <img class="h-50" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgJWP8a9vbGKmeUKbagxvtnL6XsYxKaKeQ01Vm8uiQPdkAdpUQtSGaICZO9MY5P-uzPFhJ_i6txSb8aSjOlxNEgMTJEi8bh0QkHNv8L-96G4uERtiwIEDn7F9dj8Vie7_vCLxqOIH6Qtt0B/s800/job_programmer.png" >
+  </div>
+
+  <div
+    v-click
+    v-motion
+    :initial="{ opacity: 0, left:150 }"
+    :enter="{ opacity: 1,left:100, y: 20 }"
+    class="absolute top-0 p-2 rounded-lg bg-teal-500/70 text-white max-w-48 text-center text-sm">
+    変更があるから<br>
+    <code>check out</code>できないな
+    <div class="absolute top-1/2 -right-2 -translate-y-1/2 w-0 h-0 border-t-8 border-b-8 border-l-8 border-transparent border-l-teal-500/80"></div>
+  </div>
+
+  <div
+    v-click
+    v-motion
+    :initial="{ opacity: 0, right:150 }"
+    :enter="{ opacity: 1,  right:100, y: 100 }" class="absolute p-2 rounded-lg bg-teal-500/70  text-white text-sm max-w-48 text-center">
+    <code>git stash</code>して〜
+    <div class="absolute top-1/2 -left-2 -translate-y-1/2 w-0 h-0 border-t-8 border-b-8 border-r-8 border-transparent border-r-teal-500/80"></div>
+  </div>
+
+  <div
+    v-click
+    v-motion
+    :initial="{ opacity: 0, left:150 }"
+    :enter="{ opacity: 1,left:100, y: 200 }"
+    class="absolute p-2 rounded-lg bg-teal-500/80 text-white text-sm max-w-50">
+    <code>check out</code>できた
+    <div class="absolute top-1/2 -right-2 -translate-y-1/2 w-0 h-0 border-t-8 border-b-8 border-l-8 border-transparent border-l-teal-500/80"></div>
+  </div>
 </div>
-<div>
 
-## Worktree のメリット
+---
+layout: center
+---
 
-<div v-click class="mt-4 text-green-400">
+# 作業して
 
-- 作業を中断せず別ブランチで作業
-- 各 worktree で独立したビルドキャッシュ
-- 複数機能を並行開発
-- IDE で複数ウィンドウを開ける
+---
 
-</div>
-</div>
-</div>
+<h1 class="text-center py-5">
+  戻ってきたら
+</h1>
 
-<div v-click class="mt-8 p-4 rounded-lg bg-blue-900 text-center">
+<div class="relative h-80">
 
-**「ブランチを切り替える」から「ディレクトリを移動する」へ**
+  <!-- 中心のユーザー -->
+  <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-6xl">
+    <img class="h-50" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgJWP8a9vbGKmeUKbagxvtnL6XsYxKaKeQ01Vm8uiQPdkAdpUQtSGaICZO9MY5P-uzPFhJ_i6txSb8aSjOlxNEgMTJEi8bh0QkHNv8L-96G4uERtiwIEDn7F9dj8Vie7_vCLxqOIH6Qtt0B/s800/job_programmer.png" >
+  </div>
+
+  <div
+    v-click
+    v-motion
+    :initial="{ opacity: 0, left: 150 }"
+    :enter="{ opacity: 1, left: 100, y: 20 }"
+    class="absolute top-0 p-2 rounded-lg bg-teal-500/70 text-white max-w-48 text-center text-sm">
+    <code>git checkout</code>して
+    <div class="absolute top-1/2 -right-2 -translate-y-1/2 w-0 h-0 border-t-8 border-b-8 border-l-8 border-transparent border-l-teal-500/80"></div>
+  </div>
+
+  <div
+    v-click
+    v-motion
+    :initial="{ opacity: 0, right: 150 }"
+    :enter="{ opacity: 1, right: 100, y: 100 }"
+    class="absolute p-2 rounded-lg bg-teal-500/70 text-white text-sm text-center">
+    <code>git stash pop</code>して
+    <div class="absolute top-1/2 -left-2 -translate-y-1/2 w-0 h-0 border-t-8 border-b-8 border-r-8 border-transparent border-r-teal-500/80"></div>
+  </div>
+
+  <div
+    v-click
+    v-motion
+    :initial="{ opacity: 0, left: 150 }"
+    :enter="{ opacity: 1, left: 100, y: 200 }"
+    class="absolute p-2 rounded-lg bg-teal-500/70 text-white text-sm">
+    依存が変わったから<br>
+    <code>npm i</code> からやりなおしだ
+    <div class="absolute top-1/2 -right-2 -translate-y-1/2 w-0 h-0 border-t-8 border-b-8 border-l-8 border-transparent border-l-teal-500/80"></div>
+  </div>
 
 </div>
 
@@ -126,132 +205,72 @@ myproject-hotfix/    # hotfix ブランチ
 layout: center
 ---
 
-# 基本コマンド: add
-
-新しい作業ツリーを作成する
-
-```bash {1|3|5|7|all}
-# パス名から自動でブランチを作成
-git worktree add ../feature-login
-
-# 既存ブランチを指定してチェックアウト
-git worktree add ../hotfix hotfix/urgent-fix
-
-# 新規ブランチを作成して追加
-git worktree add -b feature/new ../feature-new
-
-# デタッチHEAD（特定コミットで作業）
-git worktree add -d ../debug abc1234
-```
-
-<div v-click class="mt-4 p-3 rounded bg-yellow-900 text-sm">
-
-💡 リモートに同名ブランチがあれば自動で追跡設定される
-
-</div>
+# 作業の切り替えコストが高くて
+# 先延ばしにしがち
 
 ---
-
-# 基本コマンド: list / remove
-
-<div class="grid grid-cols-2 gap-8">
-<div>
-
-## list - 一覧表示
-
-```bash
-$ git worktree list
-/path/to/main       abc1234 [main]
-/path/to/feature    def5678 [feature/auth]
-/path/to/hotfix     ghi9012 [hotfix/bug]
-```
-
-<div v-click class="mt-4">
-
-```bash
-# 詳細表示
-git worktree list --verbose
-
-# スクリプト用出力
-git worktree list --porcelain
-```
-
-</div>
-</div>
-<div>
-
-## remove - 削除
-
-```bash
-# worktree を削除
-git worktree remove ../feature-login
-```
-
-<div v-click class="mt-4">
-
-```bash
-# 変更がある場合は強制削除
-git worktree remove --force ../feature-login
-```
-
-</div>
-
-<div v-click class="mt-4 p-3 rounded bg-red-900 text-sm">
-
-⚠️ 未コミットの変更があると失敗する
-
-</div>
-</div>
-</div>
-
+layout: center
 ---
 
-# 基本コマンド: prune / その他
+# Git Worktree なら...
 
-<div class="grid grid-cols-2 gap-8">
-<div>
-
-## prune - クリーンアップ
-
-```bash
-# 孤立した worktree 情報を削除
-git worktree prune
-
-# 削除される内容を事前確認
-git worktree prune --dry-run
-```
-
-<div v-click class="mt-4 text-sm text-gray-400">
-
-ディレクトリを手動削除した場合に使用
-
-</div>
-</div>
-<div>
-
-## その他のコマンド
-
-<div v-click>
-
-```bash
-# worktree をロック（prune から保護）
-git worktree lock ../feature
-git worktree unlock ../feature
-```
-
+<div class="mt-6 text-2xl text-center">
+  <span v-click>「ブランチを切り替える」</span>
+  <span v-click>ではなく</span>
+  <span v-click class="text-green-400 font-bold">「ディレクトリを移動する」</span>
 </div>
 
-<div v-click class="mt-4">
+<div v-click class="mt-6 p-4 text-center">
 
-```bash
-# worktree を移動
-git worktree move ../old ../new
+## stash 不要 / ビルドキャッシュ維持
 
-# リンク修復（手動移動後）
-git worktree repair
-```
+
+## だから直ぐに元の作業に戻って来れる。
+</div>
+
+
+
+
+---
+layout: center
+---
+
+# Git Worktree だと どう変わるのか
+
+<div class="grid grid-cols-2 gap-8 mt-8">
+<div v-click class="p-4 rounded-lg bg-gray-800">
+
+## 通常のgit操作だと
+
+  ```
+    reps/
+    ├── project_A/
+    └── project_B/
+
+  ```
+
+- 1リポジトリ = 1作業ディレクトリ
+- 作業切り替え時はgitのワーキングをなくしてブランチ切り替え時はが必要
+
 
 </div>
+
+<div v-click class="p-4 rounded-lg bg-green-900">
+
+## Git Worktreeだと
+
+  ```
+    reps/
+    └── project_A/
+        ├── project_A-main/      ← メイン（main）
+        ├── project_A-pr-2345/   ← PRレビュー用
+        └── project_A-fix-2347/  ← バグ修正用
+  ```
+
+- 1リポジトリ = **N個の作業ディレクトリ**
+- 各ディレクトリで異なるブランチを同時展開可能
+- フォルダ移動だけで作業を瞬時に切り替えられる。
+
 </div>
 </div>
 
@@ -273,269 +292,73 @@ layout: center
 | `git worktree repair` | リンク修復 |
 
 ---
+layout: center
+---
 
-# VSCode 拡張機能: Git Worktree Manager
+## コマンドを多いし覚えるの大変ですよね
 
-<div class="mt-2 text-gray-400">コマンドが苦手な人はこちら！</div>
+---
+layout: center
+---
 
-<div class="grid grid-cols-2 gap-8 mt-6">
-<div>
+# VSCode 拡張機能
+コマンドを使わずUIから実行できます！
 
-## 主な機能
-
-<div v-click class="mt-4 space-y-2">
-
-- **Ctrl+Shift+R** で worktree を高速切り替え
-- GUI で新規 worktree を作成
-- ワークスペースに複数 worktree を追加
-- お気に入り登録で即座にアクセス
-- 設定ファイルの自動コピー
-
-</div>
-</div>
-<div v-click>
-
-## インストール
-
-```
-拡張機能で検索:
-Git Worktree Manager
-```
-
-<div class="mt-4 p-3 rounded bg-blue-900 text-sm">
-
-<logos-visual-studio-code class="inline mr-2" />
-[marketplace.visualstudio.com](https://marketplace.visualstudio.com/items?itemName=jackiotyu.git-worktree-manager)
-
-</div>
-
-<div class="mt-4 text-sm text-gray-400">
-
-⭐ 5.0 / 9,000+ インストール / 無料
-
-</div>
-</div>
-</div>
+<logos-visual-studio-code class="inline mr-2" /> [Git Worktree Manager](https://marketplace.visualstudio.com/items?itemName=jackiotyu.git-worktree-manager)
 
 <div v-click class="mt-6 p-3 rounded bg-green-900 text-center">
 
-💡 サイドバーから直感的に操作できるので初心者にもおすすめ
+サイドバーから直感的に操作できるのでかなり楽です。
 
-</div>
-
----
-
-# ユースケース 1: 緊急バグ修正
-
-<div class="mt-4">
-
-**シナリオ**: feature 開発中に本番バグ発生！
-
-</div>
-
-<div class="grid grid-cols-2 gap-8 mt-4">
-<div class="p-4 rounded-lg bg-red-900">
-
-## stash を使う場合
-
-```bash {1|2|3|4|5|all}
-git stash              # 作業を退避
-git checkout main
-git checkout -b hotfix
-# ... 修正 ...
-git checkout feature
-git stash pop          # 作業を復元
-```
-
-<div v-click class="text-sm text-red-300 mt-2">
-
-😵 手順が多い、stash を忘れがち
-
-</div>
-</div>
-<div class="p-4 rounded-lg bg-green-900">
-
-## worktree を使う場合
-
-```bash {1|2|3|4|all}
-git worktree add ../hotfix main
-cd ../hotfix
-# ... 修正 & コミット ...
-cd ../myproject        # 元の作業に戻る
-git worktree remove ../hotfix
-```
-
-<div v-click class="text-sm text-green-300 mt-2">
-
-😊 作業を中断せず、すぐ戻れる
-
-</div>
-</div>
-</div>
-
----
-
-# ユースケース 2: コードレビュー
-
-<div class="mt-4">
-
-**シナリオ**: 他の人の PR を手元で動作確認したい
-
-</div>
-
-```bash {1-2|4-5|7-8|all}
-# レビュー対象のブランチを展開
-git worktree add ../review feature/someone-pr
-
-# 動作確認（ビルド、テスト、手動確認）
-cd ../review && npm install && npm run dev
-
-# レビュー完了後、クリーンアップ
-git worktree remove ../review
-```
-
-<div v-click class="mt-6 p-4 rounded-lg bg-blue-900">
-
-💡 **メリット**
-- 自分の作業を中断しなくていい
-- レビュー専用の環境を素早く作れる
-- 終わったらすぐ削除できる
-
-</div>
-
----
-
-# ユースケース 3: 並行開発 & AI 活用
-
-<div class="grid grid-cols-2 gap-8 mt-4">
-<div>
-
-## 複数機能の同時進行
-
-```
-myproject/
-├── main/           # メイン
-├── feature-auth/   # 認証機能
-├── feature-api/    # API 改善
-└── feature-ui/     # UI 改善
-```
-
-<div v-click class="mt-4 text-sm">
-
-各機能を独立して開発・テスト可能
-
-</div>
-</div>
-<div v-click>
-
-## AI アシスタントとの並列作業
-
-```bash
-# AI 用の worktree を作成
-git worktree add ../ai-task feature/ai-work
-```
-
-<div class="mt-4 text-sm">
-
-- AI に一部を任せながら自分も作業
-- 結果を確認してからマージ
-- **2024-2025年のトレンド**
-
-</div>
-
-<div class="mt-2 p-2 rounded bg-purple-900 text-xs">
-
-🤖 Claude Code などの AI エージェントと相性抜群
-
-</div>
-</div>
-</div>
-
----
-
-# ベストプラクティス
-
-<div class="grid grid-cols-2 gap-8 mt-4">
-<div>
-
-## ディレクトリ命名規則
-
-```bash
-# パターン1: プロジェクト名-ブランチ名
-myproject/
-myproject-feature-auth/
-myproject-hotfix/
-
-# パターン2: 専用ディレクトリで管理
-myproject/.worktrees/
-├── feature-auth/
-├── feature-api/
-└── hotfix/
-```
-
-<div v-click class="mt-2 text-sm text-gray-400">
-
-チームで統一すると分かりやすい
-
-</div>
-</div>
-<div v-click>
-
-## シェルエイリアス設定
-
-```bash
-# ~/.bashrc or ~/.zshrc
-alias gwta='git worktree add'
-alias gwtl='git worktree list'
-alias gwtr='git worktree remove'
-
-# よく使うパターン
-alias gwt-hotfix='git worktree add \
-  ../$(basename $(pwd))-hotfix main'
-```
-
-</div>
 </div>
 
 ---
 layout: center
 ---
 
+軽くデモを行います。
+
+---
+layout: center
+---
+
 # 注意点
+便利だけど知っておきたいこと
 
-<div class="grid grid-cols-2 gap-6 mt-8">
-<div v-click class="p-4 rounded-lg bg-red-900">
+<div class="space-y-4">
 
-## ⚠️ 同一ブランチは1箇所のみ
-
-同じブランチを複数の worktree で<br>
-同時にチェックアウトできない
-
+<div v-click class="flex gap-4 p-4 rounded-lg border-l-4 border-red-500 bg-gradient-to-r from-red-950/80 to-transparent">
+  <div class="text-2xl font-mono text-red-400 opacity-60">01</div>
+  <div>
+    <div class="font-bold text-red-300 mb-1">同一ブランチは1箇所のみ</div>
+    <div class="text-sm text-gray-300">同じブランチを複数worktreeで同時チェックアウト不可</div>
+  </div>
 </div>
-<div v-click class="p-4 rounded-lg bg-yellow-900">
 
-## ⚠️ サブモジュールに制限
-
-サブモジュールを含むプロジェクトでは<br>
-一部機能が制限される（実験的）
-
+<div v-click class="flex gap-4 p-4 rounded-lg border-l-4 border-yellow-500 bg-gradient-to-r from-yellow-950/80 to-transparent">
+  <div class="text-2xl font-mono text-yellow-400 opacity-60">02</div>
+  <div>
+    <div class="font-bold text-yellow-300 mb-1">サブモジュールは実験的</div>
+    <div class="text-sm text-gray-300">各worktreeで別コピー → ディスク容量増、手動初期化が必要</div>
+  </div>
 </div>
-<div v-click class="p-4 rounded-lg bg-orange-900">
 
-## ⚠️ メインは削除不可
-
-メインの worktree（最初の clone）は<br>
-削除・移動できない
-
+<div v-click class="flex gap-4 p-4 rounded-lg border-l-4 border-orange-500 bg-gradient-to-r from-orange-950/80 to-transparent">
+  <div class="text-2xl font-mono text-orange-400 opacity-60">03</div>
+  <div>
+    <div class="font-bold text-orange-300 mb-1">メインworktreeは削除不可</div>
+    <div class="text-sm text-gray-300">.gitディレクトリを持つ参照元のため、移動・削除できない</div>
+  </div>
 </div>
-<div v-click class="p-4 rounded-lg bg-purple-900">
 
-## ⚠️ .gitignore はコピーされない
-
-新しい worktree には `.gitignore` 対象の<br>
-ファイルはコピーされない（.env 等）
-
+<div v-click class="flex gap-4 p-4 rounded-lg border-l-4 border-purple-500 bg-gradient-to-r from-purple-950/80 to-transparent">
+  <div class="text-2xl font-mono text-purple-400 opacity-60">04</div>
+  <div>
+    <div class="font-bold text-purple-300 mb-1">.gitignore対象はコピーされない</div>
+    <div class="text-sm text-gray-300">.env等は手動コピーやシンボリックリンクで対応</div>
+  </div>
 </div>
+
 </div>
 
 ---
@@ -552,18 +375,13 @@ layout: center
 </div>
 
 <div v-click class="flex items-center gap-4">
-  <div class="text-3xl">📝</div>
-  <div><code>add</code>, <code>list</code>, <code>remove</code> の3つを覚えればOK</div>
+  <div class="text-3xl">🔀</div>
+  <div>stash 不要で割り込み対応がスムーズに</div>
 </div>
 
 <div v-click class="flex items-center gap-4">
-  <div class="text-3xl">🚀</div>
-  <div>緊急対応・並行開発・レビューで威力を発揮</div>
-</div>
-
-<div v-click class="flex items-center gap-4">
-  <div class="text-3xl">📁</div>
-  <div>ディレクトリ命名規則を決めておくと便利</div>
+  <div class="text-3xl">💻</div>
+  <div>VSCode 拡張機能で簡単に操作できる</div>
 </div>
 
 </div>
