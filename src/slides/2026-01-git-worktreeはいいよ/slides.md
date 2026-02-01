@@ -125,81 +125,75 @@ title: はじめに
 title: よくあるシーン
 ---
 
-<h1 class="text-center text-3xl font-bold mb-4 font-mono">
-  <span class="text-gray-500">//</span> 開発中に
-</h1>
-
-<div class="relative h-80">
-  <!-- 中心のユーザー -->
-  <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
-    <img class="h-44" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgJWP8a9vbGKmeUKbagxvtnL6XsYxKaKeQ01Vm8uiQPdkAdpUQtSGaICZO9MY5P-uzPFhJ_i6txSb8aSjOlxNEgMTJEi8bh0QkHNv8L-96G4uERtiwIEDn7F9dj8Vie7_vCLxqOIH6Qtt0B/s800/job_programmer.png" >
-  </div>
-
-  <!-- Slack風通知 -->
-  <div v-click v-motion :initial="{ opacity: 0, x: -30 }" :enter="{ opacity: 1, x: 0 }"
-       class="absolute top-4 left-12 p-2 bg-white text-gray-900 text-sm rounded shadow-xl max-w-52 transform -rotate-1">
-    <div class="flex items-center gap-2 mb-1">
-      <div class="w-6 h-6 bg-green-500 rounded-sm flex items-center justify-center text-white text-xs font-bold">S</div>
-      <span class="font-bold text-xs">Slack</span>
+<div class="h-full flex flex-col items-center justify-center">
+  <h1 class="text-3xl font-bold mb-6 font-mono">
+    <span class="text-gray-500">//</span> 開発中に
+  </h1>
+  <div class="relative w-full max-w-3xl h-72">
+    <!-- 中心のユーザー -->
+    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+      <img class="h-40" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgJWP8a9vbGKmeUKbagxvtnL6XsYxKaKeQ01Vm8uiQPdkAdpUQtSGaICZO9MY5P-uzPFhJ_i6txSb8aSjOlxNEgMTJEi8bh0QkHNv8L-96G4uERtiwIEDn7F9dj8Vie7_vCLxqOIH6Qtt0B/s800/job_programmer.png" >
     </div>
-    <div class="text-gray-700">📩 レビューお願いします！</div>
-  </div>
-
-  <!-- GitHub風通知 -->
-  <div v-click v-motion :initial="{ opacity: 0, x: 30 }" :enter="{ opacity: 1, x: 0 }"
-       class="absolute top-16 right-12 p-2 bg-gray-900 border border-gray-700 text-sm rounded max-w-52 transform rotate-1">
-    <div class="flex items-center gap-2 mb-1">
-      <logos-github-icon class="w-4 h-4" />
-      <span class="text-gray-400 text-xs">Issue #342</span>
+    <!-- Slack風通知 -->
+    <div v-click v-motion :initial="{ opacity: 0, x: -30 }" :enter="{ opacity: 1, x: 0 }"
+         class="absolute top-0 left-0 p-2 bg-white text-gray-900 text-sm rounded shadow-xl max-w-48 transform -rotate-2">
+      <div class="flex items-center gap-2 mb-1">
+        <div class="w-5 h-5 bg-green-500 rounded-sm flex items-center justify-center text-white text-xs font-bold">S</div>
+        <span class="font-bold text-xs">Slack</span>
+      </div>
+      <div class="text-gray-700 text-xs">📩 レビューお願いします！</div>
     </div>
-    <div class="text-red-400">🐛 エラー調査お願いします</div>
-  </div>
-
-  <!-- 直接の依頼 -->
-  <div v-click v-motion :initial="{ opacity: 0, scale: 0.9 }" :enter="{ opacity: 1, scale: 1 }"
-       class="absolute bottom-20 left-16 px-3 py-2 bg-blue-600 text-white text-sm rounded-full shadow-lg">
-    🚀 先にこの機能実装できる？
-  </div>
-
-  <!-- 心の声 -->
-  <div v-click v-motion :initial="{ opacity: 0, y: 20 }" :enter="{ opacity: 1, y: 0 }"
-       class="absolute bottom-4 left-1/2 -translate-x-1/2 px-4 py-2 border-2 border-dashed border-red-400 text-red-300 text-sm bg-red-950/50">
-    😅 今、いいところなんだけどな...
+    <!-- GitHub風通知 -->
+    <div v-click v-motion :initial="{ opacity: 0, x: 30 }" :enter="{ opacity: 1, x: 0 }"
+         class="absolute top-8 right-0 p-2 bg-gray-900 border border-gray-700 text-sm rounded max-w-48 transform rotate-2">
+      <div class="flex items-center gap-2 mb-1">
+        <logos-github-icon class="w-4 h-4" />
+        <span class="text-gray-400 text-xs">Issue #342</span>
+      </div>
+      <div class="text-red-400 text-xs">🐛 エラー調査お願いします</div>
+    </div>
+    <!-- 直接の依頼 -->
+    <div v-click v-motion :initial="{ opacity: 0, scale: 0.9 }" :enter="{ opacity: 1, scale: 1 }"
+         class="absolute bottom-12 left-0 px-3 py-1.5 bg-blue-600 text-white text-xs rounded-full shadow-lg">
+      🚀 先にこの機能実装できる？
+    </div>
+    <!-- 心の声 -->
+    <div v-click v-motion :initial="{ opacity: 0, y: 20 }" :enter="{ opacity: 1, y: 0 }"
+         class="absolute bottom-0 left-1/2 -translate-x-1/2 px-3 py-1.5 border-2 border-dashed border-red-400 text-red-300 text-xs bg-red-950/50">
+      😅 今、いいところなんだけどな...
+    </div>
   </div>
 </div>
 ---
 
-<h1 class="text-center text-3xl font-bold mb-4 font-mono">
-  <span class="text-gray-500">//</span> 切り替え中に
-</h1>
-
-<div class="relative h-80">
-  <!-- 中心のユーザー -->
-  <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
-    <img class="h-44" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgJWP8a9vbGKmeUKbagxvtnL6XsYxKaKeQ01Vm8uiQPdkAdpUQtSGaICZO9MY5P-uzPFhJ_i6txSb8aSjOlxNEgMTJEi8bh0QkHNv8L-96G4uERtiwIEDn7F9dj8Vie7_vCLxqOIH6Qtt0B/s800/job_programmer.png" >
-  </div>
-
-  <!-- ターミナルエラー -->
-  <div v-click v-motion :initial="{ opacity: 0, y: -10 }" :enter="{ opacity: 1, y: 0 }"
-       class="absolute top-4 left-12 font-mono text-sm bg-gray-950 border border-red-800 p-3 rounded max-w-64">
-    <div class="text-red-400">error: Your local changes would be overwritten</div>
-    <div class="text-gray-500 text-xs mt-1">Please commit or stash them.</div>
-  </div>
-
-  <!-- コマンド実行 -->
-  <div v-click v-motion :initial="{ opacity: 0 }" :enter="{ opacity: 1 }"
-       class="absolute top-24 right-12 font-mono text-sm">
-    <span class="text-green-400">$</span> <span class="text-cyan-300">git stash</span>
-  </div>
-
-  <!-- 成功メッセージ -->
-  <div v-click v-motion :initial="{ opacity: 0 }" :enter="{ opacity: 1 }"
-       class="absolute bottom-16 left-16 font-mono text-sm bg-gray-950 border border-green-800 p-3 rounded">
-    <div class="text-green-400">✓ Switched to branch 'feature/review'</div>
+<div class="h-full flex flex-col items-center justify-center">
+  <h1 class="text-3xl font-bold mb-6 font-mono">
+    <span class="text-gray-500">//</span> 切り替え中に
+  </h1>
+  <div class="relative w-full max-w-3xl h-72">
+    <!-- 中心のユーザー -->
+    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+      <img class="h-40" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgJWP8a9vbGKmeUKbagxvtnL6XsYxKaKeQ01Vm8uiQPdkAdpUQtSGaICZO9MY5P-uzPFhJ_i6txSb8aSjOlxNEgMTJEi8bh0QkHNv8L-96G4uERtiwIEDn7F9dj8Vie7_vCLxqOIH6Qtt0B/s800/job_programmer.png" >
+    </div>
+    <!-- ターミナルエラー -->
+    <div v-click v-motion :initial="{ opacity: 0, y: -10 }" :enter="{ opacity: 1, y: 0 }"
+         class="absolute top-0 left-0 font-mono text-xs bg-gray-950 border border-red-800 p-2 rounded max-w-56">
+      <div class="text-red-400">error: Your local changes would be overwritten</div>
+      <div class="text-gray-500 text-xs mt-1">Please commit or stash them.</div>
+    </div>
+    <!-- コマンド実行 -->
+    <div v-click v-motion :initial="{ opacity: 0 }" :enter="{ opacity: 1 }"
+         class="absolute top-16 right-0 font-mono text-sm">
+      <span class="text-green-400">$</span> <span class="text-cyan-300">git stash</span>
+    </div>
+    <!-- 成功メッセージ -->
+    <div v-click v-motion :initial="{ opacity: 0 }" :enter="{ opacity: 1 }"
+         class="absolute bottom-4 left-0 font-mono text-xs bg-gray-950 border border-green-800 p-2 rounded">
+      <div class="text-green-400">✓ Switched to branch 'feature/review'</div>
+    </div>
   </div>
 </div>
 
----
 ---
 
 <div class="h-full flex items-center justify-center">
@@ -215,34 +209,32 @@ title: よくあるシーン
 
 ---
 
-<h1 class="text-center text-3xl font-bold mb-4 font-mono">
-  <span class="text-gray-500">//</span> 戻ってきたら
-</h1>
-
-<div class="relative h-80">
-  <!-- 中心のユーザー -->
-  <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
-    <img class="h-44" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgJWP8a9vbGKmeUKbagxvtnL6XsYxKaKeQ01Vm8uiQPdkAdpUQtSGaICZO9MY5P-uzPFhJ_i6txSb8aSjOlxNEgMTJEi8bh0QkHNv8L-96G4uERtiwIEDn7F9dj8Vie7_vCLxqOIH6Qtt0B/s800/job_programmer.png" >
-  </div>
-
-  <!-- コマンド1 -->
-  <div v-click v-motion :initial="{ opacity: 0 }" :enter="{ opacity: 1 }"
-       class="absolute top-8 left-12 font-mono text-sm">
-    <span class="text-green-400">$</span> git checkout main
-  </div>
-
-  <!-- コマンド2 -->
-  <div v-click v-motion :initial="{ opacity: 0 }" :enter="{ opacity: 1 }"
-       class="absolute top-20 right-16 font-mono text-sm">
-    <span class="text-green-400">$</span> git stash pop
-  </div>
-
-  <!-- npm install の悲劇 -->
-  <div v-click v-motion :initial="{ opacity: 0, scale: 0.9 }" :enter="{ opacity: 1, scale: 1 }"
-       class="absolute bottom-8 left-1/2 -translate-x-1/2 font-mono text-sm bg-gray-950 border border-red-800 p-4 rounded max-w-md">
-    <div class="text-orange-400 mb-1">$ npm install</div>
-    <div class="text-gray-500 text-xs">added 847 packages in 2m 34s</div>
-    <div class="text-red-400 mt-2 text-xs">😫 依存変わってたからやり直し...</div>
+<div class="h-full flex flex-col items-center justify-center">
+  <h1 class="text-3xl font-bold mb-6 font-mono">
+    <span class="text-gray-500">//</span> 戻ってきたら
+  </h1>
+  <div class="relative w-full max-w-3xl h-72">
+    <!-- 中心のユーザー -->
+    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+      <img class="h-40" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgJWP8a9vbGKmeUKbagxvtnL6XsYxKaKeQ01Vm8uiQPdkAdpUQtSGaICZO9MY5P-uzPFhJ_i6txSb8aSjOlxNEgMTJEi8bh0QkHNv8L-96G4uERtiwIEDn7F9dj8Vie7_vCLxqOIH6Qtt0B/s800/job_programmer.png" >
+    </div>
+    <!-- コマンド1 -->
+    <div v-click v-motion :initial="{ opacity: 0 }" :enter="{ opacity: 1 }"
+         class="absolute top-4 left-0 font-mono text-sm">
+      <span class="text-green-400">$</span> git checkout main
+    </div>
+    <!-- コマンド2 -->
+    <div v-click v-motion :initial="{ opacity: 0 }" :enter="{ opacity: 1 }"
+         class="absolute top-12 right-0 font-mono text-sm">
+      <span class="text-green-400">$</span> git stash pop
+    </div>
+    <!-- npm install の悲劇 -->
+    <div v-click v-motion :initial="{ opacity: 0, scale: 0.9 }" :enter="{ opacity: 1, scale: 1 }"
+         class="absolute bottom-0 left-1/2 -translate-x-1/2 font-mono text-xs bg-gray-950 border border-red-800 p-3 rounded max-w-xs">
+      <div class="text-orange-400 mb-1">$ npm install</div>
+      <div class="text-gray-500 text-xs">added 847 packages in 2m 34s</div>
+      <div class="text-red-400 mt-1 text-xs">😫 依存変わってたからやり直し...</div>
+    </div>
   </div>
 </div>
 
@@ -443,44 +435,39 @@ title: Demo
 title: 注意点
 ---
 
-<div class="h-full flex flex-col justify-center px-12">
-  <h1 class="text-3xl font-bold mb-6 flex items-center gap-3">
-    <span class="text-yellow-500">⚠</span>
-    <span>注意点</span>
-    <span class="text-sm font-normal text-gray-500 ml-2">// 便利だけど知っておきたい</span>
-  </h1>
-
-<div class="grid grid-cols-2 gap-4">
-
-<div v-click v-motion :initial="{ opacity: 0, rotate: -3 }" :enter="{ opacity: 1, rotate: -1 }"
-     class="p-4 bg-red-950/60 border border-red-800/50 shadow-lg transform -rotate-1">
-  <div class="text-xs text-red-400 font-mono mb-2">// IMPORTANT</div>
-  <div class="font-bold text-red-200 mb-1">同一ブランチは1箇所のみ</div>
-  <div class="text-sm text-gray-400">複数worktreeで同時チェックアウト不可</div>
-</div>
-
-<div v-click v-motion :initial="{ opacity: 0, rotate: 3 }" :enter="{ opacity: 1, rotate: 1 }"
-     class="p-4 bg-yellow-950/60 border border-yellow-800/50 shadow-lg transform rotate-1">
-  <div class="text-xs text-yellow-400 font-mono mb-2">// EXPERIMENTAL</div>
-  <div class="font-bold text-yellow-200 mb-1">サブモジュールは実験的</div>
-  <div class="text-sm text-gray-400">手動初期化が必要</div>
-</div>
-
-<div v-click v-motion :initial="{ opacity: 0, rotate: -2 }" :enter="{ opacity: 1, rotate: -0.5 }"
-     class="p-4 bg-orange-950/60 border border-orange-800/50 shadow-lg transform -rotate-0.5">
-  <div class="text-xs text-orange-400 font-mono mb-2">// READONLY</div>
-  <div class="font-bold text-orange-200 mb-1">メインworktreeは削除不可</div>
-  <div class="text-sm text-gray-400">.gitディレクトリの参照元</div>
-</div>
-
-<div v-click v-motion :initial="{ opacity: 0, rotate: 2 }" :enter="{ opacity: 1, rotate: 0.5 }"
-     class="p-4 bg-purple-950/60 border border-purple-800/50 shadow-lg transform rotate-0.5">
-  <div class="text-xs text-purple-400 font-mono mb-2">// MANUAL</div>
-  <div class="font-bold text-purple-200 mb-1">.gitignore対象はコピーされない</div>
-  <div class="text-sm text-gray-400">.env等は手動で対応</div>
-</div>
-
-</div>
+<div class="h-full flex items-center justify-center px-12">
+  <div class="w-full max-w-4xl">
+    <Terminal title="~/repos/git-worktree-demo">
+      <TerminalPrompt path="~/repos" command="slide --caution" class="text-sm text-gray-500 mb-4" />
+      <div class="text-xl text-yellow-400 mb-6"># ⚠ 注意点 <span class="text-gray-500 text-sm">// 便利だけど知っておきたい</span></div>
+      <div class="grid grid-cols-2 gap-3">
+        <div v-click v-motion :initial="{ opacity: 0, x: -10 }" :enter="{ opacity: 1, x: 0 }"
+             class="p-3 border-l-2 border-red-500 bg-red-950/30">
+          <div class="text-xs text-red-400 mb-1">// IMPORTANT</div>
+          <div class="font-bold text-red-200 text-sm mb-1">同一ブランチは1箇所のみ</div>
+          <div class="text-xs text-gray-500">複数worktreeで同時チェックアウト不可</div>
+        </div>
+        <div v-click v-motion :initial="{ opacity: 0, x: -10 }" :enter="{ opacity: 1, x: 0, delay: 100 }"
+             class="p-3 border-l-2 border-yellow-500 bg-yellow-950/30">
+          <div class="text-xs text-yellow-400 mb-1">// EXPERIMENTAL</div>
+          <div class="font-bold text-yellow-200 text-sm mb-1">サブモジュールは実験的</div>
+          <div class="text-xs text-gray-500">手動初期化が必要</div>
+        </div>
+        <div v-click v-motion :initial="{ opacity: 0, x: -10 }" :enter="{ opacity: 1, x: 0, delay: 200 }"
+             class="p-3 border-l-2 border-orange-500 bg-orange-950/30">
+          <div class="text-xs text-orange-400 mb-1">// READONLY</div>
+          <div class="font-bold text-orange-200 text-sm mb-1">メインworktreeは削除不可</div>
+          <div class="text-xs text-gray-500">.gitディレクトリの参照元</div>
+        </div>
+        <div v-click v-motion :initial="{ opacity: 0, x: -10 }" :enter="{ opacity: 1, x: 0, delay: 300 }"
+             class="p-3 border-l-2 border-purple-500 bg-purple-950/30">
+          <div class="text-xs text-purple-400 mb-1">// MANUAL</div>
+          <div class="font-bold text-purple-200 text-sm mb-1">.gitignore対象はコピーされない</div>
+          <div class="text-xs text-gray-500">.env等は手動で対応</div>
+        </div>
+      </div>
+    </Terminal>
+  </div>
 </div>
 
 ---
