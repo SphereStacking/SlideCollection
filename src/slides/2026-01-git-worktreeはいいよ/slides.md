@@ -79,7 +79,7 @@ hideInToc: true
 <div class="h-full flex items-center justify-center">
   <div class="w-full max-w-xl">
     <Terminal title="~/repos/git-worktree-demo">
-      <TerminalPrompt path="~/repos" command="cat AGENDA.md" class="text-sm text-gray-500 mb-4" />
+      <TerminalPrompt path="~/repos" command="slide --agenda" class="text-sm text-gray-500 mb-4" />
       <div class="text-xl text-gray-400 mb-4"># 今日の流れ</div>
       <Toc maxDepth="1" class="space-y-2 text-lg" />
     </Terminal>
