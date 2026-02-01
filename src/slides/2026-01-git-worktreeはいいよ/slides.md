@@ -23,20 +23,8 @@ meta:
 ---
 
 <div class="h-full w-full flex items-center justify-center p-8">
-  <!-- ターミナルウィンドウ -->
-  <div v-motion :initial="{ opacity: 0, y: 30 }" :enter="{ opacity: 1, y: 0 }"
-       class="w-full max-w-3xl">
-    <!-- ウィンドウヘッダー -->
-    <div class="flex items-center gap-2 px-4 py-3 bg-gray-800 rounded-t-lg border-b border-gray-700">
-      <div class="flex gap-2">
-        <div class="w-3 h-3 rounded-full bg-red-500"></div>
-        <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
-        <div class="w-3 h-3 rounded-full bg-green-500"></div>
-      </div>
-      <div class="flex-1 text-center text-sm text-gray-500 font-mono">~/repos/project</div>
-    </div>
-    <!-- ターミナル本体 -->
-    <div class="bg-gray-950 p-6 rounded-b-lg font-mono border-x border-b border-gray-800">
+  <div v-motion :initial="{ opacity: 0, y: 30 }" :enter="{ opacity: 1, y: 0 }" class="w-full max-w-3xl">
+    <Terminal title="~/repos/project" size="lg">
       <div v-motion :initial="{ opacity: 0 }" :enter="{ opacity: 1, delay: 300 }"
            class="text-gray-500 text-sm mb-4">
         <span class="text-green-400">sphere@dev</span>:<span class="text-blue-400">~/repos</span>$
@@ -57,7 +45,7 @@ meta:
            class="mt-4 text-gray-500 text-sm">
         <span class="text-green-400">sphere@dev</span>:<span class="text-blue-400">~/repos</span>$ <span class="animate-pulse">▋</span>
       </div>
-    </div>
+    </Terminal>
   </div>
 </div>
 
@@ -67,17 +55,7 @@ hideInToc: true
 
 <div class="h-full flex items-center justify-center">
   <div class="w-full max-w-2xl">
-    <!-- ターミナルヘッダー -->
-    <div class="flex items-center gap-2 px-4 py-2 bg-gray-800 rounded-t-lg">
-      <div class="flex gap-1.5">
-        <div class="w-2.5 h-2.5 rounded-full bg-red-500"></div>
-        <div class="w-2.5 h-2.5 rounded-full bg-yellow-500"></div>
-        <div class="w-2.5 h-2.5 rounded-full bg-green-500"></div>
-      </div>
-      <div class="flex-1 text-center text-xs text-gray-500 font-mono">~</div>
-    </div>
-    <!-- ターミナル本体 -->
-    <div class="bg-gray-950 p-6 rounded-b-lg font-mono text-sm border-x border-b border-gray-800">
+    <Terminal title="~" size="sm">
       <div class="mb-4">
         <div><span class="text-green-400">sphere@dev</span>:<span class="text-blue-400">~</span>$ sphere --name</div>
         <div class="text-white pl-4">Sphere <span class="text-gray-500">(まんまる / まる)</span></div>
@@ -94,7 +72,7 @@ hideInToc: true
         <div class="pl-4"><span class="text-cyan-400">Portfolio:</span>  <a href="https://spherestacking.com" class="text-blue-400 hover:underline">spherestacking.com</a></div>
       </div>
       <div><span class="text-green-400">sphere@dev</span>:<span class="text-blue-400">~</span>$ <span class="animate-pulse">▋</span></div>
-    </div>
+    </Terminal>
   </div>
 </div>
 
@@ -104,23 +82,13 @@ hideInToc: true
 
 <div class="h-full flex items-center justify-center">
   <div class="w-full max-w-xl">
-    <!-- ターミナルヘッダー -->
-    <div class="flex items-center gap-2 px-4 py-2 bg-gray-800 rounded-t-lg">
-      <div class="flex gap-1.5">
-        <div class="w-2.5 h-2.5 rounded-full bg-red-500"></div>
-        <div class="w-2.5 h-2.5 rounded-full bg-yellow-500"></div>
-        <div class="w-2.5 h-2.5 rounded-full bg-green-500"></div>
-      </div>
-      <div class="flex-1 text-center text-xs text-gray-500 font-mono">~/repos/git-worktree-demo</div>
-    </div>
-    <!-- ターミナル本体 -->
-    <div class="bg-gray-950 p-6 rounded-b-lg font-mono border-x border-b border-gray-800">
+    <Terminal title="~/repos/git-worktree-demo">
       <div class="text-sm text-gray-500 mb-4">
         <span class="text-green-400">sphere@dev</span>:<span class="text-blue-400">~/repos</span>$ cat AGENDA.md
       </div>
       <div class="text-xl text-gray-400 mb-4"># 今日の流れ</div>
       <Toc maxDepth="1" class="space-y-2 text-lg" />
-    </div>
+    </Terminal>
   </div>
 </div>
 
@@ -343,17 +311,7 @@ title: Git Worktree とは
 
 <div class="h-full flex items-center justify-center px-8">
   <div class="w-full max-w-5xl">
-    <!-- ターミナルヘッダー -->
-    <div class="flex items-center gap-2 px-4 py-2 bg-gray-800 rounded-t-lg">
-      <div class="flex gap-1.5">
-        <div class="w-2.5 h-2.5 rounded-full bg-red-500"></div>
-        <div class="w-2.5 h-2.5 rounded-full bg-yellow-500"></div>
-        <div class="w-2.5 h-2.5 rounded-full bg-green-500"></div>
-      </div>
-      <div class="flex-1 text-center text-xs text-gray-500 font-mono">~/repos</div>
-    </div>
-    <!-- ターミナル本体 -->
-    <div class="bg-gray-950 p-6 rounded-b-lg font-mono border-x border-b border-gray-800">
+    <Terminal title="~/repos">
       <div class="text-sm text-gray-500 mb-4">
         <span class="text-green-400">sphere@dev</span>:<span class="text-blue-400">~/repos</span>$ diff -u 通常のgit git-worktree
       </div>
@@ -388,7 +346,7 @@ title: Git Worktree とは
           </div>
         </div>
       </div>
-    </div>
+    </Terminal>
   </div>
 </div>
 
@@ -398,17 +356,7 @@ title: コマンド早見表
 
 <div class="flex items-center justify-center h-full">
   <div class="w-full max-w-4xl">
-    <!-- ターミナルヘッダー -->
-    <div class="flex items-center gap-2 px-4 py-2 bg-gray-800 rounded-t-lg">
-      <div class="flex gap-1.5">
-        <div class="w-2.5 h-2.5 rounded-full bg-red-500"></div>
-        <div class="w-2.5 h-2.5 rounded-full bg-yellow-500"></div>
-        <div class="w-2.5 h-2.5 rounded-full bg-green-500"></div>
-      </div>
-      <div class="flex-1 text-center text-xs text-gray-500 font-mono">~/repos</div>
-    </div>
-    <!-- コンテンツ -->
-    <div class="bg-gray-950 p-5 rounded-b-lg font-mono text-sm border-x border-b border-gray-800">
+    <Terminal title="~/repos" size="sm">
       <div class="mb-3">
         <span class="text-green-400">sphere@dev</span>:<span class="text-blue-400">~/repos</span>$ man git-worktree
       </div>
@@ -424,7 +372,7 @@ title: コマンド早見表
         <div class="flex"><span class="text-cyan-400 w-72">git worktree repair</span><span class="text-gray-500">リンク修復</span></div>
       </div>
       <div class="mt-4 text-gray-600 text-xs">Press q to quit, h for help</div>
-    </div>
+    </Terminal>
   </div>
 </div>
 
