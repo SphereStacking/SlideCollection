@@ -122,6 +122,8 @@ hideInToc: true
 </div>
 
 ---
+title: はじめに
+---
 
 <div class="h-full flex flex-col justify-center px-16">
   <h1 class="text-4xl font-bold mb-10 font-mono">
@@ -152,6 +154,8 @@ hideInToc: true
 </div>
 
 
+---
+title: よくあるシーン
 ---
 
 <h1 class="text-center text-3xl font-bold mb-4 font-mono">
@@ -293,6 +297,8 @@ hideInToc: true
 </div>
 
 ---
+title: Git Worktree とは
+---
 
 <div class="h-full flex flex-col justify-center px-16">
   <h1 class="text-5xl font-bold mb-10">
@@ -381,6 +387,8 @@ hideInToc: true
 </div>
 
 ---
+title: コマンド早見表
+---
 
 <div class="flex items-center justify-center h-full">
   <div class="w-full max-w-4xl">
@@ -432,6 +440,8 @@ hideInToc: true
 </div>
 
 ---
+title: VSCode 拡張機能
+---
 
 <div class="h-full flex items-center px-16">
   <div class="flex gap-12 items-center">
@@ -462,6 +472,8 @@ hideInToc: true
 </div>
 
 ---
+title: Demo
+---
 
 <div class="h-full flex items-center justify-center">
   <div class="text-center">
@@ -476,6 +488,8 @@ hideInToc: true
   </div>
 </div>
 
+---
+title: 注意点
 ---
 
 <div class="px-12">
@@ -518,6 +532,8 @@ hideInToc: true
 </div>
 </div>
 
+---
+title: まとめ
 ---
 
 <div class="h-full flex flex-col justify-center px-16">
