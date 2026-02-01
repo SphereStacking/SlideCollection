@@ -103,11 +103,18 @@ hideInToc: true
 ---
 
 <div class="h-full flex items-center justify-center">
-  <div class="font-mono text-left">
-    <div class="text-gray-500 mb-4">
-      <span class="text-green-400">$</span> cat AGENDA.md
+  <div class="w-full max-w-xl">
+    <!-- ターミナルヘッダー -->
+    <div class="flex items-center gap-2 px-4 py-2 bg-gray-800 rounded-t-lg">
+      <div class="flex gap-1.5">
+        <div class="w-2.5 h-2.5 rounded-full bg-red-500"></div>
+        <div class="w-2.5 h-2.5 rounded-full bg-yellow-500"></div>
+        <div class="w-2.5 h-2.5 rounded-full bg-green-500"></div>
+      </div>
+      <div class="flex-1 text-center text-xs text-gray-500 font-mono">cat AGENDA.md</div>
     </div>
-    <div class="border border-dashed border-gray-700 p-6 bg-gray-900/50">
+    <!-- ターミナル本体 -->
+    <div class="bg-gray-950 p-6 rounded-b-lg font-mono border-x border-b border-gray-800">
       <div class="text-xl text-gray-400 mb-4"># 今日の流れ</div>
       <Toc maxDepth="1" class="space-y-2 text-lg" />
     </div>
@@ -261,7 +268,7 @@ hideInToc: true
 
   <!-- npm install の悲劇 -->
   <div v-click v-motion :initial="{ opacity: 0, scale: 0.9 }" :enter="{ opacity: 1, scale: 1 }"
-       class="absolute bottom-8 left-1/2 -translate-x-1/2 font-mono text-sm bg-gray-950 border-2 border-red-600 p-4 rounded max-w-md">
+       class="absolute bottom-8 left-1/2 -translate-x-1/2 font-mono text-sm bg-gray-950 border border-red-800 p-4 rounded max-w-md">
     <div class="text-orange-400 mb-1">$ npm install</div>
     <div class="text-gray-500 text-xs">added 847 packages in 2m 34s</div>
     <div class="text-red-400 mt-2 text-xs">😫 依存変わってたからやり直し...</div>
@@ -325,39 +332,49 @@ hideInToc: true
 
 ---
 
-<div class="px-12">
-  <h1 class="text-3xl font-bold mb-8 font-mono">
-    <span class="text-gray-500">diff</span> --git <span class="text-red-400">a/通常</span> <span class="text-green-400">b/worktree</span>
-  </h1>
-
-  <div class="grid grid-cols-2 gap-12">
-    <!-- 通常 -->
-    <div v-click>
-      <div class="font-mono text-sm mb-4 text-gray-500">// 通常のgit</div>
-      <div class="font-mono text-sm bg-gray-950 p-4 border border-gray-800">
-        <div class="text-gray-500">reps/</div>
-        <div class="text-gray-400">├── project_A/</div>
-        <div class="text-gray-400">└── project_B/</div>
+<div class="h-full flex items-center justify-center px-8">
+  <div class="w-full max-w-5xl">
+    <!-- ターミナルヘッダー -->
+    <div class="flex items-center gap-2 px-4 py-2 bg-gray-800 rounded-t-lg">
+      <div class="flex gap-1.5">
+        <div class="w-2.5 h-2.5 rounded-full bg-red-500"></div>
+        <div class="w-2.5 h-2.5 rounded-full bg-yellow-500"></div>
+        <div class="w-2.5 h-2.5 rounded-full bg-green-500"></div>
       </div>
-      <div class="mt-4 text-sm space-y-2">
-        <div class="text-gray-400">• 1リポジトリ = 1ディレクトリ</div>
-        <div class="text-red-400">• checkout時は stash 必須</div>
-      </div>
+      <div class="flex-1 text-center text-xs text-gray-500 font-mono">diff --git a/通常 b/worktree</div>
     </div>
-    <!-- Worktree -->
-    <div v-click>
-      <div class="font-mono text-sm mb-4 text-green-500">// git worktree</div>
-      <div class="font-mono text-sm bg-gray-950 p-4 border-2 border-green-800">
-        <div class="text-gray-500">reps/</div>
-        <div class="text-gray-400">└── project_A/</div>
-        <div class="text-green-400 pl-6">├── main/</div>
-        <div class="text-green-400 pl-6">├── pr-2345/</div>
-        <div class="text-green-400 pl-6">└── fix-2347/</div>
-      </div>
-      <div class="mt-4 text-sm space-y-2">
-        <div class="text-green-400">✓ 1リポジトリ = N個のディレクトリ</div>
-        <div class="text-green-400">✓ 同時に複数ブランチ展開</div>
-        <div class="text-green-400">✓ cd だけで切り替え</div>
+    <!-- ターミナル本体 -->
+    <div class="bg-gray-950 p-6 rounded-b-lg font-mono border-x border-b border-gray-800">
+      <div class="grid grid-cols-2 gap-8">
+        <!-- 通常 -->
+        <div v-click>
+          <div class="text-sm mb-3 text-red-400">--- a/通常のgit</div>
+          <div class="text-sm bg-red-950/30 p-4 border-l-2 border-red-500">
+            <div class="text-gray-500">reps/</div>
+            <div class="text-gray-400">├── project_A/</div>
+            <div class="text-gray-400">└── project_B/</div>
+          </div>
+          <div class="mt-4 text-sm space-y-1">
+            <div class="text-gray-500">• 1リポジトリ = 1ディレクトリ</div>
+            <div class="text-red-400">• checkout時は stash 必須</div>
+          </div>
+        </div>
+        <!-- Worktree -->
+        <div v-click>
+          <div class="text-sm mb-3 text-green-400">+++ b/git worktree</div>
+          <div class="text-sm bg-green-950/30 p-4 border-l-2 border-green-500">
+            <div class="text-gray-500">reps/</div>
+            <div class="text-gray-400">└── project_A/</div>
+            <div class="text-green-400 pl-6">├── main/</div>
+            <div class="text-green-400 pl-6">├── pr-2345/</div>
+            <div class="text-green-400 pl-6">└── fix-2347/</div>
+          </div>
+          <div class="mt-4 text-sm space-y-1">
+            <div class="text-green-400">+ 1リポジトリ = N個のディレクトリ</div>
+            <div class="text-green-400">+ 同時に複数ブランチ展開</div>
+            <div class="text-green-400">+ cd だけで切り替え</div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
