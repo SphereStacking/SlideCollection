@@ -3,7 +3,7 @@ theme: seriph
 title: Git Worktree の使い方と活用法について
 info: |
   Git Worktree の使い方と活用法について
-transition: slide-up
+transition: view-transition
 layout: intro
 hideInToc: true
 colorSchema: dark
@@ -132,7 +132,7 @@ title: よくあるシーン
   <div class="relative w-full max-w-3xl h-72">
     <!-- 中心のユーザー -->
     <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
-      <img class="h-40" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgJWP8a9vbGKmeUKbagxvtnL6XsYxKaKeQ01Vm8uiQPdkAdpUQtSGaICZO9MY5P-uzPFhJ_i6txSb8aSjOlxNEgMTJEi8bh0QkHNv8L-96G4uERtiwIEDn7F9dj8Vie7_vCLxqOIH6Qtt0B/s800/job_programmer.png" >
+      <img class="h-40" style="view-transition-name: developer" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgJWP8a9vbGKmeUKbagxvtnL6XsYxKaKeQ01Vm8uiQPdkAdpUQtSGaICZO9MY5P-uzPFhJ_i6txSb8aSjOlxNEgMTJEi8bh0QkHNv8L-96G4uERtiwIEDn7F9dj8Vie7_vCLxqOIH6Qtt0B/s800/job_programmer.png" >
     </div>
     <!-- Slack風通知 -->
     <div v-click v-motion :initial="{ opacity: 0, x: -30 }" :enter="{ opacity: 1, x: 0 }"
@@ -173,7 +173,7 @@ title: よくあるシーン
   <div class="relative w-full max-w-3xl h-72">
     <!-- 中心のユーザー -->
     <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
-      <img class="h-40" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgJWP8a9vbGKmeUKbagxvtnL6XsYxKaKeQ01Vm8uiQPdkAdpUQtSGaICZO9MY5P-uzPFhJ_i6txSb8aSjOlxNEgMTJEi8bh0QkHNv8L-96G4uERtiwIEDn7F9dj8Vie7_vCLxqOIH6Qtt0B/s800/job_programmer.png" >
+      <img class="h-40" style="view-transition-name: developer" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgJWP8a9vbGKmeUKbagxvtnL6XsYxKaKeQ01Vm8uiQPdkAdpUQtSGaICZO9MY5P-uzPFhJ_i6txSb8aSjOlxNEgMTJEi8bh0QkHNv8L-96G4uERtiwIEDn7F9dj8Vie7_vCLxqOIH6Qtt0B/s800/job_programmer.png" >
     </div>
     <!-- ターミナルエラー -->
     <div v-click v-motion :initial="{ opacity: 0, y: -10 }" :enter="{ opacity: 1, y: 0 }"
@@ -196,14 +196,15 @@ title: よくあるシーン
 
 ---
 
-<div class="h-full flex items-center justify-center">
-  <div class="text-center font-mono">
-    <div v-motion :initial="{ opacity: 0 }" :enter="{ opacity: 1 }"
-         class="text-gray-500 mb-4">$ vim feature.ts</div>
-    <div v-motion :initial="{ opacity: 0 }" :enter="{ opacity: 1, delay: 300 }"
-         class="text-6xl mb-4 text-green-400 font-bold tracking-tighter">...作業中...</div>
-    <div v-motion :initial="{ opacity: 0 }" :enter="{ opacity: 1, delay: 600 }"
-         class="text-gray-600 animate-pulse">█</div>
+<div class="h-full flex flex-col items-center justify-center">
+  <h1 class="text-3xl font-bold mb-6 font-mono">
+    <span class="text-gray-500">//</span> 作業中して...
+  </h1>
+  <div class="relative w-full max-w-3xl h-72">
+    <!-- 中心のユーザー -->
+    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+      <img class="h-40" style="view-transition-name: developer" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgJWP8a9vbGKmeUKbagxvtnL6XsYxKaKeQ01Vm8uiQPdkAdpUQtSGaICZO9MY5P-uzPFhJ_i6txSb8aSjOlxNEgMTJEi8bh0QkHNv8L-96G4uERtiwIEDn7F9dj8Vie7_vCLxqOIH6Qtt0B/s800/job_programmer.png" >
+    </div>
   </div>
 </div>
 
@@ -216,7 +217,7 @@ title: よくあるシーン
   <div class="relative w-full max-w-3xl h-72">
     <!-- 中心のユーザー -->
     <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
-      <img class="h-40" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgJWP8a9vbGKmeUKbagxvtnL6XsYxKaKeQ01Vm8uiQPdkAdpUQtSGaICZO9MY5P-uzPFhJ_i6txSb8aSjOlxNEgMTJEi8bh0QkHNv8L-96G4uERtiwIEDn7F9dj8Vie7_vCLxqOIH6Qtt0B/s800/job_programmer.png" >
+      <img class="h-40" style="view-transition-name: developer" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgJWP8a9vbGKmeUKbagxvtnL6XsYxKaKeQ01Vm8uiQPdkAdpUQtSGaICZO9MY5P-uzPFhJ_i6txSb8aSjOlxNEgMTJEi8bh0QkHNv8L-96G4uERtiwIEDn7F9dj8Vie7_vCLxqOIH6Qtt0B/s800/job_programmer.png" >
     </div>
     <!-- コマンド1 -->
     <div v-click v-motion :initial="{ opacity: 0 }" :enter="{ opacity: 1 }"
