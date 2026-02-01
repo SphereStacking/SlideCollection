@@ -74,26 +74,26 @@ hideInToc: true
         <div class="w-2.5 h-2.5 rounded-full bg-yellow-500"></div>
         <div class="w-2.5 h-2.5 rounded-full bg-green-500"></div>
       </div>
-      <div class="flex-1 text-center text-xs text-gray-500 font-mono">whoami</div>
+      <div class="flex-1 text-center text-xs text-gray-500 font-mono">~</div>
     </div>
     <!-- ターミナル本体 -->
     <div class="bg-gray-950 p-6 rounded-b-lg font-mono text-sm border-x border-b border-gray-800">
       <div class="mb-4">
-        <div class="text-gray-500">$ sphere --name</div>
-        <div class="text-white">Sphere <span class="text-gray-500">(まんまる / まる)</span></div>
+        <div><span class="text-green-400">sphere@dev</span>:<span class="text-blue-400">~</span>$ sphere --name</div>
+        <div class="text-white pl-4">Sphere <span class="text-gray-500">(まんまる / まる)</span></div>
       </div>
       <div class="mb-4">
-        <div class="text-gray-500">$ sphere --info</div>
-        <div><span class="text-cyan-400">Role:</span>      Frontend Engineer</div>
-        <div><span class="text-cyan-400">Favorite:</span>  <span class="text-green-400">Vue.js</span> 💚</div>
+        <div><span class="text-green-400">sphere@dev</span>:<span class="text-blue-400">~</span>$ sphere --info</div>
+        <div class="pl-4"><span class="text-cyan-400">Role:</span>      Frontend Engineer</div>
+        <div class="pl-4"><span class="text-cyan-400">Favorite:</span>  <span class="text-green-400">Vue.js</span> 💚</div>
       </div>
-      <div>
-        <div class="text-gray-500">$ sphere --links</div>
-        <div><span class="text-cyan-400">GitHub:</span>     <a href="https://github.com/SphereStacking" class="text-blue-400 hover:underline">github.com/SphereStacking</a></div>
-        <div><span class="text-cyan-400">X:</span>          <a href="https://x.com/SphereStacking" class="text-blue-400 hover:underline">x.com/SphereStacking</a></div>
-        <div><span class="text-cyan-400">Portfolio:</span>  <a href="https://spherestacking.com" class="text-blue-400 hover:underline">spherestacking.com</a></div>
+      <div class="mb-4">
+        <div><span class="text-green-400">sphere@dev</span>:<span class="text-blue-400">~</span>$ sphere --links</div>
+        <div class="pl-4"><span class="text-cyan-400">GitHub:</span>     <a href="https://github.com/SphereStacking" class="text-blue-400 hover:underline">github.com/SphereStacking</a></div>
+        <div class="pl-4"><span class="text-cyan-400">X:</span>          <a href="https://x.com/SphereStacking" class="text-blue-400 hover:underline">x.com/SphereStacking</a></div>
+        <div class="pl-4"><span class="text-cyan-400">Portfolio:</span>  <a href="https://spherestacking.com" class="text-blue-400 hover:underline">spherestacking.com</a></div>
       </div>
-      <div class="mt-4 text-gray-600">$ <span class="animate-pulse">▋</span></div>
+      <div><span class="text-green-400">sphere@dev</span>:<span class="text-blue-400">~</span>$ <span class="animate-pulse">▋</span></div>
     </div>
   </div>
 </div>
@@ -111,10 +111,13 @@ hideInToc: true
         <div class="w-2.5 h-2.5 rounded-full bg-yellow-500"></div>
         <div class="w-2.5 h-2.5 rounded-full bg-green-500"></div>
       </div>
-      <div class="flex-1 text-center text-xs text-gray-500 font-mono">cat AGENDA.md</div>
+      <div class="flex-1 text-center text-xs text-gray-500 font-mono">~/repos/git-worktree-demo</div>
     </div>
     <!-- ターミナル本体 -->
     <div class="bg-gray-950 p-6 rounded-b-lg font-mono border-x border-b border-gray-800">
+      <div class="text-sm text-gray-500 mb-4">
+        <span class="text-green-400">sphere@dev</span>:<span class="text-blue-400">~/repos</span>$ cat AGENDA.md
+      </div>
       <div class="text-xl text-gray-400 mb-4"># 今日の流れ</div>
       <Toc maxDepth="1" class="space-y-2 text-lg" />
     </div>
@@ -347,10 +350,13 @@ title: Git Worktree とは
         <div class="w-2.5 h-2.5 rounded-full bg-yellow-500"></div>
         <div class="w-2.5 h-2.5 rounded-full bg-green-500"></div>
       </div>
-      <div class="flex-1 text-center text-xs text-gray-500 font-mono">diff --git a/通常 b/worktree</div>
+      <div class="flex-1 text-center text-xs text-gray-500 font-mono">~/repos</div>
     </div>
     <!-- ターミナル本体 -->
     <div class="bg-gray-950 p-6 rounded-b-lg font-mono border-x border-b border-gray-800">
+      <div class="text-sm text-gray-500 mb-4">
+        <span class="text-green-400">sphere@dev</span>:<span class="text-blue-400">~/repos</span>$ diff -u 通常のgit git-worktree
+      </div>
       <div class="grid grid-cols-2 gap-8">
         <!-- 通常 -->
         <div v-click>
@@ -399,10 +405,13 @@ title: コマンド早見表
         <div class="w-2.5 h-2.5 rounded-full bg-yellow-500"></div>
         <div class="w-2.5 h-2.5 rounded-full bg-green-500"></div>
       </div>
-      <div class="flex-1 text-center text-xs text-gray-500 font-mono">man git-worktree</div>
+      <div class="flex-1 text-center text-xs text-gray-500 font-mono">~/repos</div>
     </div>
     <!-- コンテンツ -->
     <div class="bg-gray-950 p-5 rounded-b-lg font-mono text-sm border-x border-b border-gray-800">
+      <div class="mb-3">
+        <span class="text-green-400">sphere@dev</span>:<span class="text-blue-400">~/repos</span>$ man git-worktree
+      </div>
       <div class="text-yellow-400 mb-3">GIT-WORKTREE(1)</div>
       <div class="space-y-2 text-gray-300">
         <div class="flex"><span class="text-cyan-400 w-72">git worktree add &lt;path&gt;</span><span class="text-gray-500">新しい worktree を作成</span></div>
