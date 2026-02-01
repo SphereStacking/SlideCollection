@@ -26,7 +26,7 @@ meta:
   <div v-motion :initial="{ opacity: 0, y: 30 }" :enter="{ opacity: 1, y: 0 }" class="w-full max-w-3xl">
     <Terminal title="~/repos/project" size="lg">
       <TerminalPrompt v-motion :initial="{ opacity: 0 }" :enter="{ opacity: 1, delay: 300 }"
-           path="~/repos" class="text-gray-500 text-sm mb-4" />
+           path="~/repos" command="slide --title" class="text-gray-500 text-sm mb-4" />
       <div v-motion :initial="{ opacity: 0 }" :enter="{ opacity: 1, delay: 600 }"
            class="flex items-center gap-4 mb-6">
         <logos-git-icon class="text-5xl" />
@@ -90,32 +90,34 @@ hideInToc: true
 title: はじめに
 ---
 
-<div class="h-full flex flex-col justify-center px-16">
-  <h1 class="text-4xl font-bold mb-10 font-mono">
-    <span class="text-gray-500">#</span> はじめに
-  </h1>
-  <div class="space-y-6">
-    <div v-click v-motion :initial="{ x: -30, opacity: 0 }" :enter="{ x: 0, opacity: 1 }"
-         class="flex gap-4 items-start">
-      <div class="text-green-400 font-mono text-2xl font-bold">+</div>
-      <div class="border-l-4 border-green-500 pl-4 py-1 bg-green-950/20">
-        <div class="text-xl text-white">どういった場面で <code class="bg-green-900/50 px-2 py-0.5 rounded text-green-300">Git Worktree</code> が役に立つのか</div>
-        <div class="text-sm text-gray-500 mt-1">← 今日のメイン</div>
+<div class="h-full flex items-center justify-center px-16">
+  <div class="w-full max-w-3xl">
+    <Terminal title="~/repos/git-worktree-demo">
+      <TerminalPrompt path="~/repos" command="slide --intro" class="text-sm text-gray-500 mb-4" />
+      <div class="text-xl text-gray-400 mb-6"># はじめに</div>
+      <div class="space-y-4">
+        <div v-click v-motion :initial="{ x: -20, opacity: 0 }" :enter="{ x: 0, opacity: 1 }"
+             class="flex gap-3 items-start">
+          <div class="text-green-400 font-bold">+</div>
+          <div class="border-l-2 border-green-500 pl-4 py-1 bg-green-950/20">
+            <div class="text-white">どういった場面で <span class="text-green-300">Git Worktree</span> が役に立つのか</div>
+            <div class="text-xs text-gray-500 mt-1">// 今日のメイン</div>
+          </div>
+        </div>
+        <div v-click v-motion :initial="{ x: -20, opacity: 0 }" :enter="{ x: 0, opacity: 1 }"
+             class="flex gap-3 items-start opacity-60">
+          <div class="text-red-400 font-bold">-</div>
+          <div class="border-l-2 border-red-500/50 pl-4 py-1 line-through decoration-red-400/50">
+            <div class="text-gray-400">詳しいコマンドの使い方やオプション</div>
+            <div class="text-xs text-gray-600 mt-1 no-underline">// 公式ドキュメント参照</div>
+          </div>
+        </div>
       </div>
-    </div>
-    <div v-click v-motion :initial="{ x: -30, opacity: 0 }" :enter="{ x: 0, opacity: 1 }"
-         class="flex gap-4 items-start opacity-60">
-      <div class="text-red-400 font-mono text-2xl font-bold">-</div>
-      <div class="border-l-4 border-red-500/50 pl-4 py-1 line-through decoration-red-400/50">
-        <div class="text-xl text-gray-400">詳しいコマンドの使い方やオプション</div>
-        <div class="text-sm text-gray-600 mt-1 no-underline">← 公式ドキュメント参照</div>
+      <div v-click class="mt-6 text-gray-600 text-xs">
+        # 詳しい使い方は公式ドキュメントや VSCode 拡張機能にお任せします
       </div>
-    </div>
+    </Terminal>
   </div>
-
-  <p v-click class="mt-8 text-gray-500 text-sm">
-    詳しい使い方は公式ドキュメントや VSCode 拡張機能にお任せします 🙏
-  </p>
 </div>
 
 
@@ -265,36 +267,38 @@ title: よくあるシーン
 title: Git Worktree とは
 ---
 
-<div class="h-full flex flex-col justify-center px-16">
-  <h1 class="text-5xl font-bold mb-10">
-    <logos-git-icon class="inline-block mr-3" />
-    Git Worktree <span class="text-green-400">なら...</span>
-  </h1>
-
-  <div class="space-y-6 font-mono">
-    <div v-click v-motion :initial="{ opacity: 0, x: -20 }" :enter="{ opacity: 1, x: 0 }"
-         class="flex items-center gap-4">
-      <span class="text-red-400 line-through opacity-60">git checkout feature</span>
-      <span class="text-gray-500">// ブランチ切り替え</span>
-    </div>
-    <div v-click v-motion :initial="{ opacity: 0, x: -20 }" :enter="{ opacity: 1, x: 0 }"
-         class="flex items-center gap-4 text-xl">
-      <span class="text-green-400 font-bold">cd ../project-feature/</span>
-      <span class="text-gray-500">// ディレクトリ移動だけ</span>
-    </div>
-  </div>
-
-  <div v-click v-motion :initial="{ opacity: 0, y: 20 }" :enter="{ opacity: 1, y: 0 }"
-       class="mt-12 flex gap-8 text-lg">
-    <div class="border-l-4 border-green-500 pl-4">
-      <span class="text-green-400">✓</span> stash 不要
-    </div>
-    <div class="border-l-4 border-green-500 pl-4">
-      <span class="text-green-400">✓</span> キャッシュ維持
-    </div>
-    <div class="border-l-4 border-green-500 pl-4">
-      <span class="text-green-400">✓</span> 即座に復帰
-    </div>
+<div class="h-full flex items-center justify-center px-16">
+  <div class="w-full max-w-3xl">
+    <Terminal title="~/repos/project">
+      <TerminalPrompt path="~/repos" command="slide --solution" class="text-sm text-gray-500 mb-4" />
+      <div class="text-xl text-gray-400 mb-6"># Git Worktree <span class="text-green-400">なら...</span></div>
+      <div class="space-y-4">
+        <div v-click v-motion :initial="{ opacity: 0, x: -20 }" :enter="{ opacity: 1, x: 0 }"
+             class="flex items-center gap-3">
+          <span class="text-red-400">-</span>
+          <span class="text-red-400 line-through opacity-60">git checkout feature</span>
+          <span class="text-gray-600 text-sm">// ブランチ切り替え</span>
+        </div>
+        <div v-click v-motion :initial="{ opacity: 0, x: -20 }" :enter="{ opacity: 1, x: 0 }"
+             class="flex items-center gap-3 text-lg">
+          <span class="text-green-400">+</span>
+          <span class="text-green-400 font-bold">cd ../project-feature/</span>
+          <span class="text-gray-600 text-sm">// ディレクトリ移動だけ</span>
+        </div>
+      </div>
+      <div v-click v-motion :initial="{ opacity: 0, y: 10 }" :enter="{ opacity: 1, y: 0 }"
+           class="mt-8 flex gap-6 text-sm">
+        <div class="border-l-2 border-green-500 pl-3">
+          <span class="text-green-400">✓</span> stash 不要
+        </div>
+        <div class="border-l-2 border-green-500 pl-3">
+          <span class="text-green-400">✓</span> キャッシュ維持
+        </div>
+        <div class="border-l-2 border-green-500 pl-3">
+          <span class="text-green-400">✓</span> 即座に復帰
+        </div>
+      </div>
+    </Terminal>
   </div>
 </div>
 
@@ -483,34 +487,41 @@ title: 注意点
 title: まとめ
 ---
 
-<div class="h-full flex flex-col justify-center px-16">
-  <h1 class="text-4xl font-bold mb-10 font-mono">
-    <span class="text-gray-500">$</span> slide <span class="text-green-400">--summary</span>
-  </h1>
-
-  <div class="flex gap-8">
-    <div v-click v-motion :initial="{ opacity: 0, x: -20 }" :enter="{ opacity: 1, x: 0 }"
-         class="flex-1 border-l-4 border-green-500 pl-6 py-4">
-      <div class="font-mono text-green-400 text-sm mb-2">// CONCEPT</div>
-      <div class="text-2xl font-bold text-white mb-2">1リポジトリ = N作業場</div>
-      <div class="text-gray-500">ブランチごとにディレクトリを分ける</div>
-    </div>
-    <div v-click v-motion :initial="{ opacity: 0, x: -20 }" :enter="{ opacity: 1, x: 0, delay: 200 }"
-         class="flex-1 border-l-4 border-cyan-500 pl-6 py-4">
-      <div class="font-mono text-cyan-400 text-sm mb-2">// BENEFIT</div>
-      <div class="text-2xl font-bold text-white mb-2">stash要らずで即切替</div>
-      <div class="text-gray-500">割り込み作業もストレスフリー</div>
-    </div>
-    <div v-click v-motion :initial="{ opacity: 0, x: -20 }" :enter="{ opacity: 1, x: 0, delay: 400 }"
-         class="flex-1 border-l-4 border-blue-500 pl-6 py-4">
-      <div class="font-mono text-blue-400 text-sm mb-2">// TOOL</div>
-      <div class="text-2xl font-bold text-white mb-2">VSCode拡張で楽々</div>
-      <div class="text-gray-500">Git Worktree Manager</div>
-    </div>
-  </div>
-
-  <div v-click class="mt-12 font-mono text-sm text-gray-600">
-    <span class="text-gray-500">// See also:</span>
-    <a href="https://git-scm.com/docs/git-worktree" class="text-green-500 hover:underline ml-2">git-scm.com/docs/git-worktree</a>
+<div class="h-full flex items-center justify-center px-16">
+  <div class="w-full max-w-4xl">
+    <Terminal title="~/repos/git-worktree-demo">
+      <TerminalPrompt path="~/repos" command="slide --summary" class="text-sm text-gray-500 mb-4" />
+      <div class="text-xl text-gray-400 mb-6"># まとめ</div>
+      <div class="flex gap-6">
+        <div v-click v-motion :initial="{ opacity: 0, x: -20 }" :enter="{ opacity: 1, x: 0 }"
+             class="flex-1 border-l-2 border-green-500 pl-4 py-2">
+          <div class="text-green-400 text-xs mb-1">// CONCEPT</div>
+          <div class="text-lg font-bold text-white mb-1">1リポジトリ = N作業場</div>
+          <div class="text-gray-500 text-sm">ブランチごとにディレクトリを分ける</div>
+        </div>
+        <div v-click v-motion :initial="{ opacity: 0, x: -20 }" :enter="{ opacity: 1, x: 0, delay: 200 }"
+             class="flex-1 border-l-2 border-cyan-500 pl-4 py-2">
+          <div class="text-cyan-400 text-xs mb-1">// BENEFIT</div>
+          <div class="text-lg font-bold text-white mb-1">stash要らずで即切替</div>
+          <div class="text-gray-500 text-sm">割り込み作業もストレスフリー</div>
+        </div>
+        <div v-click v-motion :initial="{ opacity: 0, x: -20 }" :enter="{ opacity: 1, x: 0, delay: 400 }"
+             class="flex-1 border-l-2 border-blue-500 pl-4 py-2">
+          <div class="text-blue-400 text-xs mb-1">// TOOL</div>
+          <div class="text-lg font-bold text-white mb-1">VSCode拡張で楽々</div>
+          <div class="text-gray-500 text-sm">Git Worktree Manager</div>
+        </div>
+      </div>
+      <div v-click class="mt-6 text-xs text-gray-600">
+        <span class="text-gray-500">// See also:</span>
+        <a href="https://git-scm.com/docs/git-worktree" class="text-green-500 hover:underline ml-2">git-scm.com/docs/git-worktree</a>
+      </div>
+    </Terminal>
   </div>
 </div>
+
+---
+layout: center
+---
+
+# END
