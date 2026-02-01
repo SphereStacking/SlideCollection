@@ -25,10 +25,8 @@ meta:
 <div class="h-full w-full flex items-center justify-center p-8">
   <div v-motion :initial="{ opacity: 0, y: 30 }" :enter="{ opacity: 1, y: 0 }" class="w-full max-w-3xl">
     <Terminal title="~/repos/project" size="lg">
-      <div v-motion :initial="{ opacity: 0 }" :enter="{ opacity: 1, delay: 300 }"
-           class="text-gray-500 text-sm mb-4">
-        <span class="text-green-400">sphere@dev</span>:<span class="text-blue-400">~/repos</span>$
-      </div>
+      <TerminalPrompt v-motion :initial="{ opacity: 0 }" :enter="{ opacity: 1, delay: 300 }"
+           path="~/repos" class="text-gray-500 text-sm mb-4" />
       <div v-motion :initial="{ opacity: 0 }" :enter="{ opacity: 1, delay: 600 }"
            class="flex items-center gap-4 mb-6">
         <logos-git-icon class="text-5xl" />
@@ -41,10 +39,8 @@ meta:
            class="text-sm border-l-2 border-green-500 pl-4 py-2 bg-green-950/30">
         <span class="text-gray-400">#</span> <span class="text-green-300">stash不要</span> ・ <span class="text-green-300">ビルドキャッシュ維持</span> ・ <span class="text-green-300">瞬時に切り替え</span>
       </div>
-      <div v-motion :initial="{ opacity: 0 }" :enter="{ opacity: 1, delay: 1200 }"
-           class="mt-4 text-gray-500 text-sm">
-        <span class="text-green-400">sphere@dev</span>:<span class="text-blue-400">~/repos</span>$ <span class="animate-pulse">▋</span>
-      </div>
+      <TerminalPrompt v-motion :initial="{ opacity: 0 }" :enter="{ opacity: 1, delay: 1200 }"
+           path="~/repos" cursor class="mt-4 text-gray-500 text-sm" />
     </Terminal>
   </div>
 </div>
@@ -57,21 +53,21 @@ hideInToc: true
   <div class="w-full max-w-2xl">
     <Terminal title="~" size="sm">
       <div class="mb-4">
-        <div><span class="text-green-400">sphere@dev</span>:<span class="text-blue-400">~</span>$ sphere --name</div>
+        <TerminalPrompt command="sphere --name" />
         <div class="text-white pl-4">Sphere <span class="text-gray-500">(まんまる / まる)</span></div>
       </div>
       <div class="mb-4">
-        <div><span class="text-green-400">sphere@dev</span>:<span class="text-blue-400">~</span>$ sphere --info</div>
+        <TerminalPrompt command="sphere --info" />
         <div class="pl-4"><span class="text-cyan-400">Role:</span>      Frontend Engineer</div>
         <div class="pl-4"><span class="text-cyan-400">Favorite:</span>  <span class="text-green-400">Vue.js</span> 💚</div>
       </div>
       <div class="mb-4">
-        <div><span class="text-green-400">sphere@dev</span>:<span class="text-blue-400">~</span>$ sphere --links</div>
+        <TerminalPrompt command="sphere --links" />
         <div class="pl-4"><span class="text-cyan-400">GitHub:</span>     <a href="https://github.com/SphereStacking" class="text-blue-400 hover:underline">github.com/SphereStacking</a></div>
         <div class="pl-4"><span class="text-cyan-400">X:</span>          <a href="https://x.com/SphereStacking" class="text-blue-400 hover:underline">x.com/SphereStacking</a></div>
         <div class="pl-4"><span class="text-cyan-400">Portfolio:</span>  <a href="https://spherestacking.com" class="text-blue-400 hover:underline">spherestacking.com</a></div>
       </div>
-      <div><span class="text-green-400">sphere@dev</span>:<span class="text-blue-400">~</span>$ <span class="animate-pulse">▋</span></div>
+      <TerminalPrompt cursor />
     </Terminal>
   </div>
 </div>
@@ -83,9 +79,7 @@ hideInToc: true
 <div class="h-full flex items-center justify-center">
   <div class="w-full max-w-xl">
     <Terminal title="~/repos/git-worktree-demo">
-      <div class="text-sm text-gray-500 mb-4">
-        <span class="text-green-400">sphere@dev</span>:<span class="text-blue-400">~/repos</span>$ cat AGENDA.md
-      </div>
+      <TerminalPrompt path="~/repos" command="cat AGENDA.md" class="text-sm text-gray-500 mb-4" />
       <div class="text-xl text-gray-400 mb-4"># 今日の流れ</div>
       <Toc maxDepth="1" class="space-y-2 text-lg" />
     </Terminal>
@@ -312,9 +306,7 @@ title: Git Worktree とは
 <div class="h-full flex items-center justify-center px-8">
   <div class="w-full max-w-5xl">
     <Terminal title="~/repos">
-      <div class="text-sm text-gray-500 mb-4">
-        <span class="text-green-400">sphere@dev</span>:<span class="text-blue-400">~/repos</span>$ diff -u 通常のgit git-worktree
-      </div>
+      <TerminalPrompt path="~/repos" command="diff -u 通常のgit git-worktree" class="text-sm text-gray-500 mb-4" />
       <div class="grid grid-cols-2 gap-8">
         <!-- 通常 -->
         <div v-click>
@@ -357,9 +349,7 @@ title: コマンド早見表
 <div class="flex items-center justify-center h-full">
   <div class="w-full max-w-4xl">
     <Terminal title="~/repos" size="sm">
-      <div class="mb-3">
-        <span class="text-green-400">sphere@dev</span>:<span class="text-blue-400">~/repos</span>$ man git-worktree
-      </div>
+      <TerminalPrompt path="~/repos" command="man git-worktree" class="mb-3" />
       <div class="text-yellow-400 mb-3">GIT-WORKTREE(1)</div>
       <div class="space-y-2 text-gray-300">
         <div class="flex"><span class="text-cyan-400 w-72">git worktree add &lt;path&gt;</span><span class="text-gray-500">新しい worktree を作成</span></div>
