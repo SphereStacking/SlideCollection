@@ -62,9 +62,41 @@ meta:
 </div>
 
 ---
-src: ../../components/slides/profile_2026_q1.md
 hideInToc: true
 ---
+
+<div class="h-full flex items-center justify-center">
+  <div class="w-full max-w-2xl">
+    <!-- ターミナルヘッダー -->
+    <div class="flex items-center gap-2 px-4 py-2 bg-gray-800 rounded-t-lg">
+      <div class="flex gap-1.5">
+        <div class="w-2.5 h-2.5 rounded-full bg-red-500"></div>
+        <div class="w-2.5 h-2.5 rounded-full bg-yellow-500"></div>
+        <div class="w-2.5 h-2.5 rounded-full bg-green-500"></div>
+      </div>
+      <div class="flex-1 text-center text-xs text-gray-500 font-mono">whoami</div>
+    </div>
+    <!-- ターミナル本体 -->
+    <div class="bg-gray-950 p-6 rounded-b-lg font-mono text-sm border-x border-b border-gray-800">
+      <div class="mb-4">
+        <div class="text-gray-500">$ sphere --name</div>
+        <div class="text-white">Sphere <span class="text-gray-500">(まんまる / まる)</span></div>
+      </div>
+      <div class="mb-4">
+        <div class="text-gray-500">$ sphere --info</div>
+        <div><span class="text-cyan-400">Role:</span>      Frontend Engineer</div>
+        <div><span class="text-cyan-400">Favorite:</span>  <span class="text-green-400">Vue.js</span> 💚</div>
+      </div>
+      <div>
+        <div class="text-gray-500">$ sphere --links</div>
+        <div><span class="text-cyan-400">GitHub:</span>     <a href="https://github.com/SphereStacking" class="text-blue-400 hover:underline">github.com/SphereStacking</a></div>
+        <div><span class="text-cyan-400">X:</span>          <a href="https://x.com/SphereStacking" class="text-blue-400 hover:underline">x.com/SphereStacking</a></div>
+        <div><span class="text-cyan-400">Portfolio:</span>  <a href="https://spherestacking.com" class="text-blue-400 hover:underline">spherestacking.com</a></div>
+      </div>
+      <div class="mt-4 text-gray-600">$ <span class="animate-pulse">▋</span></div>
+    </div>
+  </div>
+</div>
 
 ---
 hideInToc: true
@@ -83,13 +115,11 @@ hideInToc: true
 </div>
 
 ---
----
 
 <div class="h-full flex flex-col justify-center px-16">
   <h1 class="text-4xl font-bold mb-10 font-mono">
     <span class="text-gray-500">#</span> はじめに
   </h1>
-
   <div class="space-y-6">
     <div v-click v-motion :initial="{ x: -30, opacity: 0 }" :enter="{ x: 0, opacity: 1 }"
          class="flex gap-4 items-start">
@@ -99,7 +129,6 @@ hideInToc: true
         <div class="text-sm text-gray-500 mt-1">← 今日のメイン</div>
       </div>
     </div>
-
     <div v-click v-motion :initial="{ x: -30, opacity: 0 }" :enter="{ x: 0, opacity: 1 }"
          class="flex gap-4 items-start opacity-60">
       <div class="text-red-400 font-mono text-2xl font-bold">-</div>
@@ -240,7 +269,6 @@ hideInToc: true
 </div>
 
 ---
----
 
 <div class="h-full flex flex-col items-center justify-center">
   <div v-motion :initial="{ opacity: 0, rotate: -5 }" :enter="{ opacity: 1, rotate: 0 }"
@@ -258,7 +286,6 @@ hideInToc: true
 </div>
 
 ---
----
 
 <div class="h-full flex flex-col justify-center px-16">
   <h1 class="text-5xl font-bold mb-10">
@@ -272,7 +299,6 @@ hideInToc: true
       <span class="text-red-400 line-through opacity-60">git checkout feature</span>
       <span class="text-gray-500">// ブランチ切り替え</span>
     </div>
-
     <div v-click v-motion :initial="{ opacity: 0, x: -20 }" :enter="{ opacity: 1, x: 0 }"
          class="flex items-center gap-4 text-xl">
       <span class="text-green-400 font-bold">cd ../project-feature/</span>
@@ -298,7 +324,6 @@ hideInToc: true
 
 
 ---
----
 
 <div class="px-12">
   <h1 class="text-3xl font-bold mb-8 font-mono">
@@ -319,7 +344,6 @@ hideInToc: true
         <div class="text-red-400">• checkout時は stash 必須</div>
       </div>
     </div>
-
     <!-- Worktree -->
     <div v-click>
       <div class="font-mono text-sm mb-4 text-green-500">// git worktree</div>
@@ -339,7 +363,6 @@ hideInToc: true
   </div>
 </div>
 
----
 ---
 
 <div class="flex items-center justify-center h-full">
@@ -372,7 +395,6 @@ hideInToc: true
 </div>
 
 ---
----
 
 <div class="h-full flex items-center justify-center">
   <div class="relative">
@@ -382,7 +404,6 @@ hideInToc: true
     <div class="absolute top-4 -left-32 text-xs font-mono text-gray-700 rotate-[-3deg]">git worktree list</div>
     <div class="absolute bottom-12 -right-24 text-sm font-mono text-gray-600 rotate-[12deg]">git worktree remove</div>
     <div class="absolute -bottom-8 left-0 text-xs font-mono text-gray-700 rotate-[-6deg]">git worktree lock</div>
-
     <!-- メインテキスト -->
     <div class="text-center relative z-10">
       <div class="text-6xl mb-6 transform rotate-12">😵‍💫</div>
@@ -394,7 +415,6 @@ hideInToc: true
 </div>
 
 ---
----
 
 <div class="h-full flex items-center px-16">
   <div class="flex gap-12 items-center">
@@ -402,24 +422,20 @@ hideInToc: true
     <div v-motion :initial="{ opacity: 0, x: -30 }" :enter="{ opacity: 1, x: 0 }">
       <logos-visual-studio-code class="text-8xl" />
     </div>
-
     <!-- 右: 説明 -->
     <div class="flex-1">
       <h1 v-motion :initial="{ opacity: 0 }" :enter="{ opacity: 1, delay: 200 }"
           class="text-4xl font-bold mb-4">
         <span class="text-blue-400">Git Worktree Manager</span>
       </h1>
-
       <p v-motion :initial="{ opacity: 0 }" :enter="{ opacity: 1, delay: 400 }"
          class="text-xl text-gray-400 mb-6">コマンド不要。UIでぽちぽち操作</p>
-
       <a v-motion :initial="{ opacity: 0, y: 10 }" :enter="{ opacity: 1, y: 0, delay: 600 }"
          href="https://marketplace.visualstudio.com/items?itemName=jackiotyu.git-worktree-manager"
          class="inline-flex items-center gap-3 px-5 py-2.5 border-2 border-blue-500 text-blue-400 hover:bg-blue-500/10 transition font-mono text-sm">
         <span>marketplace.visualstudio.com</span>
         <span class="text-gray-500">→</span>
       </a>
-
       <div v-click v-motion :initial="{ opacity: 0 }" :enter="{ opacity: 1 }"
            class="mt-6 font-mono text-sm">
         <span class="text-gray-500">//</span> <span class="text-green-400">サイドバーから直感的に操作できる</span>
@@ -428,7 +444,6 @@ hideInToc: true
   </div>
 </div>
 
----
 ---
 
 <div class="h-full flex items-center justify-center">
@@ -444,7 +459,6 @@ hideInToc: true
   </div>
 </div>
 
----
 ---
 
 <div class="px-12">
@@ -488,7 +502,6 @@ hideInToc: true
 </div>
 
 ---
----
 
 <div class="h-full flex flex-col justify-center px-16">
   <h1 class="text-4xl font-bold mb-10 font-mono">
@@ -502,14 +515,12 @@ hideInToc: true
       <div class="text-2xl font-bold text-white mb-2">1リポジトリ = N作業場</div>
       <div class="text-gray-500">ブランチごとにディレクトリを分ける</div>
     </div>
-
     <div v-click v-motion :initial="{ opacity: 0, x: -20 }" :enter="{ opacity: 1, x: 0, delay: 200 }"
          class="flex-1 border-l-4 border-cyan-500 pl-6 py-4">
       <div class="font-mono text-cyan-400 text-sm mb-2">// BENEFIT</div>
       <div class="text-2xl font-bold text-white mb-2">stash要らずで即切替</div>
       <div class="text-gray-500">割り込み作業もストレスフリー</div>
     </div>
-
     <div v-click v-motion :initial="{ opacity: 0, x: -20 }" :enter="{ opacity: 1, x: 0, delay: 400 }"
          class="flex-1 border-l-4 border-blue-500 pl-6 py-4">
       <div class="font-mono text-blue-400 text-sm mb-2">// TOOL</div>
