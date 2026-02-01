@@ -51,7 +51,7 @@ hideInToc: true
 
 <div class="h-full flex items-center justify-center">
   <div class="w-full max-w-2xl">
-    <Terminal title="~" size="sm">
+    <Terminal title="profile" size="sm">
       <div class="mb-4">
         <TerminalPrompt command="sphere --name" />
         <div class="text-white pl-4">Sphere <span class="text-gray-500">(まんまる / まる)</span></div>
@@ -439,7 +439,7 @@ title: Demo
 title: 注意点
 ---
 
-<div class="px-12">
+<div class="h-full flex flex-col justify-center px-12">
   <h1 class="text-3xl font-bold mb-6 flex items-center gap-3">
     <span class="text-yellow-500">⚠</span>
     <span>注意点</span>
@@ -485,7 +485,7 @@ title: まとめ
 
 <div class="h-full flex flex-col justify-center px-16">
   <h1 class="text-4xl font-bold mb-10 font-mono">
-    <span class="text-gray-500">$</span> git worktree <span class="text-green-400">--summary</span>
+    <span class="text-gray-500">$</span> slide <span class="text-green-400">--summary</span>
   </h1>
 
   <div class="flex gap-8">
