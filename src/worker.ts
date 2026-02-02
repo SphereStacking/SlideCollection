@@ -44,6 +44,11 @@ app.get('/api/slides', async (c) => {
   })
 })
 
+// ルートページをメインサイトにリダイレクト
+app.get('/', (c) => {
+  return c.redirect('https://www.spherestacking.com/talk', 302)
+})
+
 // 静的アセット + SPA フォールバック
 app.all('*', async (c) => {
   const url = new URL(c.req.url)
