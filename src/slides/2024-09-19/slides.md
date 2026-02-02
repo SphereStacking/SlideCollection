@@ -16,6 +16,10 @@ meta:
   icon: logos:slidev
   published: true
   legacyPath: 2024-09-19
+  tags:
+    - Slidev
+    - プレゼンテーション
+    - Markdown
 seoMeta:
   ogImage: auto
 ---

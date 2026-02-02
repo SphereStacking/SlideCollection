@@ -21,6 +21,7 @@ export interface SlideMeta {
   published: boolean
   hidden?: boolean  // ビルドはするがAPIには返さない
   legacyPath?: string
+  tags?: string[]
 }
 
 export interface SlideInfo {
@@ -57,6 +58,7 @@ export async function getAllSlides(): Promise<SlideInfo[]> {
       published: data.meta?.published !== false,
       hidden: data.meta?.hidden || false,
       legacyPath: data.meta?.legacyPath || dirName,
+      tags: data.meta?.tags || [],
     }
 
     const year = extractYear(meta.date)

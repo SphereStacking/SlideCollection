@@ -20,6 +20,10 @@ meta:
   icon: logos:git-icon
   published: true
   legacyPath: 2026-01-git-worktreeはいいよ
+  tags:
+    - git
+    - worktree
+    - 開発効率化
 seoMeta:
   ogImage: auto
 ---

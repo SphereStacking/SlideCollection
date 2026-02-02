@@ -24,6 +24,10 @@ meta:
   icon: wpf:ghost
   published: true
   legacyPath: 2024-08-23
+  tags:
+    - 個人開発
+    - VR
+    - サービス開発
 seoMeta:
   ogImage: auto
 ---

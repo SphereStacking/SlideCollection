@@ -9,6 +9,7 @@ interface SlideJsonEntry {
   date: string
   link: string
   slug: string
+  tags: string[]
 }
 
 async function generateIndex() {
@@ -23,6 +24,7 @@ async function generateIndex() {
     date: slide.meta.date || '',
     link: slide.url,
     slug: slide.meta.slug,
+    tags: slide.meta.tags || [],
   }))
 
   const outputPath = join(ROOT_DIR, 'slides.json')
