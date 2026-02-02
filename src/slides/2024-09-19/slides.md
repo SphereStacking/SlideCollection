@@ -22,7 +22,7 @@ meta:
     - プレゼンテーション
     - Markdown
 seoMeta:
-  ogImage: auto
+  ogImage: ./og-image.png
 ---
 
 # **Slidev**の布教

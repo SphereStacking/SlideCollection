@@ -30,7 +30,7 @@ meta:
     - VR
     - サービス開発
 seoMeta:
-  ogImage: auto
+  ogImage: ./og-image.png
 ---
 
 # 個人開発したVRイベント共有サービスについて

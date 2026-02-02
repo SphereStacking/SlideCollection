@@ -26,7 +26,7 @@ meta:
     - worktree
     - 開発効率化
 seoMeta:
-  ogImage: auto
+  ogImage: ./og-image.png
 ---
 
 <div class="h-full w-full flex items-center justify-center p-8">

@@ -27,7 +27,7 @@ meta:
     - フロントエンド
     - ハンズオン
 seoMeta:
-  ogImage: auto
+  ogImage: ./og-image.png
 ---
 
 <MouseGlow />

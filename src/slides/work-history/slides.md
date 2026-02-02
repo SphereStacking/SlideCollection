@@ -21,7 +21,7 @@ meta:
   hidden: true
   legacyPath: work-history
 seoMeta:
-  ogImage: auto
+  ogImage: ./og-image.png
 ---
 
 <div class="mb-4 absolute bottom-4 left-12">
