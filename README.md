@@ -4,7 +4,7 @@
 
 @SphereStacking が作成したスライドを公開しています。
 
-https://slide-collection.sphere-stacking.workers.dev/
+https://slides.spherestacking.com/
 
 ---
 
