@@ -37,7 +37,7 @@ async function buildSlide(slide: SlideInfo): Promise<void> {
 
   try {
     await execAsync(
-      `npx slidev build "${slide.slidesPath}" --base "${BASE_URL}/${slide.outputPath}/" --out "${outputDir}"`,
+      `npx slidev build "${slide.slidesPath}" --base "/${slide.outputPath}/" --out "${outputDir}"`,
       { cwd: ROOT_DIR }
     )
     log(`Built: ${slide.outputPath}`, 'success')
