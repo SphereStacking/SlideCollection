@@ -19,6 +19,7 @@ export interface SlideMeta {
   description?: string
   icon?: string
   published: boolean
+  hidden?: boolean  // ビルドはするがAPIには返さない
   legacyPath?: string
 }
 
@@ -54,6 +55,7 @@ export async function getAllSlides(): Promise<SlideInfo[]> {
       description: data.meta?.description || data.info,
       icon: data.meta?.icon || 'mdi:file-presentation-box',
       published: data.meta?.published !== false,
+      hidden: data.meta?.hidden || false,
       legacyPath: data.meta?.legacyPath || dirName,
     }
 
@@ -86,6 +88,11 @@ export async function getAllSlides(): Promise<SlideInfo[]> {
 export async function getPublishedSlides(): Promise<SlideInfo[]> {
   const slides = await getAllSlides()
   return slides.filter((s) => s.meta.published)
+}
+
+export async function getListedSlides(): Promise<SlideInfo[]> {
+  const slides = await getPublishedSlides()
+  return slides.filter((s) => !s.meta.hidden)
 }
 
 function extractDateFromDir(dirName: string): string {

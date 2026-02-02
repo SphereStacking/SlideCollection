@@ -1,6 +1,6 @@
 import { writeFileSync } from 'fs'
 import { join } from 'path'
-import { getPublishedSlides, ROOT_DIR, BASE_URL, log } from './utils.js'
+import { getListedSlides, ROOT_DIR, log } from './utils.js'
 
 interface SlideJsonEntry {
   title: string
@@ -14,7 +14,7 @@ interface SlideJsonEntry {
 async function generateIndex() {
   log('Generating slides.json...')
 
-  const slides = await getPublishedSlides()
+  const slides = await getListedSlides()
 
   const entries: SlideJsonEntry[] = slides.map((slide) => ({
     title: slide.title,

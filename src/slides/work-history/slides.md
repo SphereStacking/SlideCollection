@@ -17,6 +17,7 @@ meta:
   description: 職務経歴書
   icon: hugeicons:work-history
   published: true
+  hidden: true
   legacyPath: work-history
 ---
 
