@@ -85,6 +85,12 @@ async function build() {
     log('Copied slides.json', 'success')
   }
 
+  const logoPath = join(ROOT_DIR, 'logo.svg')
+  if (existsSync(logoPath)) {
+    copyFileSync(logoPath, join(DIST_DIR, 'logo.svg'))
+    log('Copied logo.svg', 'success')
+  }
+
   log('Build completed!', 'success')
 }
 

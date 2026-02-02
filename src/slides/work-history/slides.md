@@ -1,5 +1,6 @@
 ---
 theme: seriph
+favicon: /logo.svg
 title: 職務経歴書
 info: |
   職務経歴書

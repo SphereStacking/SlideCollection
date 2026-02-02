@@ -1,5 +1,6 @@
 ---
 theme: seriph
+favicon: /logo.svg
 title: Vue.js hands-on
 info: |
   Vueのドキュメントを読んでまとめてみた

@@ -1,5 +1,6 @@
 ---
 theme: seriph
+favicon: /logo.svg
 layout: intro
 title: Slidevの布教
 info: "Slidevの布教"

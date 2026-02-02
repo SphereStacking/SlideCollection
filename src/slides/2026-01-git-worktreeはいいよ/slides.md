@@ -1,5 +1,6 @@
 ---
 theme: seriph
+favicon: /logo.svg
 title: Git Worktree の使い方と活用法について
 info: |
   Git Worktree の使い方と活用法について

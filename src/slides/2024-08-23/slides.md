@@ -1,5 +1,6 @@
 ---
 theme: seriph
+favicon: /logo.svg
 background: https://cover.sli.dev
 class: 'text-center'
 highlighter: shiki
