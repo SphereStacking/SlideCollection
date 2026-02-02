@@ -73,12 +73,6 @@ async function build() {
 
   await runConcurrent(slides, concurrency, buildSlide)
 
-  const indexPath = join(ROOT_DIR, 'index.html')
-  if (existsSync(indexPath)) {
-    copyFileSync(indexPath, join(DIST_DIR, 'index.html'))
-    log('Copied index.html', 'success')
-  }
-
   const notFoundPath = join(ROOT_DIR, '404.html')
   if (existsSync(notFoundPath)) {
     copyFileSync(notFoundPath, join(DIST_DIR, '404.html'))
