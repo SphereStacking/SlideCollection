@@ -19,6 +19,8 @@ meta:
   published: true
   hidden: true
   legacyPath: work-history
+seoMeta:
+  ogImage: auto
 ---
 
 <div class="mb-4 absolute bottom-4 left-12">

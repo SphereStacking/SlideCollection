@@ -16,6 +16,8 @@ meta:
   icon: logos:slidev
   published: true
   legacyPath: 2024-09-19
+seoMeta:
+  ogImage: auto
 ---
 
 # **Slidev**の布教

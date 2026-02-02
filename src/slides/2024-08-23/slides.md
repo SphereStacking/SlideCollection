@@ -24,6 +24,8 @@ meta:
   icon: wpf:ghost
   published: true
   legacyPath: 2024-08-23
+seoMeta:
+  ogImage: auto
 ---
 
 # 個人開発したVRイベント共有サービスについて

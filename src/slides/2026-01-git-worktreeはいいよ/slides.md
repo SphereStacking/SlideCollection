@@ -20,6 +20,8 @@ meta:
   icon: logos:git-icon
   published: true
   legacyPath: 2026-01-git-worktreeはいいよ
+seoMeta:
+  ogImage: auto
 ---
 
 <div class="h-full w-full flex items-center justify-center p-8">

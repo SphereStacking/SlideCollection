@@ -21,6 +21,8 @@ meta:
   icon: logos:vue
   published: true
   legacyPath: 2025-01-vuejs-lecturer
+seoMeta:
+  ogImage: auto
 ---
 
 <MouseGlow />
