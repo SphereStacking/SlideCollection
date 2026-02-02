@@ -11,6 +11,6 @@ withDefaults(defineProps<{
 
 <template>
   <div>
-    <span class="text-green-400">sphere@dev</span>:<span class="text-blue-400">{{ path }}</span>$ {{ command }}<span v-if="cursor" class="animate-pulse">▋</span><slot />
+    <span class="text-green-400">sphere@dev</span>:<span class="text-cyan-400">{{ path }}</span><span class="text-gray-500">$ {{ command }}</span><span v-if="cursor" class="animate-pulse">▋</span><slot />
   </div>
 </template>

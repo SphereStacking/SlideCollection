@@ -152,10 +152,23 @@ title: よくあるシーン
       </div>
       <div class="text-red-400 text-xs">🐛 エラー調査お願いします</div>
     </div>
-    <!-- 直接の依頼 -->
+    <!-- PRコメント通知 -->
+    <div v-click v-motion :initial="{ opacity: 0, y: -20 }" :enter="{ opacity: 1, y: 0 }"
+         class="absolute top-32 right-8 p-2 bg-gray-900 border border-green-700 text-sm rounded max-w-52 transform -rotate-1">
+      <div class="flex items-center gap-2 mb-1">
+        <logos-github-icon class="w-4 h-4" />
+        <span class="text-green-400 text-xs">PR #189</span>
+      </div>
+      <div class="text-green-300 text-xs">💬 コメントバックしました！</div>
+    </div>
+    <!-- 直接の依頼（Slack風） -->
     <div v-click v-motion :initial="{ opacity: 0, scale: 0.9 }" :enter="{ opacity: 1, scale: 1 }"
-         class="absolute bottom-12 left-0 px-3 py-1.5 bg-blue-600 text-white text-xs rounded-full shadow-lg">
-      🚀 先にこの機能実装できる？
+         class="absolute bottom-12 left-0 p-2 bg-white text-gray-900 text-sm rounded shadow-xl max-w-52 transform rotate-1">
+      <div class="flex items-center gap-2 mb-1">
+        <div class="w-5 h-5 bg-green-500 rounded-sm flex items-center justify-center text-white text-xs font-bold">S</div>
+        <span class="font-bold text-xs">Slack</span>
+      </div>
+      <div class="text-gray-700 text-xs">🚀 先にこの機能実装できる？</div>
     </div>
     <!-- 心の声 -->
     <div v-click v-motion :initial="{ opacity: 0, y: 20 }" :enter="{ opacity: 1, y: 0 }"
@@ -198,7 +211,7 @@ title: よくあるシーン
 
 <div class="h-full flex flex-col items-center justify-center">
   <h1 class="text-3xl font-bold mb-6 font-mono">
-    <span class="text-gray-500">//</span> 作業中して...
+    <span class="text-gray-500">//</span> 作業して...
   </h1>
   <div class="relative w-full max-w-3xl h-72">
     <!-- 中心のユーザー -->
@@ -229,12 +242,21 @@ title: よくあるシーン
          class="absolute top-12 right-0 font-mono text-sm">
       <span class="text-green-400">$</span> git stash pop
     </div>
-    <!-- npm install の悲劇 -->
+    <!-- stash一覧の混乱 -->
+    <div v-click v-motion :initial="{ opacity: 0, x: 20 }" :enter="{ opacity: 1, x: 0 }"
+         class="absolute top-24 right-0 font-mono text-xs bg-gray-950 border border-gray-700 p-2 rounded max-w-56">
+      <div class="text-gray-500 mb-1">$ git stash list</div>
+      <div class="text-gray-400">stash@{0}: WIP on main</div>
+      <div class="text-gray-400">stash@{1}: WIP on main</div>
+      <div class="text-gray-400">stash@{2}: WIP on feature</div>
+      <div class="text-yellow-400 mt-1 text-xs">🤔 どれがどれだっけ...</div>
+    </div>
+    <!-- npm run dev の悲劇 -->
     <div v-click v-motion :initial="{ opacity: 0, scale: 0.9 }" :enter="{ opacity: 1, scale: 1 }"
          class="absolute bottom-0 left-1/2 -translate-x-1/2 font-mono text-xs bg-gray-950 border border-red-800 p-3 rounded max-w-xs">
-      <div class="text-orange-400 mb-1">$ npm install</div>
-      <div class="text-gray-500 text-xs">added 847 packages in 2m 34s</div>
-      <div class="text-red-400 mt-1 text-xs">😫 依存変わってたからやり直し...</div>
+      <div class="text-orange-400 mb-1">$ npm run dev</div>
+      <div class="text-red-400 text-xs">Error: Cannot find module 'vite'</div>
+      <div class="text-red-300 mt-1 text-xs">😫 npm install からやり直し...</div>
     </div>
   </div>
 </div>
