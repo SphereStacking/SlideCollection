@@ -20,7 +20,6 @@ meta:
   description: Git Worktreeの使い方と活用法について
   icon: logos:git-icon
   published: true
-  legacyPath: 2026-01-git-worktreeはいいよ
   tags:
     - git
     - worktree
