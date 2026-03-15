@@ -1,9 +1,9 @@
 ---
 theme: seriph
 favicon: /logo.svg
-title: "Temporal API が Stage 4 に！ - JS の日付処理が変わる"
+title: "Temporal — 新しい日付処理 API"
 info: |
-  TC39 Temporal API が Stage 4 に到達。Date の問題点と Temporal の魅力を5分で解説
+  ES2026 標準化 — ライブラリ不要の日付処理へ
 transition: view-transition
 layout: intro
 hideInToc: true
@@ -17,7 +17,7 @@ themeConfig:
 meta:
   slug: temporal-api
   date: '2026-03'
-  description: "TC39 Temporal API が Stage 4 に到達。Date の問題点と Temporal の魅力を5分で解説"
+  description: "ES2026 標準化 — ライブラリ不要の日付処理へ"
   icon: "logos:javascript"
   published: true
   tags:
@@ -42,8 +42,8 @@ seoMeta:
       <span class="px-3 py-1 bg-purple-500/20 border border-purple-500 text-purple-400 text-sm font-mono">2026.03.11</span>
     </div>
     <p v-motion :initial="{ opacity: 0 }" :enter="{ opacity: 1, delay: 700 }"
-       class="text-2xl text-gray-400">
-      JS の日付処理が<span class="text-green-400 font-bold">変わる</span>
+       class="text-xl text-gray-400">
+      ES2026 標準化 — ライブラリ不要の日付処理へ
     </p>
   </div>
 </div>
@@ -121,13 +121,13 @@ title: Date の闇 ① ミュータビリティ
       <div v-click v-motion :initial="{ opacity: 0, x: -20 }" :enter="{ opacity: 1, x: 0 }">
         <div class="text-xs text-red-400 font-mono mb-2">// やりがちなコード</div>
         <div class="bg-gray-900 border border-red-800/50 rounded p-4 font-mono text-sm leading-relaxed">
-          <div><span class="text-purple-400">const</span> <span class="text-cyan-300">meeting</span> = <span class="text-yellow-300">new</span> Date(<span class="text-yellow-300">"2026-03-15"</span>)</div>
-          <div class="mt-2"><span class="text-gray-600">// リマインダーを前日に設定したい</span></div>
-          <div><span class="text-purple-400">const</span> <span class="text-cyan-300">reminder</span> = meeting</div>
-          <div>reminder.<span class="text-red-400">setDate</span>(meeting.getDate() - 1)</div>
-          <div class="mt-2">console.log(meeting)</div>
-          <div class="text-red-400">// → 3月14日 💥 会議の日付が変わった！</div>
-          <div class="text-gray-600">// reminder と meeting は同じオブジェクト</div>
+          <div><span class="text-purple-400">const</span> <span class="text-cyan-300">original</span> = <span class="text-yellow-300">new</span> Date(<span class="text-yellow-300">"2026-03-15"</span>)</div>
+          <div class="mt-2"><span class="text-gray-600">// コピーして変更したい</span></div>
+          <div><span class="text-purple-400">const</span> <span class="text-cyan-300">copy</span> = original</div>
+          <div>copy.<span class="text-red-400">setDate</span>(copy.getDate() - 1)</div>
+          <div class="mt-2">console.log(original)</div>
+          <div class="text-red-400">// → 3月14日 💥 original も変わった！</div>
+          <div class="text-gray-600">// copy と original は同じオブジェクト</div>
         </div>
       </div>
       <!-- なぜ起きるか -->
@@ -155,7 +155,7 @@ title: Date の闇 ① ミュータビリティ
 
 <!--
 - Date 最大の問題はミュータブルなことです
-- 左の例：リマインダーを作ったつもりが元の会議日付まで変わってしまう
+- 左の例：コピーしたつもりが同じ参照なので original まで変わってしまう
 - 右の例：ユーティリティ関数に渡しただけで呼び出し元が壊れる
 - コードレビューでも見落としやすく、実際にバグとして踏んだ方も多いはず
 - Date の set 系メソッドは全部これです。setHours, setMonth, setFullYear...
@@ -181,23 +181,24 @@ title: Date の闇 ② 罠だらけの API
           <div class="text-gray-600 mt-1">// 日は1始まり、月だけ0始まり...なぜ？</div>
         </div>
       </div>
-      <!-- 月末オーバーフロー -->
+      <!-- 不正な日付がエラーにならない -->
       <div v-click v-motion :initial="{ opacity: 0, y: 20 }" :enter="{ opacity: 1, y: 0 }">
-        <div class="text-xs text-red-400 font-mono mb-1">// 月の加算が壊れる</div>
+        <div class="text-xs text-red-400 font-mono mb-1">// 不正な日付がエラーにならない</div>
         <div class="bg-gray-900 border border-red-800/50 rounded p-3 font-mono text-xs leading-relaxed">
-          <div><span class="text-purple-400">const</span> jan31 = <span class="text-yellow-300">new</span> Date(2026, 0, 31)</div>
-          <div>jan31.<span class="text-red-400">setMonth</span>(1) <span class="text-gray-600">// 2月にしたい</span></div>
-          <div class="text-red-400">// → 3月3日 💥 静かにオーバーフロー</div>
+          <div><span class="text-yellow-300">new</span> Date(2026, 1, 30) <span class="text-gray-600">// 2月30日</span></div>
+          <div class="text-red-400">// → 3月2日 💥 静かに別の日になる</div>
+          <div class="mt-1"><span class="text-yellow-300">new</span> Date(2026, 0, 31).<span class="text-red-400">setMonth</span>(1)</div>
+          <div class="text-red-400">// → 3月3日 💥 こちらも静かにずれる</div>
         </div>
       </div>
-      <!-- パースの不整合 -->
+      <!-- getYear の罠 -->
       <div v-click v-motion :initial="{ opacity: 0, y: 20 }" :enter="{ opacity: 1, y: 0 }">
-        <div class="text-xs text-red-400 font-mono mb-1">// ブラウザ間のパース差異</div>
+        <div class="text-xs text-red-400 font-mono mb-1">// 似た名前で全く違う結果</div>
         <div class="bg-gray-900 border border-red-800/50 rounded p-3 font-mono text-xs leading-relaxed">
-          <div><span class="text-yellow-300">new</span> Date(<span class="text-yellow-300">"2026-03-15"</span>)</div>
-          <div class="text-gray-500">// Chrome: UTC / Safari: ローカル</div>
-          <div><span class="text-yellow-300">new</span> Date(<span class="text-yellow-300">"2026/03/15"</span>)</div>
-          <div class="text-red-400">// "-" と "/" で結果が違う 🫠</div>
+          <div><span class="text-yellow-300">new</span> Date().<span class="text-red-400">getYear</span>()</div>
+          <div class="text-red-400">// → 126 😱 （1900年からの差分）</div>
+          <div class="mt-1"><span class="text-yellow-300">new</span> Date().<span class="text-green-400">getFullYear</span>()</div>
+          <div class="text-gray-600">// → 2026 （こっちが正しい）</div>
         </div>
       </div>
       <!-- toString -->
@@ -218,9 +219,9 @@ title: Date の闇 ② 罠だらけの API
 - 次は API 設計の罠です。全部初見では気づけないものばかり
 - 月が0始まり：これは Java の Calendar から受け継いだ1995年の負の遺産
   - Brendan Eich が10日で作った JavaScript の名残
-- 月末オーバーフロー：1月31日に setMonth(1) すると2月31日→3月3日に静かに壊れる
-  - エラーも出ないのが厄介
-- パース差異：ハイフンかスラッシュかでブラウザごとに解釈が変わる
+- 不正な日付：2月30日を渡してもエラーにならず3月2日になる。setMonth も同じ
+  - エラーも出ないのが厄介、バグの原因になりやすい
+- getYear：1900年からの差分を返す謎メソッド。getFullYear と間違えやすい
 - toString：機械可読でもなく、フォーマット指定もできない
 -->
 
@@ -233,52 +234,55 @@ title: Date の闇 ③ タイムゾーン
     <h1 class="text-3xl font-bold mb-2 font-mono">
       <span class="text-gray-500">//</span> Date の<span class="text-red-400">闇</span> ③
     </h1>
-    <div class="text-gray-500 text-sm font-mono mb-6">タイムゾーン — 最大の地雷原</div>
-    <div class="space-y-5">
+    <div class="text-gray-500 text-sm font-mono mb-4">タイムゾーン — 最大の地雷原</div>
+    <div class="space-y-3">
+      <!-- 内部表現の説明 -->
       <div v-click v-motion :initial="{ opacity: 0, x: -20 }" :enter="{ opacity: 1, x: 0 }">
-        <div class="bg-gray-900 border border-red-800/50 rounded p-4 font-mono text-sm">
-          <div class="text-gray-600 mb-2">// 東京のユーザーが「3月15日」の予約を送信</div>
-          <div><span class="text-purple-400">const</span> <span class="text-cyan-300">date</span> = <span class="text-yellow-300">new</span> Date(<span class="text-yellow-300">"2026-03-15T00:00:00"</span>)</div>
-          <div class="mt-1">date.toISOString()</div>
-          <div class="text-red-400">// → "2026-03-14T15:00:00.000Z"</div>
-          <div class="text-red-400">// サーバーには「3月14日」として届く 💥</div>
+        <div class="text-xs text-red-400 font-mono mb-1">// Date の内部表現 — 全てが UTC ミリ秒</div>
+        <div class="bg-gray-900 border border-red-800/50 rounded p-3 font-mono text-sm">
+          <div><span class="text-yellow-300">new</span> Date(<span class="text-yellow-300">"2026-03-15"</span>)</div>
+          <div class="text-gray-600 mt-1">// 内部値: <span class="text-orange-400">1742169600000</span>（1970-01-01 UTC からのミリ秒）</div>
+          <div class="text-gray-600">// 実体: <span class="text-cyan-300">2026-03-15T00:00:00.000Z</span>（UTC の深夜0時）</div>
+          <div class="text-red-400 mt-1">// → 「3月15日」という日付だけを持つことは不可能</div>
         </div>
       </div>
-      <div v-click v-motion :initial="{ opacity: 0, x: -20 }" :enter="{ opacity: 1, x: 0 }"
-           class="grid grid-cols-3 gap-4">
-        <div class="p-3 border border-red-800/30 bg-red-950/20 rounded text-center">
-          <div class="text-red-400 text-sm font-bold mb-1">UTC とローカルの2択</div>
-          <div class="text-xs text-gray-500">getHours() か getUTCHours() だけ</div>
-          <div class="text-xs text-gray-600 mt-1">"America/New_York" 指定不可</div>
-        </div>
-        <div class="p-3 border border-red-800/30 bg-red-950/20 rounded text-center">
-          <div class="text-red-400 text-sm font-bold mb-1">DST 非考慮</div>
-          <div class="text-xs text-gray-500">夏時間の境界で計算がズレる</div>
-          <div class="text-xs text-gray-600 mt-1">+1時間のつもりが+2時間に</div>
-        </div>
-        <div class="p-3 border border-red-800/30 bg-red-950/20 rounded text-center">
-          <div class="text-red-400 text-sm font-bold mb-1">内部表現が UTC</div>
-          <div class="text-xs text-gray-500">表示だけローカルに変換</div>
-          <div class="text-xs text-gray-600 mt-1">「日付だけ」を扱えない</div>
+      <!-- 環境依存の結果 -->
+      <div v-click v-motion :initial="{ opacity: 0, x: -20 }" :enter="{ opacity: 1, x: 0 }">
+        <div class="text-xs text-red-400 font-mono mb-1">// getDate() の結果が環境で変わる</div>
+        <div class="bg-gray-900 border border-red-800/50 rounded p-3 font-mono text-sm">
+          <div><span class="text-yellow-300">new</span> Date(<span class="text-yellow-300">"2026-03-15"</span>).getDate()</div>
+          <div class="text-gray-600 mt-1">// UTC 0時 → ローカル時刻に変換して日付を返す</div>
+          <div class="text-red-400">// → UTC+9（日本）: 3/15 09:00 JST → <span class="text-white font-bold">15</span></div>
+          <div class="text-red-400">// → UTC-5（NY）: 3/14 19:00 EST → <span class="text-white font-bold">14</span> 💥 前日！</div>
         </div>
       </div>
+      <!-- まとめカード -->
       <div v-click v-motion :initial="{ opacity: 0, y: 10 }" :enter="{ opacity: 1, y: 0 }"
-           class="p-3 border border-orange-800/30 bg-orange-950/20 rounded text-center">
-        <span class="text-orange-400 font-bold">Date には「タイムゾーンなしの日付」という概念がない</span>
-        <div class="text-gray-500 text-xs mt-1">「誕生日」「締切日」のような単純な日付すら正しく扱えない</div>
+           class="grid grid-cols-2 gap-3">
+        <div class="p-3 border border-red-800/30 bg-red-950/20 rounded text-center">
+          <div class="text-red-400 text-sm font-bold mb-1">Date = 必ず UTC ミリ秒</div>
+          <div class="text-xs text-gray-500">「日付だけ」は存在できない</div>
+          <div class="text-xs text-gray-600 mt-1">誕生日すら時刻+TZ情報を持つ</div>
+        </div>
+        <div class="p-3 border border-red-800/30 bg-red-950/20 rounded text-center">
+          <div class="text-red-400 text-sm font-bold mb-1">TZ 指定が UTC かローカルだけ</div>
+          <div class="text-xs text-gray-500">"America/New_York" のような指定不可</div>
+          <div class="text-xs text-gray-600 mt-1">国際対応では致命的</div>
+        </div>
       </div>
     </div>
   </div>
 </div>
 
 <!--
-- タイムゾーンは Date 最大の地雷原です
-- 上の例：東京のユーザーが3月15日で予約→サーバーには3月14日で届く
-  - toISOString() は常にUTCに変換するので9時間ズレる
-- Date は内部的に全部UTCのミリ秒で持っていて、表示だけローカルに変換する
-- 根本的な問題：Date には「タイムゾーンなしの日付」という概念がない
-  - 誕生日や締切日のような「ただの日付」を表現できない
-  - 必ず時刻情報が付いてしまう
+- Date の内部は「1970年1月1日 UTC からのミリ秒」という単一の数値
+  - "2026-03-15" と書いても、実際は「UTC の3月15日 深夜0時ちょうど」という瞬間を指す
+  - つまり「3月15日」という日付だけを保持することは構造的に不可能
+- この UTC 基準の値を getDate() でローカル時刻に変換するので、結果が環境で変わる
+  - 日本（UTC+9）では UTC 0時 → JST 9時だから同じ15日
+  - ニューヨーク（UTC-5）では UTC 0時 → EST 前日19時だから14日になる
+- これが「Date にはタイムゾーンなしの日付がない」ということの本質
+  - Temporal の PlainDate がこれを解決する（後で紹介）
 -->
 
 ---
@@ -349,19 +353,27 @@ title: Temporal の登場
 
 <div class="h-full flex items-center justify-center px-12">
   <div class="w-full max-w-4xl">
-    <h1 class="text-3xl font-bold mb-10 font-mono">
+    <h1 class="text-3xl font-bold mb-6 font-mono">
       <span class="text-gray-500">//</span> <span class="text-green-400">Temporal</span> の歩み <span class="text-gray-500 text-lg">— 9年の旅路</span>
     </h1>
     <div class="relative">
       <!-- タイムライン軸 -->
       <div class="absolute left-6 top-0 bottom-0 w-px bg-gray-700"></div>
-      <div class="space-y-6">
+      <div class="space-y-4">
         <div v-click v-motion :initial="{ opacity: 0, x: -20 }" :enter="{ opacity: 1, x: 0 }"
              class="flex items-center gap-4 pl-0">
           <div class="w-12 h-12 rounded-full bg-gray-800 border-2 border-gray-600 flex items-center justify-center text-xs font-mono text-gray-400 z-10">2017</div>
           <div class="flex-1 p-3 bg-gray-900/50 border border-gray-700 rounded">
             <div class="font-bold text-white text-sm">Stage 1 — 提案</div>
             <div class="text-xs text-gray-500">Maggie Johnson-Pint (Moment.js メンテナー) が TC39 に提案</div>
+          </div>
+        </div>
+        <div v-click v-motion :initial="{ opacity: 0, x: -20 }" :enter="{ opacity: 1, x: 0 }"
+             class="flex items-center gap-4 pl-0">
+          <div class="w-12 h-12 rounded-full bg-gray-800 border-2 border-gray-600 flex items-center justify-center text-xs font-mono text-gray-400 z-10">2018</div>
+          <div class="flex-1 p-3 bg-gray-900/50 border border-gray-700 rounded">
+            <div class="font-bold text-white text-sm">Stage 2 — ドラフト</div>
+            <div class="text-xs text-gray-500">API 設計の議論が本格化。型の分離方針が固まる</div>
           </div>
         </div>
         <div v-click v-motion :initial="{ opacity: 0, x: -20 }" :enter="{ opacity: 1, x: 0 }"
@@ -384,8 +396,8 @@ title: Temporal の登場
              class="flex items-center gap-4 pl-0">
           <div class="w-12 h-12 rounded-full bg-green-900 border-2 border-green-400 flex items-center justify-center text-xs font-mono text-green-400 z-10 font-bold">2026</div>
           <div class="flex-1 p-3 bg-green-950/30 border border-green-500 rounded">
-            <div class="font-bold text-green-400 text-sm">Stage 4 到達 — ES2026 🎉</div>
-            <div class="text-xs text-gray-400">2026/3/11 TC39 第113回総会 (ニューヨーク) で承認</div>
+            <div class="font-bold text-green-400 text-sm">Chrome 144 対応 → Stage 4 到達 🎉</div>
+            <div class="text-xs text-gray-400">1月 Chrome/Edge ネイティブ対応、3/11 TC39 で ES2026 承認</div>
           </div>
         </div>
       </div>
@@ -397,10 +409,67 @@ title: Temporal の登場
 - そこで登場したのが Temporal です
 - 2017年に Moment.js のメンテナーだった Maggie Johnson-Pint さんが提案
   - Date の問題を一番よく知っている人が動いた
+- 2018年に Stage 2 でドラフトに。PlainDate, ZonedDateTime など型を分ける方針がここで固まった
 - 9年もかかった理由：日付・時刻の仕様は複雑で、タイムゾーン・カレンダー・DST全部カバーする必要があった
   - test262 テストだけで4,500件以上
 - 2025年に Firefox が初出荷、2026年1月に Chrome が続き
 - そして今月3月11日、ニューヨークの TC39 総会で Stage 4 到達！ES2026 の一部に
+-->
+
+---
+hideInToc: true
+---
+
+<div class="h-full flex items-center justify-center px-12">
+  <div class="w-full max-w-4xl">
+    <h1 class="text-3xl font-bold mb-6 font-mono">
+      <span class="text-gray-500">//</span> ちなみに <span class="text-cyan-300">TC39</span> とは
+    </h1>
+    <div class="mb-6 text-gray-400 text-sm">
+      <span class="text-white font-bold">Technical Committee 39</span> — Ecma International 配下の委員会。
+      <span class="text-cyan-300">JavaScript (ECMAScript)</span> の仕様を策定する。
+    </div>
+    <div class="mb-4 text-xs text-gray-500 font-mono">// Stage プロセス — 提案から標準化までの道のり</div>
+    <div class="space-y-2">
+      <div v-click v-motion :initial="{ opacity: 0, x: -10 }" :enter="{ opacity: 1, x: 0 }"
+           class="flex items-center gap-3 p-2 bg-gray-900/50 rounded">
+        <div class="w-20 text-center px-2 py-1 bg-gray-700/50 text-gray-400 text-xs font-mono rounded">Stage 0</div>
+        <div class="text-sm text-gray-400">Strawman — アイデア段階</div>
+      </div>
+      <div v-click v-motion :initial="{ opacity: 0, x: -10 }" :enter="{ opacity: 1, x: 0 }"
+           class="flex items-center gap-3 p-2 bg-gray-900/50 rounded">
+        <div class="w-20 text-center px-2 py-1 bg-gray-700/50 text-gray-400 text-xs font-mono rounded">Stage 1</div>
+        <div class="text-sm text-gray-400">Proposal — 問題と解決策の提案</div>
+      </div>
+      <div v-click v-motion :initial="{ opacity: 0, x: -10 }" :enter="{ opacity: 1, x: 0 }"
+           class="flex items-center gap-3 p-2 bg-gray-900/50 rounded">
+        <div class="w-20 text-center px-2 py-1 bg-gray-700/50 text-gray-400 text-xs font-mono rounded">Stage 2</div>
+        <div class="text-sm text-gray-400">Draft — 仕様のドラフト作成</div>
+      </div>
+      <div v-click v-motion :initial="{ opacity: 0, x: -10 }" :enter="{ opacity: 1, x: 0 }"
+           class="flex items-center gap-3 p-2 bg-blue-950/30 rounded">
+        <div class="w-20 text-center px-2 py-1 bg-blue-500/20 text-blue-400 text-xs font-mono rounded">Stage 3</div>
+        <div class="text-sm text-gray-300">Candidate — 仕様確定、ブラウザ実装開始</div>
+      </div>
+      <div v-click v-motion :initial="{ opacity: 0, x: -10 }" :enter="{ opacity: 1, x: 0 }"
+           class="flex items-center gap-3 p-2 bg-green-950/30 rounded">
+        <div class="w-20 text-center px-2 py-1 bg-green-500/20 text-green-400 text-xs font-mono rounded">Stage 4</div>
+        <div class="text-sm text-green-300">Finished — 標準仕様に組み込み確定</div>
+      </div>
+    </div>
+    <div v-click v-motion :initial="{ opacity: 0 }" :enter="{ opacity: 1 }"
+         class="mt-4 text-xs text-gray-600 text-center">
+      メンバー: Google, Apple, Mozilla, Microsoft, Bloomberg, Igalia など
+    </div>
+  </div>
+</div>
+
+<!--
+- ちなみに TC39 について補足します
+- TC39 は Ecma International の中にある委員会で、JavaScript の仕様を決めている場所
+- 新機能は Stage 0〜4 のプロセスを経て標準化される
+- Stage 3 で仕様が固まりブラウザが実装を始める、Stage 4 で正式に標準入り
+- さっきのタイムラインの Stage 1〜4 がこのプロセスです
 -->
 
 ---
@@ -805,7 +874,7 @@ title: まとめ
 layout: center
 ---
 
-# END
+<h1 class="font-mono"><span class="text-gray-500">//</span> END</h1>
 
 <!--
 - ご清聴ありがとうございました！
