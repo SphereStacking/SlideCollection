@@ -33,6 +33,11 @@ npx slidev export
 pnpm build --only=slug名
 ```
 
+**全スライドを強制再ビルド:**
+```sh
+pnpm build --force
+```
+
 ## アーキテクチャ
 
 ### ディレクトリ構成
