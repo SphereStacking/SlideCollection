@@ -1,4 +1,6 @@
-import { readFileSync, existsSync } from 'fs'
+import { exec } from 'child_process'
+import { createHash } from 'crypto'
+import { readFileSync, readdirSync, statSync, existsSync } from 'fs'
 import { join, dirname } from 'path'
 import { fileURLToPath } from 'url'
 import fg from 'fast-glob'
@@ -108,6 +110,58 @@ function extractDateFromDir(dirName: string): string {
 function extractYear(date: string): string {
   if (!date) return ''
   return date.split('-')[0]
+}
+
+export function execAsync(command: string, options: { cwd: string }): Promise<void> {
+  return new Promise((resolve, reject) => {
+    const child = exec(command, { ...options, maxBuffer: 1024 * 1024 * 10 }, (error) => {
+      if (error) reject(error)
+      else resolve()
+    })
+    child.stdout?.pipe(process.stdout)
+    child.stderr?.pipe(process.stderr)
+  })
+}
+
+export function contentHash(targetPath: string): string {
+  if (!existsSync(targetPath)) return ''
+  const hash = createHash('sha256')
+  const stat = statSync(targetPath)
+  if (stat.isFile()) {
+    hash.update(readFileSync(targetPath))
+    return hash.digest('hex').slice(0, 16)
+  }
+  const walkFiles = (dir: string): string[] => {
+    const entries = readdirSync(dir, { withFileTypes: true })
+    const files: string[] = []
+    for (const entry of entries) {
+      if (entry.name === 'node_modules' || entry.name === '.og-export') continue
+      const fullPath = join(dir, entry.name)
+      if (entry.isDirectory()) files.push(...walkFiles(fullPath))
+      else files.push(fullPath)
+    }
+    return files
+  }
+  for (const file of walkFiles(targetPath).sort()) {
+    hash.update(file.slice(targetPath.length))
+    hash.update(readFileSync(file))
+  }
+  return hash.digest('hex').slice(0, 16)
+}
+
+export async function runConcurrent<T>(
+  items: T[],
+  concurrency: number,
+  fn: (item: T) => Promise<void>,
+): Promise<void> {
+  const queue = [...items]
+  const workers = Array.from({ length: Math.min(concurrency, queue.length) }, async () => {
+    while (queue.length > 0) {
+      const item = queue.shift()!
+      await fn(item)
+    }
+  })
+  await Promise.all(workers)
 }
 
 export function log(message: string, type: 'info' | 'success' | 'error' | 'warn' = 'info') {

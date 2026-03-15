@@ -1,15 +1,14 @@
-import { exec } from 'child_process'
-import { mkdirSync, existsSync, copyFileSync, readFileSync, writeFileSync } from 'fs'
+import { mkdirSync, existsSync, copyFileSync, readFileSync, writeFileSync, readdirSync, rmSync } from 'fs'
 import { join } from 'path'
-import { getPublishedSlides, DIST_DIR, ROOT_DIR, log, type SlideInfo } from './utils.js'
+import { getPublishedSlides, DIST_DIR, ROOT_DIR, log, execAsync, contentHash, runConcurrent, type SlideInfo } from './utils.js'
 
 const DEFAULT_CONCURRENCY = 1
 const MANIFEST_PATH = join(DIST_DIR, '.build-manifest.json')
 
 const SHARED_PATHS = [
-  'components',
-  'package.json',
-  'pnpm-lock.yaml',
+  join(ROOT_DIR, 'components'),
+  join(ROOT_DIR, 'package.json'),
+  join(ROOT_DIR, 'pnpm-lock.yaml'),
 ]
 
 interface BuildManifest {
@@ -17,54 +16,8 @@ interface BuildManifest {
   slides: Record<string, string>
 }
 
-function execOutput(command: string, cwd: string): Promise<string> {
-  return new Promise((resolve, reject) => {
-    exec(command, { cwd, maxBuffer: 1024 * 1024 }, (error, stdout) => {
-      if (error) reject(error)
-      else resolve(stdout.trim())
-    })
-  })
-}
-
-function execAsync(command: string, options: { cwd: string }): Promise<void> {
-  return new Promise((resolve, reject) => {
-    const child = exec(command, { ...options, maxBuffer: 1024 * 1024 * 10 }, (error) => {
-      if (error) reject(error)
-      else resolve()
-    })
-    child.stdout?.pipe(process.stdout)
-    child.stderr?.pipe(process.stderr)
-  })
-}
-
-async function runConcurrent<T>(
-  items: T[],
-  concurrency: number,
-  fn: (item: T) => Promise<void>,
-): Promise<void> {
-  const queue = [...items]
-  const workers = Array.from({ length: Math.min(concurrency, queue.length) }, async () => {
-    while (queue.length > 0) {
-      const item = queue.shift()!
-      await fn(item)
-    }
-  })
-  await Promise.all(workers)
-}
-
-async function getGitHash(path: string): Promise<string> {
-  try {
-    return await execOutput(`git log -1 --format=%H -- "${path}"`, ROOT_DIR)
-  } catch {
-    return ''
-  }
-}
-
-async function getSharedHash(): Promise<string> {
-  const hashes = await Promise.all(
-    SHARED_PATHS.map((p) => getGitHash(join(ROOT_DIR, p)))
-  )
-  return hashes.join(':')
+function getSharedHash(): string {
+  return SHARED_PATHS.map((p) => contentHash(p)).join(':')
 }
 
 function readManifest(): BuildManifest | null {
@@ -78,6 +31,33 @@ function readManifest(): BuildManifest | null {
 
 function writeManifest(manifest: BuildManifest): void {
   writeFileSync(MANIFEST_PATH, JSON.stringify(manifest, null, 2))
+}
+
+function cleanOrphans(slides: SlideInfo[]): void {
+  if (!existsSync(DIST_DIR)) return
+  const validOutputPaths = new Set(slides.map((s) => s.outputPath))
+
+  for (const entry of readdirSync(DIST_DIR, { withFileTypes: true })) {
+    if (!entry.isDirectory()) continue
+
+    if (/^\d{4}$/.test(entry.name)) {
+      const yearDir = join(DIST_DIR, entry.name)
+      for (const sub of readdirSync(yearDir, { withFileTypes: true })) {
+        if (!sub.isDirectory()) continue
+        const outputPath = `${entry.name}/${sub.name}`
+        if (!validOutputPaths.has(outputPath)) {
+          rmSync(join(yearDir, sub.name), { recursive: true })
+          log(`Removed orphan: ${outputPath}`, 'warn')
+        }
+      }
+      if (readdirSync(yearDir).length === 0) {
+        rmSync(yearDir, { recursive: true })
+      }
+    } else if (!validOutputPaths.has(entry.name)) {
+      rmSync(join(DIST_DIR, entry.name), { recursive: true })
+      log(`Removed orphan: ${entry.name}`, 'warn')
+    }
+  }
 }
 
 async function buildSlide(slide: SlideInfo): Promise<void> {
@@ -105,10 +85,11 @@ async function build() {
 
   log('Starting build process...')
 
-  let slides = await getPublishedSlides()
+  const allSlides = await getPublishedSlides()
 
+  let slides = allSlides
   if (onlySlug) {
-    slides = slides.filter((s) => s.meta.slug === onlySlug)
+    slides = allSlides.filter((s) => s.meta.slug === onlySlug)
     if (slides.length === 0) {
       log(`Slide with slug "${onlySlug}" not found`, 'error')
       process.exit(1)
@@ -129,9 +110,9 @@ async function build() {
     mkdirSync(DIST_DIR, { recursive: true })
   }
 
-  // Detect changes using git hashes
+  // Detect changes using content hashes
   const prevManifest = force ? null : readManifest()
-  const sharedHash = await getSharedHash()
+  const sharedHash = getSharedHash()
   const sharedChanged = !prevManifest || prevManifest.sharedHash !== sharedHash
 
   if (sharedChanged && prevManifest) {
@@ -142,8 +123,8 @@ async function build() {
   const slideHashes = new Map<string, string>()
   const slidesToBuild: SlideInfo[] = []
 
-  await Promise.all(slides.map(async (slide) => {
-    const hash = await getGitHash(slide.dir)
+  for (const slide of slides) {
+    const hash = contentHash(slide.dir)
     slideHashes.set(slide.outputPath, hash)
 
     if (force || sharedChanged) {
@@ -151,13 +132,12 @@ async function build() {
     } else if (!prevManifest?.slides[slide.outputPath] || prevManifest.slides[slide.outputPath] !== hash) {
       slidesToBuild.push(slide)
     } else {
-      // Check cached output exists
       const outputDir = join(DIST_DIR, slide.outputPath)
       if (!existsSync(join(outputDir, 'index.html'))) {
         slidesToBuild.push(slide)
       }
     }
-  }))
+  }
 
   const skipped = slides.length - slidesToBuild.length
   if (skipped > 0) {
@@ -169,13 +149,15 @@ async function build() {
     await runConcurrent(slidesToBuild, concurrency, buildSlide)
   }
 
-  // Update manifest
+  // Clean up orphan directories (use full list, not filtered by --only)
+  if (!onlySlug) {
+    cleanOrphans(allSlides)
+  }
+
+  // Update manifest (current slides only, no stale entries)
   const newManifest: BuildManifest = {
     sharedHash,
-    slides: {
-      ...(prevManifest?.slides || {}),
-      ...Object.fromEntries(slideHashes),
-    },
+    slides: Object.fromEntries(slideHashes),
   }
   writeManifest(newManifest)
 

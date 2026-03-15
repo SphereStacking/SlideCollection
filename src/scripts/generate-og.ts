@@ -1,18 +1,6 @@
-import { exec } from 'child_process'
 import { existsSync, renameSync, rmSync } from 'fs'
 import { join } from 'path'
-import { getPublishedSlides, ROOT_DIR, log } from './utils.js'
-
-function execAsync(command: string, options: { cwd: string }): Promise<void> {
-  return new Promise((resolve, reject) => {
-    const child = exec(command, { ...options, maxBuffer: 1024 * 1024 * 10 }, (error) => {
-      if (error) reject(error)
-      else resolve()
-    })
-    child.stdout?.pipe(process.stdout)
-    child.stderr?.pipe(process.stderr)
-  })
-}
+import { getPublishedSlides, ROOT_DIR, log, execAsync } from './utils.js'
 
 async function generateOg() {
   const args = process.argv.slice(2)
