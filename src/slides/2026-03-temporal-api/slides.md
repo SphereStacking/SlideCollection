@@ -25,6 +25,8 @@ meta:
     - temporal
     - tc39
     - es2026
+seoMeta:
+  ogImage: ./og-image.png
 ---
 
 <div class="h-full w-full flex items-center justify-center p-8">
