@@ -9,6 +9,7 @@
     "build": "tsx scripts/build.ts",
     "build:index": "tsx scripts/generate-index.ts",
     "build:redirects": "tsx scripts/generate-redirects.ts",
+    "gen:og": "tsx scripts/generate-og.ts",
     "preview": "pnpm exec serve dist"
   },
   "dependencies": {

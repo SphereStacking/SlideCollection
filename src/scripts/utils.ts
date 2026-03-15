@@ -110,11 +110,12 @@ function extractYear(date: string): string {
   return date.split('-')[0]
 }
 
-export function log(message: string, type: 'info' | 'success' | 'error' = 'info') {
+export function log(message: string, type: 'info' | 'success' | 'error' | 'warn' = 'info') {
   const prefix = {
     info: '\x1b[36m[INFO]\x1b[0m',
     success: '\x1b[32m[OK]\x1b[0m',
     error: '\x1b[31m[ERROR]\x1b[0m',
+    warn: '\x1b[33m[WARN]\x1b[0m',
   }
   console.log(`${prefix[type]} ${message}`)
 }

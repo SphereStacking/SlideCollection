@@ -1,0 +1,53 @@
+name: Deploy
+
+on:
+  push:
+    branches: [master]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 9.15.0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: pnpm
+          cache-dependency-path: src/pnpm-lock.yaml
+
+      - name: Install dependencies
+        run: pnpm install
+        working-directory: src
+
+      - name: Install Playwright Chromium
+        run: npx playwright install --with-deps chromium
+        working-directory: src
+
+      - name: Generate OGP images
+        run: pnpm gen:og
+        working-directory: src
+
+      - name: Generate slides.json
+        run: pnpm build:index
+        working-directory: src
+
+      - name: Build slides
+        run: pnpm build --force
+        working-directory: src
+
+      - name: Generate redirects
+        run: pnpm build:redirects
+        working-directory: src
+
+      - name: Deploy to Cloudflare Workers
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          command: deploy
+          workingDirectory: src

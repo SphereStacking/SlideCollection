@@ -115,6 +115,16 @@ async function build() {
     }
   }
 
+  // Check for missing og-image.png
+  const missingOg = slides.filter(
+    (s) => !existsSync(join(s.dir, 'og-image.png'))
+  )
+  if (missingOg.length > 0) {
+    log(`${missingOg.length} slide(s) missing og-image.png:`, 'warn')
+    missingOg.forEach((s) => log(`  - ${s.outputPath}`, 'warn'))
+    log('Run "pnpm gen:og" to generate them', 'warn')
+  }
+
   if (!existsSync(DIST_DIR)) {
     mkdirSync(DIST_DIR, { recursive: true })
   }
