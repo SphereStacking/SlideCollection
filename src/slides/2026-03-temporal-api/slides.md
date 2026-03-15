@@ -1,7 +1,7 @@
 ---
 theme: seriph
 favicon: /logo.svg
-title: "Temporal — 新しい日付処理 API"
+title: "Temporal — ライブラリ不要の 新しい日付処理 API"
 info: |
   ES2026 標準化 — ライブラリ不要の日付処理へ
 transition: view-transition
@@ -17,7 +17,7 @@ themeConfig:
 meta:
   slug: temporal-api
   date: '2026-03'
-  description: "ES2026 標準化 — ライブラリ不要の日付処理へ"
+  description: "Temporal — ライブラリ不要の 新しい日付処理 API"
   icon: "logos:javascript"
   published: true
   tags:
@@ -31,20 +31,18 @@ seoMeta:
 
 <div class="h-full w-full flex items-center justify-center p-8">
   <div v-motion :initial="{ opacity: 0, y: 30 }" :enter="{ opacity: 1, y: 0 }" class="text-center">
-    <div class="flex items-center justify-center gap-4 mb-6">
+    <div class="flex items-center justify-center gap-4 mb-4">
       <logos-javascript class="text-6xl" />
       <div class="text-7xl font-black tracking-tight text-white">Temporal</div>
     </div>
-    <div v-motion :initial="{ opacity: 0 }" :enter="{ opacity: 1, delay: 400 }"
-         class="flex items-center justify-center gap-3 mb-6">
+    <div v-motion :initial="{ opacity: 0 }" :enter="{ opacity: 1, delay: 300 }"
+         class="text-2xl font-bold text-gray-400 mb-4">ライブラリ不要の 新しい日付処理 API</div>
+    <div v-motion :initial="{ opacity: 0 }" :enter="{ opacity: 1, delay: 500 }"
+         class="flex items-center justify-center gap-3 mb-3">
       <span class="px-3 py-1 bg-green-500/20 border border-green-500 text-green-400 text-sm font-mono">Stage 4</span>
       <span class="px-3 py-1 bg-blue-500/20 border border-blue-500 text-blue-400 text-sm font-mono">ES2026</span>
       <span class="px-3 py-1 bg-purple-500/20 border border-purple-500 text-purple-400 text-sm font-mono">2026.03.11</span>
     </div>
-    <p v-motion :initial="{ opacity: 0 }" :enter="{ opacity: 1, delay: 700 }"
-       class="text-xl text-gray-400">
-      ES2026 標準化 — ライブラリ不要の日付処理へ
-    </p>
   </div>
 </div>
 
