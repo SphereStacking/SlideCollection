@@ -3,7 +3,7 @@ import { mkdirSync, existsSync, copyFileSync } from 'fs'
 import { join } from 'path'
 import { getPublishedSlides, DIST_DIR, ROOT_DIR, BASE_URL, log, type SlideInfo } from './utils.js'
 
-const DEFAULT_CONCURRENCY = 2
+const DEFAULT_CONCURRENCY = 1
 
 function execAsync(command: string, options: { cwd: string }): Promise<void> {
   return new Promise((resolve, reject) => {
