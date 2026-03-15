@@ -5,7 +5,111 @@ on:
     branches: [master]
 
 jobs:
+  prepare:
+    runs-on: ubuntu-latest
+    outputs:
+      matrix: ${{ steps.slides.outputs.matrix }}
+      shared-hash: ${{ steps.slides.outputs.shared-hash }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 9.15.0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: pnpm
+          cache-dependency-path: src/pnpm-lock.yaml
+
+      - run: pnpm install
+        working-directory: src
+
+      - run: npx playwright install --with-deps chromium
+        working-directory: src
+
+      - name: Generate OGP images
+        run: pnpm gen:og
+        working-directory: src
+
+      - name: Generate slides.json
+        run: pnpm build:index
+        working-directory: src
+
+      - name: Compute slide matrix
+        id: slides
+        run: |
+          OUTPUT=$(npx tsx scripts/list-slides.ts)
+          echo "matrix=$(echo "$OUTPUT" | jq -c '.matrix')" >> "$GITHUB_OUTPUT"
+          echo "shared-hash=$(echo "$OUTPUT" | jq -r '.sharedHash')" >> "$GITHUB_OUTPUT"
+        working-directory: src
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: slides-source
+          path: src/slides/
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: static-files
+          path: src/slides.json
+
+  build:
+    needs: prepare
+    strategy:
+      matrix:
+        slide: ${{ fromJson(needs.prepare.outputs.matrix) }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Restore slide cache
+        id: cache
+        uses: actions/cache@v4
+        with:
+          path: slide-output
+          key: slide-${{ matrix.slide.slug }}-${{ needs.prepare.outputs.shared-hash }}-${{ matrix.slide.hash }}
+
+      - uses: pnpm/action-setup@v4
+        if: steps.cache.outputs.cache-hit != 'true'
+        with:
+          version: 9.15.0
+
+      - uses: actions/setup-node@v4
+        if: steps.cache.outputs.cache-hit != 'true'
+        with:
+          node-version: 20
+          cache: pnpm
+          cache-dependency-path: src/pnpm-lock.yaml
+
+      - name: Install dependencies
+        if: steps.cache.outputs.cache-hit != 'true'
+        run: pnpm install
+        working-directory: src
+
+      - name: Restore slides source
+        if: steps.cache.outputs.cache-hit != 'true'
+        uses: actions/download-artifact@v4
+        with:
+          name: slides-source
+          path: src/slides/
+
+      - name: Build slide
+        if: steps.cache.outputs.cache-hit != 'true'
+        run: |
+          pnpm build --only=${{ matrix.slide.slug }}
+          mkdir -p $GITHUB_WORKSPACE/slide-output/${{ matrix.slide.outputPath }}
+          cp -r dist/${{ matrix.slide.outputPath }}/* $GITHUB_WORKSPACE/slide-output/${{ matrix.slide.outputPath }}/
+        working-directory: src
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: slide-${{ matrix.slide.slug }}
+          path: slide-output
+
   deploy:
+    needs: [prepare, build]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -20,32 +124,26 @@ jobs:
           cache: pnpm
           cache-dependency-path: src/pnpm-lock.yaml
 
-      - name: Restore build cache
-        uses: actions/cache@v4
+      - run: pnpm install
+        working-directory: src
+
+      - name: Download slide artifacts
+        uses: actions/download-artifact@v4
         with:
+          pattern: slide-*
+          merge-multiple: true
           path: src/dist
-          key: slides-dist-${{ github.ref_name }}
-          restore-keys: |
-            slides-dist-
 
-      - name: Install dependencies
-        run: pnpm install
-        working-directory: src
+      - name: Download static files
+        uses: actions/download-artifact@v4
+        with:
+          name: static-files
+          path: src/dist
 
-      - name: Install Playwright Chromium
-        run: npx playwright install --with-deps chromium
-        working-directory: src
-
-      - name: Generate OGP images
-        run: pnpm gen:og
-        working-directory: src
-
-      - name: Generate slides.json
-        run: pnpm build:index
-        working-directory: src
-
-      - name: Build slides
-        run: pnpm build
+      - name: Copy static assets
+        run: |
+          cp 404.html dist/404.html 2>/dev/null || true
+          cp logo.svg dist/logo.svg 2>/dev/null || true
         working-directory: src
 
       - name: Generate redirects
