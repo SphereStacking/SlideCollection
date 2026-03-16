@@ -72,6 +72,8 @@ importers:
 
   slides/2025-01-vuejs-lecturer: {}
 
+  slides/2026-03-js-is-weird: {}
+
   slides/2026-03-temporal-api: {}
 
   slides/git-worktree-guide: {}
