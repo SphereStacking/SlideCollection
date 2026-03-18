@@ -20,7 +20,7 @@ meta:
   date: '2026-03'
   event: 社内LT会
   description: "JavaScriptの闘を体感する選択式クイズ"
-  icon: "logos:javascript"
+  icon: "twemoji-exploding-head"
   published: true
   tags:
     - javascript
@@ -654,53 +654,6 @@ hideInToc: true
 -->
 
 ---
-title: 対策
----
-
-<div class="h-full flex items-center justify-center px-12">
-  <div class="w-full max-w-3xl">
-    <h1 class="text-3xl font-bold mb-6 font-mono">
-      <span class="text-gray-500">//</span> 対策
-    </h1>
-    <div class="grid grid-cols-3 gap-4 text-center">
-      <div v-click v-motion :initial="{ opacity: 0, y: 20 }" :enter="{ opacity: 1, y: 0 }"
-           class="p-4 bg-green-950/20 border border-green-500/30 rounded-lg">
-        <div class="text-xs text-green-500 font-mono mb-2">// 生活習慣の改善</div>
-        <div class="text-4xl mb-2">🏃</div>
-        <div class="text-sm text-gray-400 mb-3">毎日の運動や食事のように</div>
-        <code>===</code> など<br>
-        型を意識して書く
-      </div>
-      <div v-click v-motion :initial="{ opacity: 0, y: 20 }" :enter="{ opacity: 1, y: 0, delay: 200 }"
-           class="p-4 bg-blue-950/20 border border-blue-500/30 rounded-lg">
-        <div class="text-xs text-blue-500 font-mono mb-2">// ワクチン接種</div>
-        <div class="text-4xl mb-2">💉</div>
-        <div class="text-sm text-gray-400 mb-3">かかる前に打っておく</div>
-        TypeScript で<br>
-        型安全を手に入れる
-      </div>
-      <div v-click v-motion :initial="{ opacity: 0, y: 20 }" :enter="{ opacity: 1, y: 0, delay: 400 }"
-           class="p-4 bg-purple-950/20 border border-purple-500/30 rounded-lg">
-        <div class="text-xs text-purple-500 font-mono mb-2">// 治療薬</div>
-        <div class="text-4xl mb-2">💊</div>
-        <div class="text-sm text-gray-400 mb-3">発症しても薬で治せる</div>
-        Linter で<br>
-        危険なコードを自動検出
-      </div>
-    </div>
-    <div v-click v-motion :initial="{ opacity: 0, y: 10 }" :enter="{ opacity: 1, y: 0 }"
-         class="mt-6 p-3 bg-yellow-950/20 border border-yellow-500/30 rounded text-center text-sm">
-      <span class="text-yellow-400 font-bold">少しでも知っていれば、対策していれば、バグを未然に防げるかもしれません。</span>
-    </div>
-  </div>
-</div>
-
-<!--
-- 3つの対策を健康メタファーで紹介
-- 生活習慣: === を使う。ワクチン: TypeScript。治療薬: Linter
--->
-
----
 hideInToc: true
 ---
 
@@ -713,7 +666,7 @@ hideInToc: true
       <div v-motion :initial="{ opacity: 0, x: -20 }" :enter="{ opacity: 1, x: 0 }"
            class="p-4 bg-green-950/20 border border-green-500/30 rounded-lg">
         <div class="text-xs text-green-500 font-mono mb-1">// TypeScript</div>
-        <div class="text-base text-gray-300">さっきの闇を全部ではないけど<span class="text-green-400 font-bold">コンパイル時にエラー</span>にしてくれる。</div>
+        <div class="text-base text-gray-300">奇妙な仕様によるエラーを全部ではないけど<span class="text-green-400 font-bold">コンパイル時にエラー</span>にしてくれる。</div>
       </div>
       <div v-motion :initial="{ opacity: 0, x: 20 }" :enter="{ opacity: 1, x: 0 }"
            class="p-4 bg-purple-950/20 border border-purple-500/30 rounded-lg">
