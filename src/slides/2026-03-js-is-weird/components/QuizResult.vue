@@ -30,7 +30,7 @@ const rank = computed(() => {
       ({{ percentage }}% 正解)
     </div>
 
-    <div class="grid grid-cols-6 gap-2 mt-8 max-w-xs mx-auto">
+    <div class="grid grid-cols-4 gap-2 mt-8 max-w-xs mx-auto">
       <div
         v-for="q in store.totalQuestions"
         :key="q"

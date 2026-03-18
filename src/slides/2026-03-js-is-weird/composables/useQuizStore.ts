@@ -5,7 +5,7 @@ export interface QuizAnswer {
   isCorrect: boolean | null
 }
 
-const TOTAL_QUESTIONS = 12
+const TOTAL_QUESTIONS = 8
 
 const state = reactive({
   answers: Object.fromEntries(
