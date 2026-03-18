@@ -111,8 +111,9 @@ hideInToc: true
     <h1 v-motion :initial="{ opacity: 0, y: 20 }" :enter="{ opacity: 1, y: 0 }" class="text-3xl font-bold mb-6 font-mono">
       <span class="text-gray-500">//</span> JSは奇妙な言語仕様がある
     </h1>
-    <p v-motion :initial="{ opacity: 0 }" :enter="{ opacity: 1, delay: 300 }" class="text-lg text-gray-400 leading-relaxed">
-      これらをしってなぜTSが世界的に使われているのかをしっていただきたいです
+    <p v-motion :initial="{ opacity: 0 }" :enter="{ opacity: 1, delay: 300 }" class="pt-5 text-lg text-gray-400 leading-relaxed">
+      なぜTSが世界的に使われているのかを感じてもらい<br>
+      TS導入のハードルを下げたいなと思ってます
     </p>
   </div>
 </div>
@@ -128,11 +129,11 @@ title: Q1. Boolean の足し算
 
 <div class="h-full flex items-center justify-center px-8">
   <div class="w-full max-w-3xl">
-    <h1 class="text-3xl font-bold mb-2 font-mono">
+    <h1 class="text-2xl font-bold mb-1 font-mono">
       <span class="text-gray-500">//</span> Q1. <span class="text-gray-400 text-xl">Boolean の足し算</span>
     </h1>
     <div v-motion :initial="{ opacity: 0, y: 20 }" :enter="{ opacity: 1, y: 0 }"
-         class="bg-gray-900 border border-yellow-800/50 rounded p-4 font-mono text-lg mb-2">
+         class="bg-gray-900 border border-yellow-800/50 rounded p-3 font-mono text-base mb-1">
       <span class="text-purple-400">true</span> + <span class="text-purple-400">false</span>
     </div>
 
@@ -160,11 +161,11 @@ title: Q2. 配列の足し算
 
 <div class="h-full flex items-center justify-center px-8">
   <div class="w-full max-w-3xl">
-    <h1 class="text-3xl font-bold mb-2 font-mono">
+    <h1 class="text-2xl font-bold mb-1 font-mono">
       <span class="text-gray-500">//</span> Q2. <span class="text-gray-400 text-xl">配列の足し算</span>
     </h1>
     <div v-motion :initial="{ opacity: 0, y: 20 }" :enter="{ opacity: 1, y: 0 }"
-         class="bg-gray-900 border border-yellow-800/50 rounded p-4 font-mono text-lg mb-2">
+         class="bg-gray-900 border border-yellow-800/50 rounded p-3 font-mono text-base mb-1">
       [<span class="text-yellow-300">1</span>,<span class="text-yellow-300">2</span>,<span class="text-yellow-300">3</span>] + [<span class="text-yellow-300">4</span>,<span class="text-yellow-300">5</span>,<span class="text-yellow-300">6</span>]
     </div>
 
@@ -192,11 +193,11 @@ title: Q3. ブロック文の罠
 
 <div class="h-full flex items-center justify-center px-8">
   <div class="w-full max-w-3xl">
-    <h1 class="text-3xl font-bold mb-2 font-mono">
+    <h1 class="text-2xl font-bold mb-1 font-mono">
       <span class="text-gray-500">//</span> Q3. <span class="text-gray-400 text-xl">ブロック文の罠</span>
     </h1>
     <div v-motion :initial="{ opacity: 0, y: 20 }" :enter="{ opacity: 1, y: 0 }"
-         class="bg-gray-900 border border-yellow-800/50 rounded p-4 font-mono text-lg mb-2">
+         class="bg-gray-900 border border-yellow-800/50 rounded p-3 font-mono text-base mb-1">
       {} + [<span class="text-yellow-300">1</span>,<span class="text-yellow-300">2</span>]
     </div>
 
@@ -226,11 +227,11 @@ title: Q4. typeof の罠
 
 <div class="h-full flex items-center justify-center px-8">
   <div class="w-full max-w-3xl">
-    <h1 class="text-3xl font-bold mb-2 font-mono">
+    <h1 class="text-2xl font-bold mb-1 font-mono">
       <span class="text-gray-500">//</span> Q4. <span class="text-gray-400 text-xl">typeof の罠</span>
     </h1>
     <div v-motion :initial="{ opacity: 0, y: 20 }" :enter="{ opacity: 1, y: 0 }"
-         class="bg-gray-900 border border-yellow-800/50 rounded p-4 font-mono text-lg mb-2">
+         class="bg-gray-900 border border-yellow-800/50 rounded p-3 font-mono text-base mb-1">
       <span class="text-purple-400">typeof</span> <span class="text-red-400">NaN</span>
     </div>
 
@@ -260,11 +261,11 @@ title: Q5. 20年越しのバグ
 
 <div class="h-full flex items-center justify-center px-8">
   <div class="w-full max-w-3xl">
-    <h1 class="text-3xl font-bold mb-2 font-mono">
+    <h1 class="text-2xl font-bold mb-1 font-mono">
       <span class="text-gray-500">//</span> Q5. <span class="text-gray-400 text-xl">20年越しのバグ</span>
     </h1>
     <div v-motion :initial="{ opacity: 0, y: 20 }" :enter="{ opacity: 1, y: 0 }"
-         class="bg-gray-900 border border-yellow-800/50 rounded p-4 font-mono text-lg mb-2">
+         class="bg-gray-900 border border-yellow-800/50 rounded p-3 font-mono text-base mb-1">
       <span class="text-purple-400">typeof</span> <span class="text-purple-400">null</span>
     </div>
 
@@ -294,11 +295,11 @@ title: Q6. == の特殊ルール
 
 <div class="h-full flex items-center justify-center px-8">
   <div class="w-full max-w-3xl">
-    <h1 class="text-3xl font-bold mb-2 font-mono">
+    <h1 class="text-2xl font-bold mb-1 font-mono">
       <span class="text-gray-500">//</span> Q6. <span class="text-gray-400 text-xl">== の特殊ルール</span>
     </h1>
     <div v-motion :initial="{ opacity: 0, y: 20 }" :enter="{ opacity: 1, y: 0 }"
-         class="bg-gray-900 border border-yellow-800/50 rounded p-4 font-mono text-lg mb-2">
+         class="bg-gray-900 border border-yellow-800/50 rounded p-3 font-mono text-base mb-1">
       <span class="text-purple-400">null</span> == <span class="text-purple-400">undefined</span>
     </div>
 
@@ -328,11 +329,11 @@ title: Q7. truthy の矛盾
 
 <div class="h-full flex items-center justify-center px-8">
   <div class="w-full max-w-3xl">
-    <h1 class="text-3xl font-bold mb-2 font-mono">
+    <h1 class="text-2xl font-bold mb-1 font-mono">
       <span class="text-gray-500">//</span> Q7. <span class="text-gray-400 text-xl">truthy の矛盾</span>
     </h1>
     <div v-motion :initial="{ opacity: 0, y: 20 }" :enter="{ opacity: 1, y: 0 }"
-         class="bg-gray-900 border border-yellow-800/50 rounded p-4 font-mono text-lg mb-2">
+         class="bg-gray-900 border border-yellow-800/50 rounded p-3 font-mono text-base mb-1">
       [] == ![]
     </div>
 
@@ -364,11 +365,11 @@ title: Q8. NaN 錬成術
 
 <div class="h-full flex items-center justify-center px-8">
   <div class="w-full max-w-3xl">
-    <h1 class="text-3xl font-bold mb-2 font-mono">
+    <h1 class="text-2xl font-bold mb-1 font-mono">
       <span class="text-gray-500">//</span> Q8. <span class="text-gray-400 text-xl">NaN 錬成術</span>
     </h1>
     <div v-motion :initial="{ opacity: 0, y: 20 }" :enter="{ opacity: 1, y: 0 }"
-         class="bg-gray-900 border border-yellow-800/50 rounded p-4 font-mono text-lg mb-2">
+         class="bg-gray-900 border border-yellow-800/50 rounded p-3 font-mono text-base mb-1">
       (<span class="text-yellow-300">"b"</span> + <span class="text-yellow-300">"a"</span> + + <span class="text-yellow-300">"a"</span> + <span class="text-yellow-300">"a"</span>).toLowerCase()
     </div>
 
@@ -475,14 +476,14 @@ title: 暗黙の型変換
 -->
 
 ---
-title: + と - で世界が変わる
+title: + と - で変換が変わる
 hideInToc: true
 ---
 
 <div class="h-full flex items-center justify-center px-8">
   <div class="w-full max-w-3xl">
     <h1 class="text-3xl font-bold mb-6 font-mono">
-      <span class="text-gray-500">//</span> <code>+</code> と <code>-</code> で世界が変わる
+      <span class="text-gray-500">//</span> <code>+</code> と <code>-</code> で変換が変わる
     </h1>
 
 <div class="grid grid-cols-2 gap-4 text-sm">
@@ -523,43 +524,6 @@ hideInToc: true
 - 同じ値でも演算子で型が変わる
 - + は片方が string なら文字列連結、- は常に数値演算
 - これがバグの温床になる
--->
-
----
-title: まとめ（クイズ）
-hideInToc: true
----
-
-<div class="h-full flex items-center justify-center px-12">
-  <div class="w-full max-w-4xl">
-    <h1 class="text-3xl font-bold mb-8 font-mono">
-      <span class="text-gray-500">//</span> まとめ
-    </h1>
-    <div class="flex gap-6">
-      <div v-click v-motion :initial="{ opacity: 0, x: -20 }" :enter="{ opacity: 1, x: 0 }"
-           class="flex-1 border-l-2 border-yellow-500 pl-4 py-3">
-        <div class="text-yellow-400 text-xs font-mono mb-1">// COERCION</div>
-        <div class="text-lg font-bold text-white mb-1">暗黙の型変換</div>
-        <div class="text-gray-500 text-sm">全てを覚える必要はない。「この言語にはクセがある」と知っておくことが大事。</div>
-      </div>
-      <div v-click v-motion :initial="{ opacity: 0, x: -20 }" :enter="{ opacity: 1, x: 0, delay: 200 }"
-           class="flex-1 border-l-2 border-green-500 pl-4 py-3">
-        <div class="text-green-400 text-xs font-mono mb-1">// TYPESCRIPT</div>
-        <div class="text-lg font-bold text-white mb-1">型の秩序</div>
-        <div class="text-gray-500 text-sm">TSにするだけでコンパイル時にエラーを検出できる。</div>
-      </div>
-      <div v-click v-motion :initial="{ opacity: 0, x: -20 }" :enter="{ opacity: 1, x: 0, delay: 400 }"
-           class="flex-1 border-l-2 border-cyan-500 pl-4 py-3">
-        <div class="text-cyan-400 text-xs font-mono mb-1">// LINTER</div>
-        <div class="text-lg font-bold text-white mb-1">自動検出</div>
-        <div class="text-gray-500 text-sm">危険なコードを記述時に制限してくれる。</div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!--
-- 全部覚える必要はない。クセがあると知っておくだけでいい
 -->
 
 ---
@@ -660,12 +624,42 @@ hideInToc: true
 -->
 
 ---
+hideInToc: true
+---
+
+<div class="h-full flex items-center justify-center px-12">
+  <div class="w-full max-w-2xl">
+    <div class="space-y-6">
+      <div v-motion :initial="{ opacity: 0, x: -20 }" :enter="{ opacity: 1, x: 0 }">
+        <div class="text-gray-500 text-xs font-mono mb-1">// 過去</div>
+        <div class="text-lg text-gray-300">C や C# でコードを書いていた頃、<span class="text-gray-500">型がめんどくさいと思ってました。</span></div>
+      </div>
+      <div v-click v-motion :initial="{ opacity: 0, x: -20 }" :enter="{ opacity: 1, x: 0 }">
+        <div class="text-gray-500 text-xs font-mono mb-1">// JSを知って</div>
+        <div class="text-lg text-gray-300">JS を初めて学んだとき、<span class="text-green-400 font-bold">型を書かなくていいのが最高に楽</span>だと思いました。</div>
+      </div>
+      <div v-click v-motion :initial="{ opacity: 0, x: -20 }" :enter="{ opacity: 1, x: 0 }">
+        <div class="text-gray-500 text-xs font-mono mb-1">// 転機</div>
+        <div class="text-lg text-gray-300">個人開発や Web 系への転職で本物のコードを書き始めたとき</div>
+        <div class="text-2xl font-bold text-cyan-400 mt-2">型の恩恵を再認識しました。</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--
+- もともとCやC#で書いてた頃、型めんどくさいと思ってた
+- JSを学んだとき型を書かなくていいのが楽だと感じた
+- でも個人開発やWeb系転職で本物のコードを書き始めて型の恩恵を再認識した
+-->
+
+---
 title: 対策
 ---
 
 <div class="h-full flex items-center justify-center px-12">
   <div class="w-full max-w-3xl">
-    <h1 class="text-3xl font-bold mb-6 font-mono text-center">
+    <h1 class="text-3xl font-bold mb-6 font-mono">
       <span class="text-gray-500">//</span> 対策
     </h1>
     <div class="grid grid-cols-3 gap-4 text-center">
@@ -712,22 +706,27 @@ hideInToc: true
 
 <div class="h-full flex items-center justify-center px-12">
   <div class="w-full max-w-3xl">
+    <h1 class="text-3xl font-bold mb-6 font-mono">
+      <span class="text-gray-500">//</span> ちなみに
+    </h1>
     <div class="grid grid-cols-2 gap-4">
       <div v-motion :initial="{ opacity: 0, x: -20 }" :enter="{ opacity: 1, x: 0 }"
            class="p-4 bg-green-950/20 border border-green-500/30 rounded-lg">
         <div class="text-xs text-green-500 font-mono mb-1">// TypeScript</div>
-        <div class="text-base text-gray-300">さっきの闇を<span class="text-green-400 font-bold">全部ではないけど</span>コンパイル時にエラーにしてくれる。</div>
+        <div class="text-base text-gray-300">さっきの闇を全部ではないけど<span class="text-green-400 font-bold">コンパイル時にエラー</span>にしてくれる。</div>
       </div>
       <div v-motion :initial="{ opacity: 0, x: 20 }" :enter="{ opacity: 1, x: 0 }"
            class="p-4 bg-purple-950/20 border border-purple-500/30 rounded-lg">
         <div class="text-xs text-purple-500 font-mono mb-1">// Linter</div>
-        <div class="text-base text-gray-300">コンパイルでエラーにはならない記述を<span class="text-purple-400 font-bold">コーディング時に弾いてくれる</span>。</div>
+        <div class="text-base text-gray-300">コンパイルでエラーにはならない記述を設定次第でコーディング時に<span class="text-purple-400 font-bold">lintエラー</span>にして弾いてくれる。</div>
       </div>
     </div>
     <div v-click v-motion :initial="{ opacity: 0, y: 20 }" :enter="{ opacity: 1, y: 0 }"
          class="mt-6 p-4 bg-red-950/20 border border-red-500/30 rounded-lg text-center">
-      <div class="text-base text-gray-300">JS で書くということは、これらの <span class="text-red-400 font-bold">開発DX を捨てる</span>ということ。</div>
-      <div class="text-sm text-gray-400 mt-1">記述時に気をつけるのも、コードレビューで指摘するのも、<span class="text-red-400">限界</span>があります。</div>
+      <div class="text-base text-gray-300">
+        JS で書くということは、これらの <span class="text-red-400 font-bold">開発DX を捨てる</span>ということ。<br>
+        記述時に気をつけるのも、コードレビューで指摘するのも、<span class="text-red-400 font-bold">限界</span>があります。
+      </div>
     </div>
     <div v-click v-motion :initial="{ opacity: 0, y: 10 }" :enter="{ opacity: 1, y: 0 }"
          class="mt-6 text-center text-base text-gray-300">
@@ -751,42 +750,12 @@ hideInToc: true
 
 <div class="h-full flex items-center justify-center px-12">
   <div class="w-full max-w-2xl">
-    <div class="space-y-6">
-      <div v-motion :initial="{ opacity: 0, x: -20 }" :enter="{ opacity: 1, x: 0 }">
-        <div class="text-gray-500 text-xs font-mono mb-1">// 過去</div>
-        <div class="text-lg text-gray-300">C や C# でコードを書いていた頃、<span class="text-gray-500">型がめんどくさいと思ってました。</span></div>
-      </div>
-      <div v-click v-motion :initial="{ opacity: 0, x: -20 }" :enter="{ opacity: 1, x: 0 }">
-        <div class="text-gray-500 text-xs font-mono mb-1">// JSを知って</div>
-        <div class="text-lg text-gray-300">JS を初めて学んだとき、<span class="text-green-400 font-bold">型を書かなくていいのが最高に楽</span>だと思いました。</div>
-      </div>
-      <div v-click v-motion :initial="{ opacity: 0, x: -20 }" :enter="{ opacity: 1, x: 0 }">
-        <div class="text-gray-500 text-xs font-mono mb-1">// 転機</div>
-        <div class="text-lg text-gray-300">個人開発や Web 系への転職で本物のコードを書き始めたとき</div>
-        <div class="text-2xl font-bold text-cyan-400 mt-2">型の恩恵を再認識しました。</div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!--
-- もともとCやC#で書いてた頃、型めんどくさいと思ってた
-- JSを学んだとき型を書かなくていいのが楽だと感じた
-- でも個人開発やWeb系転職で本物のコードを書き始めて型の恩恵を再認識した
--->
-
----
-hideInToc: true
----
-
-<div class="h-full flex items-center justify-center px-12">
-  <div class="w-full max-w-2xl">
     <div v-motion :initial="{ opacity: 0, x: -20 }" :enter="{ opacity: 1, x: 0 }" class="text-gray-500 font-mono text-xs mb-6">// いま、伝えたいこと</div>
     <div v-motion :initial="{ opacity: 0, x: -20 }" :enter="{ opacity: 1, x: 0 }" class="text-lg text-gray-400">いまの私たちのプロジェクトのコードは JS です。</div>
     <div v-click v-motion :initial="{ opacity: 0, x: -20 }" :enter="{ opacity: 1, x: 0 }"
          class="mt-6 p-4 bg-green-950/20 border border-green-500/30 rounded-lg">
       <div class="text-xs text-green-500 font-mono mb-1">// 提案</div>
-      <div class="text-2xl font-bold text-green-400">TS にするだけでも、<br>みなさんの認知負荷を大きく下げられる</div>
+      <div class="text-2xl font-bold text-green-400">TS にするだけでも、<br>認知負荷と障害率を大きく改善できる</div>
     </div>
     <div v-click v-motion :initial="{ opacity: 0, x: -20 }" :enter="{ opacity: 1, x: 0 }"
          class="mt-8 text-3xl font-black tracking-tight">と思っています。</div>
@@ -797,6 +766,49 @@ hideInToc: true
 - いまのPJのコードはJS
 - TSにするだけでもみなさんの認知負荷を大きく下げられると思っている
 - みなさんともっとよりよいサービスにしていきたい
+-->
+
+---
+title: まとめ（クイズ）
+hideInToc: true
+---
+
+<div class="h-full flex items-center justify-center px-12">
+  <div class="w-full max-w-4xl">
+    <h1 class="text-3xl font-bold mb-8 font-mono">
+      <span class="text-gray-500">//</span> まとめ
+    </h1>
+    <div class="flex gap-6">
+      <div v-click v-motion :initial="{ opacity: 0, x: -20 }" :enter="{ opacity: 1, x: 0 }"
+           class="flex-1 border-l-2 border-yellow-500 pl-4 py-3">
+        <div class="text-yellow-400 text-xs font-mono mb-1">// COERCION</div>
+        <div class="text-lg font-bold text-white mb-1">暗黙の型変換</div>
+        <div class="text-gray-500 text-sm">全てを覚える必要はない。「この言語にはクセがある」と知っておくことが大事。</div>
+      </div>
+      <div v-click v-motion :initial="{ opacity: 0, x: -20 }" :enter="{ opacity: 1, x: 0, delay: 200 }"
+           class="flex-1 border-l-2 border-green-500 pl-4 py-3">
+        <div class="text-green-400 text-xs font-mono mb-1">// TYPESCRIPT</div>
+        <div class="text-lg font-bold text-white mb-1">型の秩序</div>
+        <div class="text-gray-500 text-sm">TSにするだけでコンパイル時にエラーを検出できる。</div>
+      </div>
+      <div v-click v-motion :initial="{ opacity: 0, x: -20 }" :enter="{ opacity: 1, x: 0, delay: 400 }"
+           class="flex-1 border-l-2 border-cyan-500 pl-4 py-3">
+        <div class="text-cyan-400 text-xs font-mono mb-1">// LINTER</div>
+        <div class="text-lg font-bold text-white mb-1">自動検出</div>
+        <div class="text-gray-500 text-sm">危険なコードを記述時に制限してくれる。</div>
+      </div>
+    </div>
+    <div v-click v-motion :initial="{ opacity: 0, x: -20 }" :enter="{ opacity: 1, x: 0 }"
+      class="mt-8 text-3xl font-black tracking-tight">
+      TypeScriptにかえていきませんか？
+  </div>
+
+  </div>
+
+</div>
+
+<!--
+- 全部覚える必要はない。クセがあると知っておくだけでいい
 -->
 
 ---

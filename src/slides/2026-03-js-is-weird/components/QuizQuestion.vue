@@ -34,21 +34,21 @@ function optionClass(label: string) {
 </script>
 
 <template>
-  <div class="grid grid-cols-2 gap-3 mt-6 max-w-2xl mx-auto">
+  <div class="grid grid-cols-4 gap-2 mt-3 max-w-3xl mx-auto">
     <button
       v-for="(option, index) in parsedOptions"
       :key="labels[index]"
       :disabled="locked"
-      class="px-4 py-3 rounded-lg border-2 text-left transition-all duration-300 text-lg disabled:cursor-default"
+      class="px-3 py-2 rounded-lg border-2 text-left transition-all duration-300 text-sm disabled:cursor-default whitespace-nowrap"
       :class="optionClass(labels[index])"
       @click="select(labels[index])"
     >
-      <span class="font-bold mr-2">{{ labels[index] }}.</span>
+      <span class="font-bold mr-1">{{ labels[index] }}.</span>
       <code>{{ option }}</code>
-      <span v-if="locked && labels[index] === correct" class="ml-2">✅</span>
+      <span v-if="locked && labels[index] === correct" class="ml-1">✅</span>
       <span
         v-if="locked && labels[index] === currentAnswer.selected && !currentAnswer.isCorrect"
-        class="ml-2"
+        class="ml-1"
         >❌</span
       >
     </button>
@@ -61,10 +61,10 @@ function optionClass(label: string) {
   >
     <div
       v-if="locked"
-      class="mt-6 p-4 rounded-lg text-sm max-w-2xl mx-auto"
+      class="mt-3 p-3 rounded-lg text-sm max-w-3xl mx-auto"
       :class="currentAnswer.isCorrect ? 'bg-green-900/40' : 'bg-red-900/30'"
     >
-      <div class="text-lg font-bold mb-2">
+      <div class="text-base font-bold mb-1">
         {{ currentAnswer.isCorrect ? '🎉 正解！' : '😱 不正解...' }}
         答え: {{ correct }}
       </div>
