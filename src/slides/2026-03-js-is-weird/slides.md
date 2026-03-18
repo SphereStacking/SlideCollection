@@ -420,63 +420,7 @@ hideInToc: true
 -->
 
 ---
-title: 暗黙の型変換
----
-
-<div class="h-full flex items-center justify-center px-8">
-  <div class="w-full max-w-3xl">
-    <h1 class="text-3xl font-bold mb-4 font-mono">
-      <span class="text-gray-500">//</span> 暗黙の型変換 <span class="text-gray-400 text-xl">— まだまだある</span>
-    </h1>
-
-<div class="grid grid-cols-2 gap-4 text-sm">
-
-<div v-click v-motion :initial="{ opacity: 0, x: -20 }" :enter="{ opacity: 1, x: 0 }" class="bg-gray-900/50 border border-gray-700 rounded-lg p-4">
-<div class="text-gray-500 font-mono text-xs mb-2">// 文字列への変換</div>
-
-| 式 | 結果 | 型 |
-|---|---|---|
-| `"" + 0` | `"0"` | string |
-| `"" + false` | `"false"` | string |
-| `"" + null` | `"null"` | string |
-| `"" + undefined` | `"undefined"` | string |
-| `"" + []` | `""` | string |
-| `"" + {}` | `"[object Object]"` | string |
-
-</div>
-
-<div v-click v-motion :initial="{ opacity: 0, x: 20 }" :enter="{ opacity: 1, x: 0 }" class="bg-gray-900/50 border border-gray-700 rounded-lg p-4">
-<div class="text-gray-500 font-mono text-xs mb-2">// 数値への変換</div>
-
-| 式 | 結果 | 型 |
-|---|---|---|
-| `+""` | `0` | number |
-| `+false` | `0` | number |
-| `+true` | `1` | number |
-| `+null` | `0` | number |
-| `+undefined` | `NaN` | number |
-| `+[]` | `0` | number |
-| `+{}` | `NaN` | number |
-
-</div>
-
-</div>
-
-<div v-click v-motion :initial="{ opacity: 0, y: 10 }" :enter="{ opacity: 1, y: 0 }"
-     class="mt-3 text-center text-gray-500 text-xs">
-  クイズで出たのは氷山の一角。
-</div>
-  </div>
-</div>
-
-<!--
-- クイズで出たのは氷山の一角。こんなにたくさんある
-- 左が文字列への変換、右が数値への変換
-- 全部覚える必要はないけど、こういうルールがあると知っておくことが大事
--->
-
----
-title: + と - で変換が変わる
+title: 暗黙の型変換 + と - で変換が変わる
 hideInToc: true
 ---
 
@@ -517,6 +461,12 @@ hideInToc: true
   <span class="text-red-400 font-bold">`+`</span> は片方が string なら文字列連結、
   <span class="text-green-400 font-bold">`-`</span> は常に数値演算 — 演算子で型が変わる
 </div>
+<div v-click v-motion :initial="{ opacity: 0, y: 10 }" :enter="{ opacity: 1, y: 0 }"
+     class="mt-6 p-4 bg-red-950/20 border border-red-500/30 rounded-lg text-center text-sm">
+     ちなみにまだまだ他にいろいろあります
+</div>
+
+
   </div>
 </div>
 
@@ -777,14 +727,14 @@ hideInToc: true
       <div v-click v-motion :initial="{ opacity: 0, x: -20 }" :enter="{ opacity: 1, x: 0 }"
            class="flex items-center gap-4 p-3 bg-gray-900/50 border border-gray-700 rounded">
         <div class="flex-1">
-          <div class="font-bold text-white text-lg">jsisweird.com</div>
+          <a href="https://jsisweird.com" target="_blank" class="font-bold text-white text-lg hover:text-blue-400 transition-colors">jsisweird.com</a>
           <div class="text-xs text-gray-500">元ネタ — JavaScript の奇妙な挙動をクイズ形式で学べるサイト</div>
         </div>
       </div>
       <div v-click v-motion :initial="{ opacity: 0, x: -20 }" :enter="{ opacity: 1, x: 0 }"
            class="flex items-center gap-4 p-3 bg-gray-900/50 border border-gray-700 rounded">
         <div class="flex-1">
-          <div class="font-bold text-white text-lg">wtfjs</div>
+          <a href="https://github.com/denysdovhan/wtfjs" target="_blank" class="font-bold text-white text-lg hover:text-blue-400 transition-colors">wtfjs</a>
           <div class="text-xs text-gray-500">もっと知りたい人向け — GitHub で JS の闇をまとめたリポジトリ</div>
         </div>
       </div>
